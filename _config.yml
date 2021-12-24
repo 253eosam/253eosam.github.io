@@ -1,58 +1,82 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you: 
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
 # Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-
+site: CODER 253
 title: CODER 253
-email: 253eosam@gmail.com
+keywords: 253eosam, eosam, 253
 description: >- # this means to ignore newlines until "baseurl:"
-  Hi there 👋 .
-  I'm a coder 253(EOSAM).
-  Front-end developer 🧑‍💻 .
+  Hi there 👋 . I'm a coder 253(EOSAM)
   Like coffee, algorithm, JS, TS, clean coding, Vue.js.
-  Welcome my blog. Let's grow up skill, together.
+  Welcome to my blog. Let's grow up skill, together.
+lang: ko
+timezone: Asia/Seoul
+repo: https://github.com/253eosam/253eosam.github.io # site repo [optional]
+google_verify:      XXX # Put your Google Verification here
+google_analytics:   UA-XXXXXXXX-00 # Put your Google Analytics code
+discus-identifier: coder-253
 
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://253eosam.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-instagram_username: l__seongjun
-github_username:  253eosam
+# Author settings
+author:
+  name: Seongjun Lee
+  nick_name: 253eosam
+  bio: 🧑‍💻 Front-End Developer @WeMakePrice
+  picture: assets/images/profile.png 
+  github: 253eosam # github username
+  instagram: l__seongjun # instagram username
+  email: 253eosam@gmail.com # email adress
 
-# Build settings
-theme: minima
+
+# URL settings
+url: https://253eosam.github.io/ # Domain Name of host. [username].github.io for github pages
+permalink: pretty
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+
+exclude:
+  - .jekyll-cache
+  - .obsidian
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE.md
+  - README.md
+  - CONTRIBUTING.md
+
 plugins:
-  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-relative-links
+paginate: 20
+paginate_path: "/page/:num"
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+collections:
+  pages:
+    output: true
+    permalink: /:name
+  posts:
+    output: true
+    permalink: /:slug
+  
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+relative_links:
+  enabled:     true
+  collections: false

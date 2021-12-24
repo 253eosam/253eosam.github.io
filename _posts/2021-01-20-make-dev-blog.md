@@ -6,6 +6,7 @@ categories: Utility
 # link: http://www.google.com/
 tags: [Vue.js, CMS, Nutify, blog]
 description: 'Front-end : Vue.js & Back-end : contentful(CMS) & Deploy : Nutify'
+comments: true
 ---
 
 > 개발 블로그 만들기
