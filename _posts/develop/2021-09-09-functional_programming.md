@@ -2,7 +2,7 @@
 layout: post
 title: '함수형 프로그래밍'
 date: 2021-09-09
-categories: 'JS'
+categories: Develop
 tags: [함수형 프로그래밍]
 description: 'functional programming'
 ---

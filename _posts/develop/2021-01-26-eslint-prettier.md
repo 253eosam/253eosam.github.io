@@ -2,7 +2,7 @@
 layout: post
 title: ESLint & Prettier
 date: 2021-01-26
-categories: JavaScript
+categories: Develop
 tags: [JavaScript, ESLint, Prettier, Node.js, VS Code]
 description: 'ESLint를 설명하고 적용하는 방법을 설명합니다. 추가적으로 Prettier를 적용합니다.'
 ---

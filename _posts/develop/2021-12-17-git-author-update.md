@@ -2,7 +2,7 @@
 layout: post
 title: 'git 작성자 변경'
 date: 2021-12-17
-categories: 'git'
+categories: Develop
 tags: [git]
 description: 'git에서 작성자를 설정하여 변경하고 싶은 상황'
 ---

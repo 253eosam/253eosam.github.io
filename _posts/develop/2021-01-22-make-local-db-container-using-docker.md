@@ -2,15 +2,15 @@
 layout: post
 title: Docker를 사용해서 간단한 로컬 DB 셋팅
 date: 2021-01-22
-categories: Docker
+categories: Develop
 tags: [Docker, DB, MySQL]
 description: '로컬 환경에서 Docker를 이용하여 간단하게 DB를 환경 셋팅'
 ---
 
 # 목적
 
--   같은 포트에서 간단한 명령어를 통해 여러 버전, 다양한 DB를 관리하기 위함.
--   작은 프로젝트라 같은 서버에 (디비+ 백 + 프론트) 배포 할 목적, 미리 배포 환경을 셋팅 할 수 있음.
+- 같은 포트에서 간단한 명령어를 통해 여러 버전, 다양한 DB를 관리하기 위함.
+- 작은 프로젝트라 같은 서버에 (디비+ 백 + 프론트) 배포 할 목적, 미리 배포 환경을 셋팅 할 수 있음.
 
 <br>
 
@@ -39,7 +39,7 @@ description: '로컬 환경에서 Docker를 이용하여 간단하게 DB를 환�
     ![docker02](/assets/posts/make-local-db-container-using-docker/docker02.png)
 
     클론 받은 경로로 이동하여 도커 파일을 빌드합니다.
-    
+
     빌드를 성공하면 도커 이미지가 생성됩니다.
 
     ![docker03](/assets/posts/make-local-db-container-using-docker/docker03.png)
@@ -56,7 +56,7 @@ description: '로컬 환경에서 Docker를 이용하여 간단하게 DB를 환�
     이 공간을 통해서 타사에서 제공하는 미리 셋팅된 이미지를 클론받아 빠르고 쉽게 환경을 구축 할 수 있습니다.
 
     또 자신만의 배포 환경이나 배포 버전을 관리하여 배포하고 싶은 서버에서 클론받아 실행시켜 편리하게 환경을 구축 할 수 있습니다.
-    
+
     ![docker05](/assets/posts/make-local-db-container-using-docker/docker05.png)
     ![docker06](/assets/posts/make-local-db-container-using-docker/docker06.png)
 

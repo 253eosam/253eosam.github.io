@@ -1,7 +1,8 @@
 <nav id="main-navigation">
-  {% for item in site.data.navigation %}
-  <a href="{{ item.link }}" {% if page.url == item.link %}class="current"{% endif %}>
-    {{ item.name }}
-  </a>
-  {% endfor %}
+  <ul>
+    {% for category in site.categories %}
+      <li>{{ category[0] }}</li>
+    {% endfor %}
+  </ul>
 </nav>
+
