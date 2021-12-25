@@ -2,7 +2,7 @@
 layout: post
 title: '컴퓨터 언어의 변형'
 date: 2021-07-15
-categories: Develop
+categories: 'CS'
 tags: [CS, compiler, interpreter, JVM, VM]
 description: '컴퓨터 언어의 변형에 대표적인 컴파일러, 인터프리터, 가상머신에 대해 알아보기'
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: '프론트엔드 에러 로그 시스템 Sentry 적용기'
 date: 2021-03-16
-categories: Develop
+categories: 'Integration'
 tags: [JavaScript, Integration, telegram, bot]
 description: '프론트엔드 클라이언트 랜더링 서비스의 에러 로그 모니터링 시스템 `Sentry`를 텔레그램에 적용합니다.'
 ---

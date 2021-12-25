@@ -2,7 +2,7 @@
 layout: post
 title: 'JavaScript로 엑셀 파일 읽기'
 date: 2021-02-16
-categories: Develop
+categories: 'JavaScript'
 tags: [NPM, JavaScript, SheetJS, Excel, FileReader]
 description: 'SheetJS 라이브러리를 사용해서 Excel 파일을 읽는 방법과 코드'
 ---

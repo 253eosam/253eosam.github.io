@@ -2,7 +2,7 @@
 layout: post
 title: 'Vue Code Style'
 date: 2021-07-16
-categories: Develop
+categories: ''
 tags: []
 description: 'Vue 스타일 가이드를 해석해서 기록해둠'
 ---

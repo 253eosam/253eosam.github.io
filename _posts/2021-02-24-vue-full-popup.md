@@ -2,7 +2,7 @@
 layout: post
 title: '[Vue.js] 모달 만드는 방법'
 date: 2021-02-24
-categories: Develop
+categories: 'Vue.js'
 tags: [JavaScript, Vue.js, HTML, CSS, modal]
 description: '모달을 만들고, 효율적으로 관리하는 방법 등을 Vue.js를 통해 설명.'
 ---

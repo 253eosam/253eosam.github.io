@@ -2,7 +2,7 @@
 layout: post
 title: '텔레그램 봇 만드는 방법'
 date: 2021-03-15
-categories: Develop
+categories: 'Integration'
 tags: [JavaScript, Integration, Messenger, telegram, bot]
 description: '텔레그램 메신저의 봇을 만드는 방법에 대해서 알아봅니다.'
 ---

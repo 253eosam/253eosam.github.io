@@ -2,7 +2,7 @@
 layout: post
 title: 'JavaScript 알고리즘 노트'
 date: 2021-03-17
-categories: Develop
+categories: 'Algorithm'
 tags: [JavaScript, Algorithm]
 link: 'https://github.com/253eosam/algorithm'
 ---

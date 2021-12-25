@@ -2,7 +2,7 @@
 layout: post
 title: 'JavaScript 동작방법 이해하기'
 date: 2021-07-14
-categories: Develop
+categories: 'JavaScript'
 tags: [JavaScript]
 description: 'Call stack, Event Loop, Tasks & more'
 ---
