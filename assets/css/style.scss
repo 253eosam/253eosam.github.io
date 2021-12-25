@@ -1,3 +1,7 @@
+---
+---
+@import "nav";
+
 @import url('https://fonts.googleapis.com/css?family=Catamaran:400,500,600,700&subset=latin-ext');
 :root {
     --bg-color: #fafafa;
@@ -32,6 +36,7 @@ body{
   margin-left: auto; 
   margin-right: auto;
 }
+
 .post-container{
   display: flex; 
   flex-direction: row; 
@@ -148,7 +153,6 @@ body{
   justify-content: space-between; 
   align-items: center;
   padding: 5px 10px;
-  margin-bottom: 20px;
 }
 .profile-image-container{width: 40%;}
 .profile-image{width: 128px; height: 128px; border-radius: 50%; transition: transform .2s;}
