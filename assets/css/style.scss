@@ -141,6 +141,10 @@ body{
 .blog-post-content{
   width: 100%;
   font-size: 18px;
+  a {
+    color: rgb(3, 102, 214);
+    font-weight: 400;
+  }
 }
 
 .post-tag{background: var(--bg-color); color:var(--primary-font-color); padding: 5px 10px;}
