@@ -2,7 +2,7 @@
 layout: post
 title: 'ESLint 디테일하게 탐구하기'
 date: 2021-11-15
-categories: 'JavaScript'
+categories: Develop
 tags: [JavaScript, ESLint]
 description: 'ESLint의 설정 파일이나 설정방법에 대해 자세히 알아봅니다.'
 ---

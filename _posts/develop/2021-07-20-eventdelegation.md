@@ -2,7 +2,7 @@
 layout: post
 title: '이벤트 핸들링'
 date: 2021-07-20
-categories: 'Vue.js'
+categories: Develop
 tags: [DOM, Browser, Vue.js, Event Handling]
 description: '이벤트 버블링, 캡처, 위임, Vue.js의 이벤트 수식어'
 ---

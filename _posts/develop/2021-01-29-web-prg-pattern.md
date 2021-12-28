@@ -2,7 +2,7 @@
 layout: post
 title: '[WEB] PRG 패턴'
 date: 2021-01-29
-categories: Web
+categories: Develop
 tags: [Web]
 description: '[WEB] PRG(POST-Redirect-GET) pattern'
 ---

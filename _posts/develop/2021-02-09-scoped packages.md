@@ -2,7 +2,7 @@
 layout: post
 title: 'scoped packages - npm package 앞에 골뱅이란?'
 date: 2021-02-09
-categories: NPM
+categories: Develop
 tags: [node.js, NPM]
 description: 'NPM Doce | scope'
 ---

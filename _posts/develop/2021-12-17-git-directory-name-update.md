@@ -2,7 +2,7 @@
 layout: post
 title: 'git 대소문자 변경 추적하기'
 date: 2021-12-17
-categories: 'git'
+categories: Develop
 tags: [git]
 description: 'git commit을 올릴때 대소문자를 변경하더라도 변경사항이 추적이 안되는 경우'
 comments: true
