@@ -145,7 +145,8 @@ body{
     color: rgb(3, 102, 214);
     font-weight: 400;
   }
-  h2 { margin-top: 40px; border-bottom: 1px solid var(--border-color)}
+  h1 { text-align: center; font-size: 2.5rem; }
+  h2 { margin-top: 60px; border-bottom: 1px solid var(--border-color)}
   table th, td {
     border: 1px solid;
     padding: 10px;
@@ -156,7 +157,7 @@ body{
     padding: 0 0 0 10px;
   }
   pre {
-    padding: 10px;
+    padding: 4px 10px;
   }
   p > code {
     padding: 0.2rem 0.5rem;
@@ -221,6 +222,7 @@ pre{font-size: 14px; max-width: 90vw; overflow: auto;}
     line-height: 22px;
     left: 1px;
   }
+  h1{font-size: 2rem;}
   .profile-image{width: 96px; height: 96px;}
 }
 
