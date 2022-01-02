@@ -1,17 +1,15 @@
 ---
 layout: post
 title: '프론트엔드 에러 로그 시스템 Sentry 적용기'
-date: 2021-03-16
 categories: Develop
 tags: [JavaScript, Integration, telegram, bot]
-description: '프론트엔드 클라이언트 랜더링 서비스의 에러 로그 모니터링 시스템 `Sentry`를 텔레그램에 적용합니다.'
 ---
 
-# 📖 들어가기
+## 📖 들어가기
 
 > 서비스를 개발하고 운영하면서 필요했던 클라이언트의 에러 로그 트래킹 시스템 도입을 정리
 
-## 클라이언트 사이드 에러 로그 트래킹이 필요한 이유?
+### 클라이언트 사이드 에러 로그 트래킹이 필요한 이유?
 
 SPA(Single Page Application) + CSR(Client Side Rendering)로 구성된 서비스들이 많아지고 있습니다. 서비스를 운영하다보면 개발자의 예상과는 다르게 예기치 못한 오류가 발생하게됩니다. 서버 사이드 에러가 아닌 클라이언트 단에서 발생한 에러는 어떻게 파악할 수 있을까?
 
@@ -22,46 +20,44 @@ SPA(Single Page Application) + CSR(Client Side Rendering)로 구성된 서비스
 
 이런 번거로운 상황을 만드지 않고 개발자가 직접 프론트엔드(클라이언트 단)의 오류를 트래킹 할 수 있다면 좀 덜 수고스럽게 이슈 대응을 할 수 있지 않은까?
 
-### 자바스크립트 오류 remote logging 필요성
+#### 자바스크립트 오류 remote logging 필요성
 
 - 자바스크립트의 자유로운 문법 특성상 런타임 오류가 발생하기 쉽다.
 - 브라우저 콘솔에 찍히는 로그를 확인해야함 오류발생을 확인할 수 있다.
 - 모바일, 웹뷰 테스트 시 콘솔을 확인하기 어렵다.
 - 로그를 한 눈에 빠르게 파악할 수 있기 때문에 빠른 대응을 할 수 있다.
 
-<br>
 
-# Sentry란?
+## Sentry란?
 
 Sentry는 어플리케이션에서 오류가 발생하면 알려주는 에러 트래킹 서비스입니다. (무료 혹은 유료) 클라이언트의 오류 발생시 메일을 보내주고, 슬랙과 연동하면 슬랙 메시지를 통해 오류 발생과 해당 오류에 대한 정보 파악이 가능합니다.
 
 Javascript, vue.js, java, python 등의 다양한 언어, 프레임워크, 라이브러리를 지원하여 여러 프로젝트의 이슈를 한 곳에서 관리함으로써 에러 모니터링을 일원화 할 수 있습니다.
 
-## [지원하는 언어, 플랫폼 및 인티그레이션]
+### [지원하는 언어, 플랫폼 및 인티그레이션]
 
 ![](/assets/posts/frontend-err-log-system-sentry/1.png)
 
-## [오류에 대한 다양한 정보들]
+### [오류에 대한 다양한 정보들]
 
 ![](/assets/posts/frontend-err-log-system-sentry/2.png)
 
 
-## [실제 누적된 Error 정보]
+### [실제 누적된 Error 정보]
 
 - 오류에 대한 상세한 정보 및 오류 내용
 - 오류가 발생한 클라이언트 환경에 대한 정보
 - 오류가 발생한 Vue Component에 대한 정보
 
-## [무료 사용시 제한 사항]
+### [무료 사용시 제한 사항]
 
 - 멤버 수 제한 : 하나의 계정으로 로그인해야 해당 이슈들을 조회할 수 있음.
 - 에러 수 제한 : 무료 사용시 5,000개로 제한
 - 히스토리 저장 : 오류에 대한 히스토리 30일만 저장
 - 기타 소소한 추가 기능들은 링크를 통해 확인 가능 [Sentry 유료 정책](https://sentry.io/pricing/)
 
-<br>
 
-# 적용하기 (Node.js)
+## 적용하기 (Node.js)
 
 Sentry에 가입 후 프로젝트를 생성한다.
 
@@ -116,9 +112,8 @@ setTimeout(() => {
 ![](/assets/posts/frontend-err-log-system-sentry/3.png)
 ![](/assets/posts/frontend-err-log-system-sentry/4.png)
 
-<br>
 
-# Telegram 연동하기
+## Telegram 연동하기
 
 현재 Sentry는 많은 Integrations 지원합니다. 그 중에서 텔레그램은 지원하지 않습니다. 현재 진행중인 프로젝트의 메신저는 텔레그램을 사용중이기 때문에 텔레그램과 연결해 보겠습니다. axios를 사용해서 api를 싸주는 방법을 사용합니다.
 
@@ -198,8 +193,8 @@ setTimeout(() => {
 ![](/assets/posts/frontend-err-log-system-sentry/6.png)
 ![](/assets/posts/frontend-err-log-system-sentry/7.png)
 
+---
 
-<br>
+참고
 
-> 참고 <br> 
-[https://tech.urbanbase.com/dev/2021/03/04/Sentry.html?fbclid=IwAR0Pjpr8fwa1262-FkhfozvUTvEvqZ8qE7xoowq4wj8DNLY5HGmnu3nD6CI](https://tech.urbanbase.com/dev/2021/03/04/Sentry.html?fbclid=IwAR0Pjpr8fwa1262-FkhfozvUTvEvqZ8qE7xoowq4wj8DNLY5HGmnu3nD6CI)
+- <https://tech.urbanbase.com/dev/2021/03/04/Sentry.html?fbclid=IwAR0Pjpr8fwa1262-FkhfozvUTvEvqZ8qE7xoowq4wj8DNLY5HGmnu3nD6CI>

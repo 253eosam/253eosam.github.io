@@ -1,22 +1,18 @@
 ---
 layout: post
 title: '텔레그램 봇 만드는 방법'
-date: 2021-03-15
 categories: Develop
 tags: [JavaScript, Integration, Messenger, telegram, bot]
-description: '텔레그램 메신저의 봇을 만드는 방법에 대해서 알아봅니다.'
 ---
 
-# 📖 들어가기
+## 📖 들어가기
 
 텔레그램 메신는 안드로이드, iOS, Mac, Window 등 모든 플랫폼에서 사용 가능한 무료 메신저입니다.
 텔레그램 메신저의 장점 중 하나로는 API가 공개되어 다른 프로그램 또는 플랫폼과 연계해 사용 가능하다는 점입니다.
 
 > 텔레그램 봇을 만드는 방법에 대해서 알아보겠습니다.
 
-<br>
-
-# 텔레그램 봇 만드는 순서
+## 텔레그램 봇 만드는 순서
 
 1.  텔레그램에서 **BotFather** 채팅방에 접속합니다.
 
@@ -41,11 +37,9 @@ description: '텔레그램 메신저의 봇을 만드는 방법에 대해서 알
 
     - 초록색 부분은 API를 요청할 때 사용할 토큰입니다.
 
-        ![5](/assets/posts/make-telegram-bot/5.png)
+      ![5](/assets/posts/make-telegram-bot/5.png)
 
-<br>
-
-# 봇과 통신하기
+## 봇과 통신하기
 
 이제 봇을 이용해서 특정 트리거가 발생할 때 원하는 메시지가 오게끔 만들어보겠습니다.
 여기서 사용해 볼 방식은 두가지인데,
@@ -55,7 +49,7 @@ description: '텔레그램 메신저의 봇을 만드는 방법에 대해서 알
 
 두가지 뭘 사용하든 상관없습니다. 그리고 두가지 이외의 방법도 있습니다. 저는 위 두가지 방식을 사용해보도록 하겠습니다.
 
-## node-telegram-bot-api
+### node-telegram-bot-api
 
 > 참고 : [https://github.com/yagop/node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api)
 
@@ -73,18 +67,18 @@ $ npm init -y
 $ npm i node-telegram-bot-api
 ```
 
-설치 후 **index.js**를 생성 후 **node.js**를 통해 index.js 파일을 돌려줍니다. 아래 코드는 `node-telegram-bot-api`에서 제공되는 코드입니다. 
+설치 후 **index.js**를 생성 후 **node.js**를 통해 index.js 파일을 돌려줍니다. 아래 코드는 `node-telegram-bot-api`에서 제공되는 코드입니다.
 
 index.js:
 
 ```js
-const TelegramBot = require('node-telegram-bot-api');
+const TelegramBot = require('node-telegram-bot-api')
 
 // replace the value below with the Telegram token you receive from @BotFather
-const token = 'Here is HTTP API token';
+const token = 'Here is HTTP API token'
 
 // Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, {polling: true});
+const bot = new TelegramBot(token, { polling: true })
 
 // Matches "/echo [whatever]"
 bot.onText(/\/echo (.+)/, (msg, match) => {
@@ -92,28 +86,28 @@ bot.onText(/\/echo (.+)/, (msg, match) => {
   // 'match' is the result of executing the regexp above on the text content
   // of the message
 
-  const chatId = msg.chat.id;
-  const resp = match[1]; // the captured "whatever"
+  const chatId = msg.chat.id
+  const resp = match[1] // the captured "whatever"
 
   // send back the matched "whatever" to the chat
-  bot.sendMessage(chatId, resp);
-});
+  bot.sendMessage(chatId, resp)
+})
 
 // Listen for any kind of message. There are different kinds of
 // messages.
-bot.on('message', (msg) => {
-  const chatId = msg.chat.id;
+bot.on('message', msg => {
+  const chatId = msg.chat.id
 
   // send a message to the chat acknowledging receipt of their message
-  bot.sendMessage(chatId, `${chatId}: Received your message`);
-});
+  bot.sendMessage(chatId, `${chatId}: Received your message`)
+})
 ```
 
 무사히 잘 정상작동 하는 것을 볼 수있습니다.
 
 ![6](/assets/posts/make-telegram-bot/6.png)
 
-## axios를 이용해서 API 보내기
+### axios를 이용해서 API 보내기
 
 axios를 이용해서 get, post 방식을 통해 api를 전송하는 방법을 시도해보겠습니다. API를 전송할땐 반드시 axios일 필요는 없습니다.
 
@@ -126,113 +120,113 @@ $ npm i axios
 index.js:
 
 ```js
-const axios = require('axios');
+const axios = require('axios')
 
 const init = (() => {
-	const apiToken = 'Here is HTTP API token'
-	const apiUrl = `https://api.telegram.org/bot${apiToken}`;
+  const apiToken = 'Here is HTTP API token'
+  const apiUrl = `https://api.telegram.org/bot${apiToken}`
 
-	axios({
-		method: 'GET',
-		url: `${apiUrl}/getMe`,
-		headers: {
-			'Content-Type': 'application/json;charset=UTF-8',
-		},
-	})
-		.then(res => {
-			console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 19 ~ init ~ res', res.data);
-		})
-		.catch(err => {
-			console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 26 ~ init ~ err', err);
-		});
+  axios({
+    method: 'GET',
+    url: `${apiUrl}/getMe`,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+  })
+    .then(res => {
+      console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 19 ~ init ~ res', res.data)
+    })
+    .catch(err => {
+      console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 26 ~ init ~ err', err)
+    })
 
-	axios({
-		method: 'GET',
-		url: `${apiUrl}/getUpdates`,
-		headers: {
-			'Content-Type': 'application/json;charset=UTF-8',
-		},
-	})
-		.then(res => {
-			console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 19 ~ init ~ res', res.data);
-		})
-		.catch(err => {
-			console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 26 ~ init ~ err', err);
-		});
+  axios({
+    method: 'GET',
+    url: `${apiUrl}/getUpdates`,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+  })
+    .then(res => {
+      console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 19 ~ init ~ res', res.data)
+    })
+    .catch(err => {
+      console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 26 ~ init ~ err', err)
+    })
 
-	axios({
-		method: 'POST',
-		url: `${apiUrl}/sendMessage`,
-		headers: {
-			'Content-Type': 'application/json;charset=UTF-8',
-		},
-		data: {
-			chat_id: 'chat_id', // 텔레그램의 CHAT_ID
-			text: '메시지 잘 갔나용 🐱',
-		},
-	})
-		.then(res => {
-			console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 33 ~ init ~ res', res.data);
-		})
-		.catch(err => {
-			console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 23 ~ init ~ err', err.message);
-		});
-})();
+  axios({
+    method: 'POST',
+    url: `${apiUrl}/sendMessage`,
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
+    data: {
+      chat_id: 'chat_id', // 텔레그램의 CHAT_ID
+      text: '메시지 잘 갔나용 🐱',
+    },
+  })
+    .then(res => {
+      console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 33 ~ init ~ res', res.data)
+    })
+    .catch(err => {
+      console.log('[🐱 DDD] ~ file: propertyAxios.js ~ line 23 ~ init ~ err', err.message)
+    })
+})()
 ```
 
-### getMe method(GET)
+#### getMe method(GET)
 
 - 봇의 대한 정보를 가지고 있습니다.
 
 ```json
 {
-    "ok": true,
-    "result": {
-        "id": 'chat_id', // 이부분을 chat_id에 넣어주면된다.
-        "is_bot": true,
-        "first_name": "투두노티 프론트 봇",
-        "username": "todo_noti_FE_bot",
-        "can_join_groups": true,
-        "can_read_all_group_messages": false,
-        "supports_inline_queries": false
-    }
+  "ok": true,
+  "result": {
+    "id": "chat_id", // 이부분을 chat_id에 넣어주면된다.
+    "is_bot": true,
+    "first_name": "투두노티 프론트 봇",
+    "username": "todo_noti_FE_bot",
+    "can_join_groups": true,
+    "can_read_all_group_messages": false,
+    "supports_inline_queries": false
+  }
 }
 ```
 
-### getUpdates method(GET)
+#### getUpdates method(GET)
 
 - 마지막으로 보낸 메시지의 정보를 가지고 있습니다.
 
 ```json
 {
-    "ok": true,
-    "result": [
-        {
-            "update_id": 957584811,
-            "message": {
-                "message_id": 10,
-                "from": {
-                    "id": 'chat_id', // 이부분을 chat_id에 넣어주면된다.
-                    "is_bot": false,
-                    "first_name": "성준",
-                    "last_name": "이",
-                    "language_code": "ko"
-                },
-                "chat": {
-                    "id": 'chat_id', // 이부분을 chat_id에 넣어주면된다.
-                    "first_name": "성준",
-                    "last_name": "이",
-                    "type": "private"
-                },
-                "date": 1615804255,
-                "text": "이건 테스트용으로 메시지를 보내는겁니다."
-            }
-        }
-    ]
+  "ok": true,
+  "result": [
+    {
+      "update_id": 957584811,
+      "message": {
+        "message_id": 10,
+        "from": {
+          "id": "chat_id", // 이부분을 chat_id에 넣어주면된다.
+          "is_bot": false,
+          "first_name": "성준",
+          "last_name": "이",
+          "language_code": "ko"
+        },
+        "chat": {
+          "id": "chat_id", // 이부분을 chat_id에 넣어주면된다.
+          "first_name": "성준",
+          "last_name": "이",
+          "type": "private"
+        },
+        "date": 1615804255,
+        "text": "이건 테스트용으로 메시지를 보내는겁니다."
+      }
+    }
+  ]
 }
 ```
 
-### sendMessage method(POST)
+#### sendMessage method(POST)
 
 - 위 값을 해당 API에 전달하면 텔레그램에 text값인 `Hello world~!`값이 전달됩니다.
 

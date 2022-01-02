@@ -1,20 +1,19 @@
 ---
 layout: post
 title: Docker를 사용해서 간단한 로컬 DB 셋팅
-date: 2021-01-22
 categories: Develop
 tags: [Docker, DB, MySQL]
-description: '로컬 환경에서 Docker를 이용하여 간단하게 DB를 환경 셋팅'
 ---
 
-# 목적
+## 목적
 
--   같은 포트에서 간단한 명령어를 통해 여러 버전, 다양한 DB를 관리하기 위함.
--   작은 프로젝트라 같은 서버에 (디비+ 백 + 프론트) 배포 할 목적, 미리 배포 환경을 셋팅 할 수 있음.
+- 로컬 환경에서 Docker를 이용하여 간단하게 DB를 환경 셋팅
+- 같은 포트에서 간단한 명령어를 통해 여러 버전, 다양한 DB를 관리하기 위함.
+- 작은 프로젝트라 같은 서버에 (디비+ 백 + 프론트) 배포 할 목적, 미리 배포 환경을 셋팅 할 수 있음.
 
 <br>
 
-# 📖 스토리
+## 📖 스토리
 
 회사 동기와 간단하게 프로젝트를 진행하게 되었다.
 
@@ -24,45 +23,43 @@ description: '로컬 환경에서 Docker를 이용하여 간단하게 DB를 환�
 
 <br>
 
-# ⚙️ 설치 가이드
+## 설치 가이드
 
-## 도커 설치
+### 도커 설치
 
 1. [Docker](https://www.notion.so/donaldd/Docker-2a385060554b429aac487405550d11fc#6676687b26554c0cbc00903dd4b2446b)를 설치한다.
 
 2. 설치가 완료되면 기본적으로 튜토리얼을 실행시켜 사용하기 전 올바르게 설치되어있는지 확인할 수 있습니다. (선택)
 
-    ![docker01](/assets/posts/make-local-db-container-using-docker/docker01.png)
+   ![docker01](/assets/posts/make-local-db-container-using-docker/docker01.png)
 
-    위 명령어를 통해 도커에서 제공하는 기본 스타트 프로젝트를 클론 받습니다.
+   위 명령어를 통해 도커에서 제공하는 기본 스타트 프로젝트를 클론 받습니다.
 
-    ![docker02](/assets/posts/make-local-db-container-using-docker/docker02.png)
+   ![docker02](/assets/posts/make-local-db-container-using-docker/docker02.png)
 
-    클론 받은 경로로 이동하여 도커 파일을 빌드합니다.
-    
-    빌드를 성공하면 도커 이미지가 생성됩니다.
+   클론 받은 경로로 이동하여 도커 파일을 빌드합니다.
 
-    ![docker03](/assets/posts/make-local-db-container-using-docker/docker03.png)
+   빌드를 성공하면 도커 이미지가 생성됩니다.
 
-    생성한 도커 이미지 파일을 80포트로 실행한다. 이렇게 되면 도커 컨테이너가 올라가게 된다. (접속가능)
-    브라우저에 localhost로 접속해보면 아래와 같은 화면을 볼 수 있습니다. 😋
+   ![docker03](/assets/posts/make-local-db-container-using-docker/docker03.png)
 
-    아래와 같은 화면이 뜨면 도커가 올바르게 실행되고 있다는 뜻입니다.
+   생성한 도커 이미지 파일을 80포트로 실행한다. 이렇게 되면 도커 컨테이너가 올라가게 된다. (접속가능)
+   브라우저에 localhost로 접속해보면 아래와 같은 화면을 볼 수 있습니다. 😋
 
-    ![docker04](/assets/posts/make-local-db-container-using-docker/docker04.png)
+   아래와 같은 화면이 뜨면 도커가 올바르게 실행되고 있다는 뜻입니다.
 
-    도커에는 도커 허브라는 이미지를 공유하는 커뮤니티 공간이 있는데 github과 비슷합니다.
+   ![docker04](/assets/posts/make-local-db-container-using-docker/docker04.png)
 
-    이 공간을 통해서 타사에서 제공하는 미리 셋팅된 이미지를 클론받아 빠르고 쉽게 환경을 구축 할 수 있습니다.
+   도커에는 도커 허브라는 이미지를 공유하는 커뮤니티 공간이 있는데 github과 비슷합니다.
 
-    또 자신만의 배포 환경이나 배포 버전을 관리하여 배포하고 싶은 서버에서 클론받아 실행시켜 편리하게 환경을 구축 할 수 있습니다.
-    
-    ![docker05](/assets/posts/make-local-db-container-using-docker/docker05.png)
-    ![docker06](/assets/posts/make-local-db-container-using-docker/docker06.png)
+   이 공간을 통해서 타사에서 제공하는 미리 셋팅된 이미지를 클론받아 빠르고 쉽게 환경을 구축 할 수 있습니다.
 
-<br>
+   또 자신만의 배포 환경이나 배포 버전을 관리하여 배포하고 싶은 서버에서 클론받아 실행시켜 편리하게 환경을 구축 할 수 있습니다.
 
-# MySQL 컨테이너 실행
+   ![docker05](/assets/posts/make-local-db-container-using-docker/docker05.png)
+   ![docker06](/assets/posts/make-local-db-container-using-docker/docker06.png)
+
+## MySQL 컨테이너 실행
 
 [MySQL](https://hub.docker.com/_/mysql)이 도커 허브에서 이미지를 공식적으로 제공합니다.
 
@@ -84,12 +81,12 @@ pull을 성공적으로 했다면 mysql 이미지가 생겼을 것이다.
 docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234 --name to-do-noti-2007-db-mysql -v /Users/ddd/Documents/repository/To-do-list2007/DB:/var/lib/mysql mysql:5.7.30 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
 
-    - d: 백그라운드에서 실행
-    - p: 포트 설정
-    - e: 환경 변수 설정
-    - name: 컨테이너 이름
-    - v: 저장소를 마운트 (컨테이너를 삭제 시 데이터 복구가 힘들 것 같아서)
-    - 마지막은 실행 시킬 이미지와 버전 그리고 옵션을 추가해서 한글 입력이 가능하도록 만들었습니다.
+- d: 백그라운드에서 실행
+- p: 포트 설정
+- e: 환경 변수 설정
+- name: 컨테이너 이름
+- v: 저장소를 마운트 (컨테이너를 삭제 시 데이터 복구가 힘들 것 같아서)
+- 마지막은 실행 시킬 이미지와 버전 그리고 옵션을 추가해서 한글 입력이 가능하도록 만들었습니다.
 
 명령어를 실행하면 이제 백그라운에서 mysql container를 실행합니다.
 확인을 해보고 싶다면 `docker ps` 명령어를 입력해봅니다.
@@ -109,9 +106,7 @@ docker exec -it to-do-noti-2007-db-mysql bash
 
 ![docker](/assets/posts/make-local-db-container-using-docker/docker10.png)
 
-<br>
-
-# [심화] docker-compose로 관리
+## [심화] docker-compose로 관리
 
 > docker-compose는 도커 파일 또는 컨테이너를 효율적으로 실행시키고 설정들을 문서화하여 관리 할 수 있습니다.
 

@@ -1,13 +1,11 @@
 ---
 layout: post
 title: 'git 작성자 변경'
-date: 2021-12-17
 categories: Develop
 tags: [git]
-description: 'git에서 작성자를 설정하여 변경하고 싶은 상황'
 ---
 
-# 📖 들어가기
+## 📖 들어가기
 
 프로젝트를 여러개 진행하다보면 작성자 설정을 실수하여 원하지않는 작성자명이 들어가는 경우가 있는데 이것을 고쳐보도록하자.
 
