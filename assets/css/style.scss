@@ -145,6 +145,29 @@ body{
     color: rgb(3, 102, 214);
     font-weight: 400;
   }
+  h2 { margin-top: 40px; border-bottom: 1px solid var(--border-color)}
+  table th, td {
+    border: 1px solid;
+    padding: 10px;
+  }
+  blockquote {
+    border-left: 5px solid var(--border-color);
+    margin: 0 0 0 5px;
+    padding: 0 0 0 10px;
+  }
+  pre {
+    padding: 10px;
+  }
+  p > code {
+    padding: 0.2rem 0.5rem;
+    margin: 0 0rem;
+    font-size: 90%;
+    white-space: nowrap;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+  }
+  hr { margin: 40px 0;}
 }
 
 .post-tag{background: var(--bg-color); color:var(--primary-font-color); padding: 5px 10px;}
@@ -176,10 +199,7 @@ a{color: var(--primary-font-color); text-decoration: none;}
 img{max-width: 100%;}
 figure{margin:0; padding: 15px;}
 pre{font-size: 14px; max-width: 90vw; overflow: auto;}
-table th, td {
-  border: 1px solid;
-  padding: 10px;
-}
+
 .social-icon{height: 24px;}
 
 @media (min-width: 1200px){
@@ -194,12 +214,13 @@ table th, td {
   }
 }
 @media only screen and (max-width: 768px) {
-  .container{width: 100%;}
+  .container{
+    width: 100%;
+  }
   .mode:after {
     line-height: 22px;
     left: 1px;
   }
-  h1{font-size: 1.5rem;}
   .profile-image{width: 96px; height: 96px;}
 }
 
