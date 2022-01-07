@@ -25,7 +25,7 @@ author:
 
 
 # URL settings
-url: https://253eosam.github.io/ # Domain Name of host. [username].github.io for github pages
+url: https://253eosam.github.io # Domain Name of host. [username].github.io for github pages
 permalink: pretty
 
 markdown: kramdown
