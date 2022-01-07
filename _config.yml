@@ -9,7 +9,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 lang: ko
 timezone: Asia/Seoul
 repo: https://github.com/253eosam/253eosam.github.io # site repo [optional]
-google_verify:      XXX # Put your Google Verification here
+google_verify: 6J2S-ZZ6E200EWxNlyA9IwLz0K-4-zenstXDH_b9F5s # Put your Google Verification here
 google_analytics:   UA-XXXXXXXX-00 # Put your Google Analytics code
 discus-identifier: coder-253
 
@@ -32,7 +32,6 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-
 
 exclude:
   - .jekyll-cache
