@@ -3,9 +3,7 @@ site: CODER 253
 title: CODER 253
 keywords: 253eosam, eosam, 253
 description: >- # this means to ignore newlines until "baseurl:"
-  Hi there 👋 . I'm a coder 253(EOSAM)
-  Like coffee, algorithm, JS, TS, clean coding, Vue.js.
-  Welcome to my blog. Let's grow up skill, together.
+  프로그래밍 언어인 JS 중심의 개발 블로그이면서 개인 블로그입니다. 
 lang: ko
 timezone: Asia/Seoul
 repo: https://github.com/253eosam/253eosam.github.io # site repo [optional]
