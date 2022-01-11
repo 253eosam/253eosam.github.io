@@ -302,11 +302,11 @@
         {% elsif post.excerpt  %}
           <!-- {% include _macro/post-excerpt.html %} -->
           <!--noindex4-->
-          <!-- <div class="post-button text-center">
+          <div class="post-button text-center">
             <a class="btn" href="{{ post.url | relative_url }}{% if site.scroll_to_more %}#{{ __.post.more }}{% endif %}" rel="contents">
               {{ __.post.read_more }} &raquo;
             </a>
-          </div> -->
+          </div>
           <!--/noindex4-->
         {% elsif site.auto_excerpt.enable %}
           {% assign content = post.content | strip_html %}
