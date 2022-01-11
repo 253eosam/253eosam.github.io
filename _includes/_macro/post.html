@@ -157,7 +157,7 @@
                 </a>
               </span>
             {% elsif site.hypercomments_id %}
-            <!--noindex-->
+            <!--noindex1-->
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
                 <span class="post-meta-item-icon">
@@ -167,7 +167,7 @@
                   <span class="post-comments-count hc-comment-count" data-xid="{{ post.url }}" itemprop="commentsCount"></span>
                 </a>
               </span>
-              <!--/noindex-->
+              <!--/noindex2-->
             {% elsif post.layout == 'post' and site.gentie_productKey %}
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
@@ -292,33 +292,33 @@
       {% if is_index %}
         {% if post.description and site.excerpt_description %}
           {{ post.description }}
-          <!--noindex-->
+          <!--noindex3-->
           <div class="post-button text-center">
             <a class="btn" href="{{ post.url | relative_url }}">
               {{ __.post.read_more }} &raquo;
             </a>
           </div>
-          <!--/noindex-->
+          <!--/noindex3-->
         {% elsif post.excerpt  %}
-          {% include _macro/post-excerpt.html %}
-          <!--noindex-->
-          <div class="post-button text-center">
+          <!-- {% include _macro/post-excerpt.html %} -->
+          <!--noindex4-->
+          <!-- <div class="post-button text-center">
             <a class="btn" href="{{ post.url | relative_url }}{% if site.scroll_to_more %}#{{ __.post.more }}{% endif %}" rel="contents">
               {{ __.post.read_more }} &raquo;
             </a>
-          </div>
-          <!--/noindex-->
+          </div> -->
+          <!--/noindex4-->
         {% elsif site.auto_excerpt.enable %}
           {% assign content = post.content | strip_html %}
           {{ content | slice: 0, site.auto_excerpt.length }}
           {% if content.size > site.auto_excerpt.length %}...{% endif %}
-          <!--noindex-->
+          <!--noindex5-->
           <div class="post-button text-center">
             <a class="btn" href="{{ post.url | relative_url }}{% if site.scroll_to_more %}#{{ __.post.more }}{% endif %}" rel="contents">
               {{ __.post.read_more }} &raquo;
             </a>
           </div>
-          <!--/noindex-->
+          <!--/noindex5-->
         {% else %}
           {% if post.type == 'picture' %}
             <a href="{{ post.url | relative_url }}">{{ post.content }}</a>
