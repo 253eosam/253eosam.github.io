@@ -120,7 +120,7 @@ index_with_subtitle: false
 menu:
   home: /
   categories: /categories/
-  about: /about/
+  about: https://253.notion.site/About-215e0a0c66f7432290df491e20c0fb23
   archives: /archives/
   tags: /tags/
   #sitemap: /sitemap.xml
