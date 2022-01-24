@@ -2,7 +2,7 @@
 layout: post
 title: '함수형 프로그래밍'
 categories: Develop
-tags: [함수형 프로그래밍]
+tags:
 ---
 
 ## 📖 들어가기
@@ -78,7 +78,7 @@ tags: [함수형 프로그래밍]
 => 데스트 하기가 쉬움
 
 ```js
-const header = props => <h1>{props.title}</h1>
+const header = (props) => <h1>{props.title}</h1>
 // DOM생성 라인은 다른 펑션으로 이동
 // DOM을 변경하는 책임은 애플리케이션의 다른 부분이 담당하도록 해야한다.
 ```
