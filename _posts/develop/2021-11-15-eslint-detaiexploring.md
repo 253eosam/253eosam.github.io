@@ -30,7 +30,7 @@ tags: [JavaScript, ESLint]
 
 먼저 ESLint란? ES와 Lint를 합친말로 Ecma Script Lint입니다.
 
-[\[참고\]](https://253eosam.github.io/javascript/2021/01/26/eslint-prettier/)
+[\[참고\]](https://253eosam.github.io/develop/2021/01/26/eslint-prettier/)
 
 린트를 설정하는 이유는 코드의 품질을 올리기 위해서인데 잠재적으로 발생할 수 있는 버그나 오류를 찾는 역할을 합니다. 이와 헷갈리는 부분이 prettier 입니다.
 
