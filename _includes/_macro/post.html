@@ -305,7 +305,9 @@
 
       {% if is_index %}
         {% if post.description and site.excerpt_description %}
-          {{ post.description }}
+          <p class="post-description">
+            {{ post.description }}
+          </p>
           <!--noindex3-->
           <div class="post-button text-center">
             <a class="btn" href="{{ post.url | relative_url }}">
