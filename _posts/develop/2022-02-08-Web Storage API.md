@@ -43,3 +43,10 @@ Web Storage API는 브라우저에서 키/값 쌍을 쿠키보다 훨씬 직관�
 3. 서버는 브라우저가 보낸 요청 헤더의 식별자를 읽어 사용자를 식별합니다.
 
 `document.cookie` 프로퍼티를 이용하면 브라우저에서도 쿠키에 접근할 수 있습니다.
+
+---
+
+참고
+
+<https://developer.mozilla.org/ko/docs/Web/API/Web_Storage_API#web_storage_%EA%B0%9C%EB%85%90%EA%B3%BC_%EC%82%AC%EC%9A%A9%EB%B2%95>
+<https://ko.javascript.info/cookie>
