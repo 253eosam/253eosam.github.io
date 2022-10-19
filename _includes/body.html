@@ -17,14 +17,24 @@
                     {% else %}
                         <h1 id="{{ page.id }}">{{ site.title | escape }}</h1>
                     {% endif %}
-                    {% if page.tags %}
-                        {% for tag in page.tags %}
-                            <a href="{{ site.baseurl }}/tag/{{ tag | slugify }}/">
-                                #<span class="badge badge-pill badge-primary">{{ tag }}</span>
-                            </a>
-                        {% endfor %}
+
+                    {% if page.date %}
+                        <div class="date" style="text-align: right;">
+                            <i class="fa fa-calendar"></i>
+                            <span>{{ page.date | date: "%B %-d, %Y" }}</span>
+                        </div>
                     {% endif %}
 
+                    {% if page.tags %}
+                        <div class="tag">
+                            {% for tag in page.tags %}
+                                <a href="{{ site.baseurl }}/tag/{{ tag | slugify }}/">
+                                    #<span class="badge badge-pill badge-primary">{{ tag | downcase }}</span>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    
                     {{ content }}
                 </section>
             </div>
