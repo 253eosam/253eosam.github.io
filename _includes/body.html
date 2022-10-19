@@ -17,6 +17,13 @@
                     {% else %}
                         <h1 id="{{ page.id }}">{{ site.title | escape }}</h1>
                     {% endif %}
+                    {% if page.tags %}
+                        {% for tag in page.tags %}
+                            <a href="{{ site.baseurl }}/tag/{{ tag | slugify }}/">
+                                #<span class="badge badge-pill badge-primary">{{ tag }}</span>
+                            </a>
+                        {% endfor %}
+                    {% endif %}
 
                     {{ content }}
                 </section>
