@@ -29,6 +29,16 @@
     padding-bottom: 20px;
 }
 
+.book-body .body-inner .page-wrapper .page-inner h1{
+    text-align: center;
+}
+
+.book-body .body-inner .page-wrapper .page-inner h2{
+    background: rgba(251, 243, 219, 1);
+    padding: 0px 10px;
+    border-radius: 11px;
+}
+
 @media (max-width: 1240px) {
     .book-body .body-inner .navigation {
         max-width: calc(50% - 3px);
