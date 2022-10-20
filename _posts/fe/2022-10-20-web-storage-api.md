@@ -1,6 +1,9 @@
-# Web Storage API (웹 저장소)
-
-> #cookie #localStorage #sessionStorage
+---
+title: Web Storage API (웹 저장소)
+category: front-end
+layout: post
+tags: [ cookie , localStorage, sessionStorage ]
+---
 
 Web Storage API는 브라우저에서 키/값 쌍을 쿠키보다 훨씬 직관적으로 저장할 수 있는 방법을 제공한다.
 

@@ -1,4 +1,9 @@
-# 브라우저 이벤트 핸들링
+---
+title: 브라우저 이벤트 핸들링
+category: front-end
+layout: post
+tags: [ JavaScript , eventHandler ]
+---
 
 ## 📖 들어가기
 

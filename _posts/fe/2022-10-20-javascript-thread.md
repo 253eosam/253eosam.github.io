@@ -1,6 +1,9 @@
-# JavaScript 동작 방법과 이해
-
-> #javascript
+---
+title: JavaScript 동작 방법과 이해
+category: front-end
+layout: post
+tags: [ JavaScript ]
+---
 
 ## 📖 들어가기
 

@@ -1,6 +1,9 @@
-# 데이터 상태 관리 - 그것을 알려주마 
-
-> #AngularJS #jQuery #Redux
+---
+title: 데이터 상태 관리 - 그것을 알려주마 
+category: front-end
+layout: post
+tags: [ AngularJs , jQuery, Redux ]
+---
 
 > **[Tech concert : front-end 2019 - 데이터 상태관리. 그것을 알려주마](https://www.youtube.com/watch?v=o4meZ7MRd5o&ab_channel=naverd2)** 세미나를 보고난 후 정리한 내용입니다.
 

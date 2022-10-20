@@ -1,10 +1,9 @@
-# ESLint 간단하게 알아보기
-
-> 1. ESLint와 Prettier를 사용하는 이유
-> 2. ESLint 적용하기
-> 3. Prettier 적용하기
-> 4. ESLint + Prettier
-> 5. Git hook을 이용한 자동화 방법
+---
+title: ESLint 간단하게 알아보기
+category: javascript
+layout: post
+tags: [JavaScript, ESLint, Prettier]
+---
 
 ## ESLint와 Prettier를 사용하는 이유
 

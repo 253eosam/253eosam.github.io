@@ -1,6 +1,9 @@
-# 브라우저 렌더링
-
-> #browser
+---
+title: 브라우저 렌더링
+category: front-end
+layout: post
+tags: [ browser ]
+---
 
 ## 웹 브라우저의 구조
 

@@ -1,4 +1,9 @@
-# ESLint 디테일하게 알아보기
+---
+title: ESLint 디테일하게 알아보기
+category: javascript
+layout: post
+tags: [ JavaScript, ESLint, Vue.js , TypeScript]
+---
 
 ## 알수있는 내용
 
@@ -15,7 +20,9 @@
 
 불편한 상황이 지속되자 결국 이 부분을 뜯어고치기로 했다.
 
-## 프로젝트에 [ESLint](https://eslint.org/)를 설정해보자
+## 프로젝트에 ESLint를 설정해보자
+
+[ESLint](https://eslint.org/)
 
 ### ESLint vs Prettier
 

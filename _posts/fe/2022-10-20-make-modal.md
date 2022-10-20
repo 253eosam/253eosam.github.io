@@ -1,6 +1,9 @@
-# Modal 컴포넌트 만들기
-
-> #CSS #JavaScript #Vue.js
+---
+title: Modal 컴포넌트 만들기
+category: front-end
+layout: post
+tags: [ Vue.js ]
+---
 
 ## 📖 들어가기
 
