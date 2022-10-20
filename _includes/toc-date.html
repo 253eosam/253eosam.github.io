@@ -35,6 +35,9 @@
                         <li class="chapter" data-level="1.1" data-path="{{site.baseurl}}{{post.url}}">
                         {% endif %}
                             <a href="{{site.baseurl}}{{post.url}}">
+                                {% if post.category %}
+                                [ <em>{{ post.category | capitalize }}</em> ]
+                                {% endif %}
                                 {{ post.title | escape }}
                             </a>
                             {% if site.toc.enabled %}
