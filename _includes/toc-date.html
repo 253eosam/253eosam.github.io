@@ -34,6 +34,15 @@
                         {% else %}
                         <li class="chapter" data-level="1.1" data-path="{{site.baseurl}}{{post.url}}">
                         {% endif %}
+
+                        {% if post.link %}
+                            <a href="{{post.link}}">
+                                {% if post.category %}
+                                [ <em>{{ post.category | capitalize }}</em> ]
+                                {% endif %}
+                                {{ post.title | escape }}
+                            </a>
+                        {% else %}
                             <a href="{{site.baseurl}}{{post.url}}">
                                 {% if post.category %}
                                 [ <em>{{ post.category | capitalize }}</em> ]
@@ -46,6 +55,7 @@
                                 {% endif %}
                             {% endif %}
                         </li>
+                        {% endif %}
                     {% endfor %}
 
                     {% if reversed_posts.size > 0 %}
@@ -53,12 +63,6 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-
-            <li>
-                <a href="https://github.com/sighingnow/jekyll-gitbook/fork" target="blank" class="gitbook-link">
-                    Fork it Now!
-                </a>
-            </li>
         </ul>
     </nav>
 </div>
