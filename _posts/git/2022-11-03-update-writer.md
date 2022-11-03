@@ -1,4 +1,9 @@
-# Git 작성자 변경
+---
+title: Git 작성자 변경
+category: git
+layout: post
+tags: [git]
+---
 
 ## 📖 들어가기
 

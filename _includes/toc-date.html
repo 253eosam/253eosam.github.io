@@ -36,17 +36,11 @@
                         {% endif %}
 
                         {% if post.link %}
-                            <a href="{{post.link}}">
-                                {% if post.category %}
-                                [ <em>{{ post.category | capitalize }}</em> ]
-                                {% endif %}
+                            <a href="{{post.link}}" class="link">
                                 {{ post.title | escape }}
                             </a>
                         {% else %}
                             <a href="{{site.baseurl}}{{post.url}}">
-                                {% if post.category %}
-                                [ <em>{{ post.category | capitalize }}</em> ]
-                                {% endif %}
                                 {{ post.title | escape }}
                             </a>
                             {% if site.toc.enabled %}

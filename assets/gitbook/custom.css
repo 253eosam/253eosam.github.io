@@ -1,6 +1,20 @@
 ---
 ---
 
+.page-inner .category {
+    color: #1c1f2b;
+    font-family: cursive, 'Courier New', Courier, monospace;
+}
+
+.book-summary ul.summary li.active>a  {
+    color: rgb(255, 13, 0);
+    font-weight: bold;
+}
+.book-summary ul.summary li>a.link  {
+    color: #008cff;
+    text-decoration: underline;
+}
+
 .book-body {
     overflow-y: scroll;
 }
