@@ -125,7 +125,6 @@ arguments, caller
 Foo함수는 arguments와 caller가 그냥 출력이 되었다면, Bar 클래스는 에러를 던지고있습니다.
 이 코드로 확인 가능한 것은 기존 코드들은 웬만해선 에러가 발생하지 않게 했다면 최신 문법에선 친절하게 에러를 던져주므로써 빠른 시점에 수정을 할 수 있게끔 유도하고 있습니다.
 
-* arguments 사용 지양
 
 ### 3. new 키워드로 생성
 
@@ -140,8 +139,6 @@ Foo는 함수로도 사용가능하고, 생성자함수로도 사용이 가능�
 - function 키워드를 이용해서 생성자 함수를 만들었다면 prototype의 프로퍼티가 순회 대상이되기 때문에 class를 사용하여 생성자를 구현하는 것이 효율적이다.
 - class의 경우 arguments 접근시 에러가 발생시킨다. 따라서 기존 에러를 발생시키지않고 실행되던 코드를 사전에 수정할 수 있다.
 - class는 new 키워드를 통해서만 생성 가능하다. 따라서 목적이 뚜렷하다.
-
-* class가 편의 문법 , 문법 설탕
 
 ## function 키워드의 일반 함수 문제점
 
@@ -257,3 +254,6 @@ function 이라는 키워드를 반드시 쓰지마세요라는뜻은 아닙니�
 참고
 
 - [https://www.youtube.com/watch?v=LPEwb5plEoU](https://www.youtube.com/watch?v=LPEwb5plEoU)
+- [[es2015+] class문은 특별할까?](https://www.bsidesoft.com/5370)
+- [ES6 Class는 단지 prototype 상속의 문법설탕일 뿐인가?](https://roy-jung.github.io/161007_is-class-only-a-syntactic-sugar/)
+- [arguments 객체 :: ES6를 사용 중이라면 나머지 매개변수를 사용해야 합니다.](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions/arguments)
