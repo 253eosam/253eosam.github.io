@@ -1,8 +1,5 @@
 ---
 title: About
-author: Tao He
-date: 2022-02-04
-layout: post
+link: https://253eosam.notion.site/About-215e0a0c66f7432290df491e20c0fb23
 ---
 
-This is an about page.
