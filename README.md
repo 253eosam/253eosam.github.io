@@ -38,7 +38,11 @@ function openCity(evt, selected) {
     <ul>
       {% for post in site.posts %}
         {% assign last_posts = site[collection.label] %}
-        <li><a style="overflow: hidden" href="{{ post.url }}">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a></li>
+        <li>
+          <div style="overflow: hidden;">
+            <a href="{{ post.url }}">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+          </div>
+        </li>
       {% endfor %}
     </ul>
   </div>
@@ -49,7 +53,11 @@ function openCity(evt, selected) {
       <span>{{ category[0] }}</span>
       <ul>
         {% for post in category[1] %}
-        <li><a style="overflow: hidden" href="{{ post.url }}">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a></li>
+        <li>
+          <div style="overflow: hidden;">
+            <a href="{{ post.url }}">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+          </div>
+        </li>
         {% endfor %}
       </ul>
     {% endfor %}
@@ -60,7 +68,11 @@ function openCity(evt, selected) {
       <span class="subtitle">{{ tag[0] }}</span>
       <ul>
         {% for post in tag[1] %}
-        <li><a style="overflow: hidden" href="{{ post.url }}">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a></li>
+        <li>
+          <div style="overflow: hidden;">
+            <a href="{{ post.url }}">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+          </div>
+        </li>
         {% endfor %}
       </ul>
     {% endfor %}
