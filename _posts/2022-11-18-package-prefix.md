@@ -1,7 +1,9 @@
-# NPM package 접두사 '@'는 무슨 의미일까?
-
-> #npm
-
+---
+title: "NPM package 접두사 '@'는 무슨 의미일까?"
+layout: post
+category: npm
+tags: [npm]
+---
 ## Scoped packages
 
 ### Description
