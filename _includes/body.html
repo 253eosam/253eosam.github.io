@@ -9,11 +9,11 @@
         <section class="normal markdown-section">
           {% if page.title %}
           <h1 id="{{ page.id }}">
-            {% if page.category` %} <a href="{{ site.baseurl }}/category/{{ page.category | slugify }}/" class="category"> <span>[{{ page.category | capitalize }}]</span> </a> - {% endif %} {{ page.title | escape }}
+            {% if page.category` %} <a href="/#home-category" class="category"> <span>[{{ page.category | capitalize }}]</span> </a> - {% endif %} {{ page.title | escape }}
           </h1>
           {% else %}
           <h1 id="{{ page.id }}">
-            {% if page.category` %} <a href="{{ site.baseurl }}/category/{{ page.category | slugify }}/" class="category"> <span>[{{ page.category | capitalize }}]</span> </a> - {% endif %} {{ site.title | escape }}
+            {% if page.category` %} <a href="/#home-category" class="category"> <span>[{{ page.category | capitalize }}]</span> </a> - {% endif %} {{ site.title | escape }}
           </h1>
           {% endif %} {% if page.date %}
           <div class="date" style="text-align: right">
@@ -23,7 +23,7 @@
           {% endif %} {% if page.tags %}
           <div class="tag">
             {% for tag in page.tags %}
-            <a href="{{ site.baseurl }}/tag/{{ tag | slugify }}/"> #<span class="badge badge-pill badge-primary">{{ tag | downcase }}</span> </a>
+            <a href="/#home-tag"> #<span class="badge badge-pill badge-primary">{{ tag | downcase }}</span> </a>
             {% endfor %}
           </div>
           <br />

@@ -3,8 +3,16 @@ layout: home
 title: Home
 permalink: /
 ---
+
 <script>
-function openCity(evt, selected) {
+(() => {
+  console.log(
+    "hash" , location.hash
+  )
+  openCity(location.hash.slice(1))
+})()
+
+function openCity(selected) {
   // Declare all variables
   var i, tabcontent, tablinks;
 
@@ -21,26 +29,30 @@ function openCity(evt, selected) {
   }
 
   // Show the current tab, and add an "active" class to the button that opened the tab
+  
   document.getElementById(selected).style.display = "block";
-  evt.currentTarget.className += " active";
+  document.querySelector(`.${selected}`).className += " active";
 }
 </script>
 
 <div class="home">
   <!-- Tab links -->
   <div class="tab">
-    <button class="tablinks active" onclick="openCity(event, 'home-post')">최신글</button>
-    <button class="tablinks" onclick="openCity(event, 'home-category')">카테고리</button>
-    <button class="tablinks" onclick="openCity(event, 'home-tag')">태그</button>
+    <button class="home-post-btn tablinks active" onclick="openCity('home-post')">최신글</button>
+    <button class="home-category tablinks" onclick="openCity('home-category')">카테고리</button>
+    <button class="home-tag tablinks" onclick="openCity('home-tag')">태그</button>
   </div>
 
   <div id="home-post" style="display: block;" class="tabcontent">
     <ul>
       {% for post in site.posts %}
-        {% assign last_posts = site[collection.label] %}
         <li>
           <div style="overflow: hidden;">
-            <a href="{{ post.url }}">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+            {% if post.link %}
+              <a href="{{post.link}}" class="link">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+            {% else %}
+              <a href="{{ post.url }}" style="color: #364149;">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+            {% endif %}
           </div>
         </li>
       {% endfor %}
@@ -50,12 +62,16 @@ function openCity(evt, selected) {
   <!-- Tab content -->
   <div id="home-category" class="tabcontent">
     {% for category in site.categories %}
-      <span>{{ category[0] }}</span>
+      <h5>{{ category[0] }}</h5>
       <ul>
         {% for post in category[1] %}
         <li>
           <div style="overflow: hidden;">
-            <a href="{{ post.url }}">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+            {% if post.link %}
+              <a href="{{post.link}}" class="link">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+            {% else %}
+              <a href="{{ post.url }}" style="color: #364149;">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+            {% endif %}
           </div>
         </li>
         {% endfor %}
@@ -65,12 +81,16 @@ function openCity(evt, selected) {
 
   <div id="home-tag" class="tabcontent">
     {% for tag in site.tags %}
-      <span class="subtitle">{{ tag[0] }}</span>
+      <h5 class="subtitle">{{ tag[0] }}</h5>
       <ul>
         {% for post in tag[1] %}
         <li>
           <div style="overflow: hidden;">
-            <a href="{{ post.url }}">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+            {% if post.link %}
+              <a href="{{post.link}}" class="link">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+            {% else %}
+              <a href="{{ post.url }}" style="color: #364149;">{{ post.title }} <span style="float: right;">{{ post.date | date: "%Y-%m-%d" }}</span></a>
+            {% endif %}
           </div>
         </li>
         {% endfor %}
