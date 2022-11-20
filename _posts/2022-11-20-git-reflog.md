@@ -10,7 +10,9 @@ tags: [git, reflog]
 git을 사용도중 rebase, reset을 통해 커밋이 삭제되는 일이 생길 수 있습니다.
 이럴경우 git log에 확인하고 복구하는 벙법이있다.
 
-## git reflog
+## 해결책
+
+### git reflog
 
 ```bash
 git reflog
