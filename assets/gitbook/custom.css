@@ -46,6 +46,12 @@
     overflow-y: scroll;
 }
 
+.book-body .thumbnail-img {
+    display: block;
+    margin: 0 auto;
+    height: 300px;
+}
+
 .book-body .book-header {
     position: fixed;
     width: 100%;
