@@ -225,7 +225,6 @@ require(['gitbook', 'jquery'], function(gitbook, $) {
     // Init configuration at start
     gitbook.events.bind('start', function(e, config) {
         var opts = {
-            "family": "serif",
             "size": 2,
             "theme": "white"
         };
