@@ -10,9 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "next lint --fix",
-    "export": "next export",
-    "deploy": "pnpm run build && pnpm run export"
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
