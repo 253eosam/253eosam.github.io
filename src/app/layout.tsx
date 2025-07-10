@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import '@/app/globals.css'
 
-
 export const metadata: Metadata = {
   title: '253eosam github blog',
   description: '253eosam github blog',
@@ -41,10 +40,8 @@ export default function RootLayout({
           href="/favicon-16x16.png"
         />
         <link rel="manifest" href="/site.webmanifest" />
-
       </head>
-      <body
-      >
+      <body>
         <main className="" role="main">
           {children}
         </main>
