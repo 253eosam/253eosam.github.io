@@ -34,6 +34,8 @@
 - 예제 draft "claude-workflow-system-구축기" 생성
 - 환경 변경 추적 규칙을 CLAUDE.md에 명시
 - velog-fetcher 포스트 20개 자동 정리 스크립트 (`organize-velog-posts.sh`) 추가
+- 블로그 글 개선 방법론을 CLAUDE.md에 체계화
+- 글 톤 가이드라인 정립 (경험 공유 톤, 자연스러운 표현)
 
 ### Migration
 - 기존 39개 블로그 포스트를 카테고리별로 재구성
