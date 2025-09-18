@@ -1,91 +1,244 @@
-# CLAUDE.md
+# 프로젝트 개요
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+이 프로젝트는 Claude를 활용하여 높은 퀄리티의 블로그 컨텐츠를 생성하는 공간입니다. draft template을 통해 체계적으로 글을 기획하고, AI 대화를 통해 품질을 개선하여 최종적으로 velog에 발행할 수 있는 완성된 컨텐츠를 생산합니다.
 
-## Project Overview
+## 목적
 
-This is a Next.js 15 personal tech blog with TypeScript, using static export to deploy on GitHub Pages. The project has been completely restructured and simplified to focus purely on content management with a clean, minimal design.
+- Claude 기반 고품질 컨텐츠 생성
+- Draft template을 통한 체계적 글 기획
+- 대화형 방식으로 글의 품질 지속 개선
+- 완성된 컨텐츠의 체계적 관리 및 아카이브
+- Velog 발행을 위한 최종 컨텐츠 준비
 
-## Commands
+# 컨텐츠 생성 워크플로우
 
-### Development
-- `pnpm dev` - Start development server with Turbopack
-- `pnpm build` - Build for production (static export to `./out`)
-- `pnpm start` - Start production server
+## 1단계: Draft Template 작성
 
-### Code Quality
-- `pnpm lint` - Run ESLint
-- `pnpm lint:fix` - Run ESLint with auto-fix
+- `templates/draft-template.md` 사용
+- 토픽, 목차, 글의 컨셉 정의
+- 타겟 독자 및 글의 목적 명시
 
-## Code Architecture
+## 2단계: Claude 대화형 컨텐츠 생성
 
-### Content Structure (Fully Migrated)
+- Draft template을 기반으로 초기 컨텐츠 생성
+- 대화를 통한 반복적 품질 개선
+- 구조, 내용, 문체 최적화
+
+## 3단계: 이미지 생성 및 최적화
+
+- 글에 맞는 적절한 이미지 생성 또는 선별
+- 썸네일 및 본문 이미지 준비
+- 이미지 파일 최적화 및 저장
+
+## 4단계: 아카이브 이동
+
+- 완성된 고품질 컨텐츠를 archive 폴더로 이동
+- 최종 검토 및 메타데이터 완성
+- Velog 발행 준비 완료
+
+## 5단계: Velog 발행
+
+- 사용자가 archive 내용을 직접 velog에 작성
+- 발행 후 상태 업데이트
+
+# 저장소 구조
+
+## 폴더 구조
+
 ```
-content/posts/
-├── frontend/ (21 posts)
-│   ├── JavaScript: interpreters, closures, prototypes, functional programming
-│   ├── Vue.js: performance, reactivity, code style
-│   ├── React/UI: modals, events, DOM, browser rendering, state management
-│   ├── Advanced: Core.js, virtual DOM, web storage
-│   └── Other: dynamic web pages, frontend development basics
-├── patterns/ (3 posts)
-│   ├── Proxy Pattern, Observer Pattern, PRG Pattern
-├── dev-tools/ (7 posts)
-│   ├── Git workflows, caching, project configuration
-├── infrastructure/ (4 posts)
-│   ├── Docker containers, Telegram bots, Excel processing, Sentry
-└── algorithms/ (multiple)
-    ├── data-structure/ and leetcode/ problems
+/
+├── drafts/                    # 작성 중인 초안들
+│   ├── templates/            # Draft 템플릿
+│   │   └── draft-template.md # 기본 draft 템플릿
+│   └── [topic-name]/         # 토픽별 draft 폴더
+├── in-progress/              # Claude와 작업 중인 컨텐츠
+├── archive/                  # 완성된 고품질 컨텐츠
+│   ├── ready-to-publish/     # Velog 발행 준비된 글
+│   └── published/            # 발행 완료된 글
+├── assets/                   # 이미지, 파일 등 리소스
+│   ├── images/              # 생성된 이미지들
+│   └── templates/           # 이미지 템플릿
+└── tools/                   # 자동화 스크립트
 ```
 
-### Directory Structure
-- `src/app/` - Next.js App Router pages and layouts (minimal, clean UI)
-- `src/types/` - TypeScript type definitions
-- `src/utils/` - Utility functions
-- `content/posts/` - All blog posts organized by category (39 posts total)
-- `public/` - Static files for web
+## 분류 체계
 
-### Content Organization Principles
-- **Post Structure**: Each post has its own directory with `index.md` and `images/` folder
-- **Image Management**: All images are co-located with their posts using relative paths `./images/filename.png`
-- **Categories**: Posts are systematically organized into 5 main categories
-- **Frontmatter**: Posts use YAML frontmatter with `title`, `category`, `tags`, `layout` fields
-- **Asset Migration**: All legacy `/assets/` references have been converted to relative paths
+- 토픽별 분류 (기술, 개발, 리뷰, 튜토리얼 등)
+- 진행 상태별 구분 (draft → in-progress → archive)
+- 품질 단계별 관리 (초안 → 개선 → 완성)
+- 발행 상태 추적 (ready-to-publish → published)
 
-### Key Configuration
-- **Next.js**: Configured with `output: 'export'` for static site generation
-- **TypeScript**: Path mapping configured with `@/*` pointing to `src/*`
-- **Package Manager**: Uses pnpm (specified in `packageManager` field)
-- **Dependencies**: Minimal dependencies - Next.js core, dayjs for dates, no UI libraries
+# 파일 명명 규칙
 
-### Styling & UI
-- Tailwind CSS v4 for styling
-- Pretendard Variable font for Korean typography
-- Clean, minimal blog design without component libraries
-- Responsive grid layouts for content display
-- Simple homepage with recent posts and category navigation
+## 포스트 파일명
 
-### Code Style
-- ESLint with Next.js TypeScript rules and Prettier integration
-- No semicolons (`;`), single quotes, trailing commas in multiline
-- Unused variables with `_` prefix are ignored
-- Korean language set in HTML (`lang="ko"`)
+- 형식: `YYYY-MM-DD-제목.md`
+- 예시: `2024-03-15-react-hooks-정리.md`
 
-### Content Migration Status
-- ✅ All 39 posts migrated from legacy structure
-- ✅ All image assets moved to post-specific `images/` directories
-- ✅ All `/assets/` references converted to relative paths
-- ✅ External images downloaded and stored locally where possible
-- ✅ Legacy `_my-assets/` and `/assets/` directories completely removed
+## Draft Template 메타데이터
 
-### Image Management
-- Each post directory contains its own `images/` folder
-- 17 actual image files preserved (browser rendering, patterns, state management)
-- Placeholder references for missing images use `./images/placeholder.ext` pattern
-- All image references use relative paths for portability
+```markdown
+---
+type: 'draft-template'
+topic: '글의 주제'
+target_audience: '타겟 독자'
+purpose: '글의 목적'
+estimated_length: '예상 글 길이'
+difficulty_level: '난이도 (초급/중급/고급)'
+created_date: 'YYYY-MM-DD'
+status: 'planning' # planning → drafting → improving → completed
+---
+```
 
-### Deployment
-- Automatic deployment to GitHub Pages via GitHub Actions on push to `main`
-- Static files exported to `./out` directory
-- Deployed to `gh-pages` branch
-- Blog URL: https://253eosam.github.io
+## 완성된 글 메타데이터
+
+```markdown
+---
+title: '포스트 제목'
+date: 'YYYY-MM-DD'
+category: '카테고리명'
+tags: ['태그1', '태그2']
+description: '글 요약'
+thumbnail: 'assets/images/썸네일.jpg'
+status: 'ready-to-publish' # ready-to-publish → published
+velog_url: '' # 발행 후 URL 기록
+quality_score: '1-10점' # Claude와의 작업을 통한 품질 평가
+---
+```
+
+# 작업 가이드라인
+
+## Draft Template 작성 가이드
+
+1. **토픽 정의**
+
+   - 명확하고 구체적인 주제 설정
+   - 타겟 독자 명시
+   - 글의 목적과 가치 정의
+
+2. **목차 구성**
+
+   - 논리적 흐름 구성
+   - 섹션별 핵심 포인트 명시
+   - 예상 분량 및 깊이 설정
+
+3. **컨셉 및 접근법**
+   - 글의 톤앤매너 정의
+   - 설명 방식 (예제 중심, 이론 중심 등)
+   - 독자 참여 요소 계획
+
+## Claude 대화형 개선 가이드
+
+1. **초기 컨텐츠 생성**
+
+   - Draft template 기반 첫 버전 생성
+   - 구조와 핵심 내용 우선 작성
+
+2. **반복적 품질 개선**
+
+   - 섹션별 상세화 및 보완
+   - 예제 추가 및 설명 강화
+   - 문체 및 가독성 개선
+
+3. **최종 검토**
+   - 전체 일관성 확인
+   - 오타 및 문법 검토
+   - 메타데이터 완성
+
+## 이미지 생성 및 관리
+
+1. **이미지 기획**
+
+   - 썸네일 컨셉 정의
+   - 본문 설명 이미지 계획
+   - 브랜딩 요소 고려
+
+2. **이미지 생성**
+
+   - AI 도구 활용한 이미지 생성
+   - 일관된 스타일 유지
+   - 해상도 및 파일 크기 최적화
+
+3. **파일 관리**
+   - 체계적 파일명 규칙
+   - assets/images 폴더 정리
+   - 백업 및 버전 관리
+
+# 우선 작업 순서
+
+1. **Draft Template 시스템 구축**
+
+   - 기본 draft-template.md 파일 생성
+   - 토픽별 템플릿 커스터마이징
+   - 메타데이터 표준화
+
+2. **Claude 협업 프로세스 정립**
+
+   - 대화형 컨텐츠 생성 방법론 확립
+   - 품질 평가 기준 설정
+   - 개선 사이클 최적화
+
+3. **이미지 생성 파이프라인 구축**
+
+   - 이미지 생성 도구 선정
+   - 스타일 가이드 정의
+   - 자동화 스크립트 개발
+
+4. **아카이브 시스템 정비**
+
+   - 완성된 컨텐츠 분류 체계
+   - Velog 발행 준비 프로세스
+   - 품질 관리 시스템
+
+5. **자동화 도구 개발**
+   - 워크플로우 자동화 스크립트
+   - 메타데이터 관리 도구
+   - 품질 체크 자동화
+
+# 도구 및 자동화
+
+## 권장 도구
+
+- 마크다운 에디터 (Typora, Mark Text 등)
+- Git for 버전 관리
+- 이미지 최적화 도구
+
+## 자동화 스크립트
+
+- 새 포스트 템플릿 생성 스크립트
+- 메타데이터 일괄 업데이트 스크립트
+- 백업 및 정리 스크립트
+
+# 주의사항
+
+## 컨텐츠 품질 관리
+
+- Claude와의 대화를 통한 지속적 품질 개선
+- 타겟 독자에 맞는 적절한 난이도 유지
+- 정확성과 최신성 확보
+- 독창성과 가치 있는 인사이트 제공
+
+## 기술적 주의사항
+
+- 이미지 파일 크기 최적화 (웹 최적화)
+- 메타데이터 일관성 유지
+- 파일 명명 규칙 준수
+- 정기적인 백업 및 버전 관리
+
+## 발행 전 체크리스트
+
+- 오타 및 문법 검토 완료
+- 이미지 최적화 및 대체 텍스트 추가
+- 메타데이터 완성도 확인
+- 구조 및 흐름 최종 점검
+
+# 확장 계획
+
+- 검색 기능 추가 (전체 텍스트 검색)
+- 통계 대시보드 (포스트 수, 카테고리별 분포 등)
+- 다른 플랫폼 연동 (Medium, 티스토리 등)
+- 자동 배포 스크립트 개발
+
+# claude code 명령어
+
+`/claude_code_commands.md` 파일 참고
