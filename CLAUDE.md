@@ -10,36 +10,37 @@
 - 완성된 컨텐츠의 체계적 관리 및 아카이브
 - Velog 발행을 위한 최종 컨텐츠 준비
 
-# 컨텐츠 생성 워크플로우
+# 신규 컨텐츠 생성 상세 플로우
 
-## 1단계: Draft Template 작성
+## 1단계: Draft Template 생성 및 작성
 
-- `templates/draft-template.md` 사용
-- 토픽, 목차, 글의 컨셉 정의
-- 타겟 독자 및 글의 목적 명시
+- `drafts/templates/draft-template.md` 사용하여 새로운 draft 생성
+- `drafts/[topic-name]/` 폴더에 토픽별 draft 작성
+- 토픽, 목차, 글의 컨셉, 타겟 독자, 목적 상세 정의
 
-## 2단계: Claude 대화형 컨텐츠 생성
+## 2단계: make content 명령 실행
 
-- Draft template을 기반으로 초기 컨텐츠 생성
+- **make content** 명령으로 Draft 기반 초안 생성
+- 사용된 Draft → `archive/used-draft/`로 자동 이동
+- 생성된 초안 → `in-progress/`에 배치
+
+## 3단계: Claude AI와 대화형 고도화
+
+- `in-progress/`에서 Claude AI와 협업
 - 대화를 통한 반복적 품질 개선
-- 구조, 내용, 문체 최적화
+- 구조, 내용, 문체, 실용성 최적화
 
-## 3단계: 이미지 생성 및 최적화
+## 4단계: approve로 완성 확정
 
-- 글에 맞는 적절한 이미지 생성 또는 선별
-- 썸네일 및 본문 이미지 준비
-- 이미지 파일 최적화 및 저장
-
-## 4단계: 아카이브 이동
-
-- 완성된 고품질 컨텐츠를 archive 폴더로 이동
+- **approve** 명령으로 `archive/ready-to-publish/`로 이동
+- 메타태그 `status: ready-to-publish` 설정
 - 최종 검토 및 메타데이터 완성
-- Velog 발행 준비 완료
 
-## 5단계: Velog 발행
+## 5단계: 발행 및 상태 관리
 
-- 사용자가 archive 내용을 직접 velog에 작성
-- 발행 후 상태 업데이트
+- 사용자가 실제 블로그에 발행
+- 메타태그 `status: published`로 업데이트
+- `archive/published/`로 이동 (선택사항)
 
 # 저장소 구조 및 워크플로우
 
@@ -47,12 +48,13 @@
 
 ```
 /
-├── drafts/                    # 토픽 정보 제공 레이어
+├── drafts/                    # Draft 작성 영역
 │   ├── templates/            # Draft 템플릿
 │   │   └── draft-template.md # 기본 draft 템플릿
 │   └── [topic-name]/         # 토픽별 draft 폴더
 ├── in-progress/              # AI ↔ 사용자 협업 작업 공간
 ├── archive/                  # 완성된 고품질 컨텐츠
+│   ├── used-draft/          # 사용된 draft 보관
 │   ├── ready-to-publish/     # 발행 준비된 완성 글
 │   └── published/            # 발행 완료된 글
 ├── content/posts/            # 기존 컨텐츠 (개선 대상)
@@ -71,28 +73,38 @@ content/posts/ → [rewrite] → in-progress/ → [approve] → archive/ready-to
 
 ### 신규 컨텐츠 생성
 ```
-drafts/ → [make] → archive/ready-to-publish/ → [필요시 개선] → in-progress/ → [approve] → archive/ready-to-publish/
+1. Draft Template 생성 → drafts/
+2. Draft 작성 완료
+3. [make content] → drafts/ 이동 → archive/used-draft/ + 초안 생성 → in-progress/
+4. in-progress/에서 Claude AI와 대화형 고도화 작업
+5. [approve] → in-progress/ → archive/ready-to-publish/
+6. 메타태그로 publish 상태 체크 → archive/published/
 ```
 
 ## 디렉토리별 역할
 
-### `/drafts/` - 토픽 정보 제공 레이어
-- 사용자가 작성할 토픽과 방향성 정의
-- AI에게 컨텐츠 생성 정보 제공
-- **make** 명령으로 초안 생성
+### `/drafts/` - Draft 작성 영역
+- Draft Template을 기반으로 컨텐츠 기획
+- 토픽, 목차, 방향성 정의
+- **make content** 명령으로 초안 생성 후 `archive/used-draft/`로 이동
 
-### `/in-progress/` - 협업 작업 공간
-- AI와 사용자가 함께 컨텐츠 개선
-- **rewrite** 대상 파일들
-- 반복적 개선 작업 진행
+### `/in-progress/` - AI ↔ 사용자 협업 작업 공간
+- **make content**로 생성된 초안의 고도화 작업
+- **rewrite** 대상 파일들의 개선 작업
+- Claude AI와 대화형으로 컨텐츠 품질 향상
+
+### `/archive/used-draft/` - 사용된 Draft 보관
+- **make content** 실행 시 사용된 draft 파일들 보관
+- 컨텐츠 생성 과정 추적 가능
 
 ### `/archive/ready-to-publish/` - 완성된 컨텐츠
 - **approve** 된 고품질 컨텐츠
-- **make**로 생성된 초안 보관
 - 발행 준비 완료 상태
+- 메타태그로 publish 상태 관리
 
 ### `/archive/published/` - 발행 완료
 - 실제 블로그에 발행된 글들
+- 메타태그 `status: published` 상태
 
 ## 명령어별 동작
 
@@ -100,14 +112,21 @@ drafts/ → [make] → archive/ready-to-publish/ → [필요시 개선] → in-p
 - 기존 컨텐츠를 `in-progress/`로 이동
 - 개선 작업 시작
 
+### **make content** 명령 (신규 컨텐츠)
+1. `drafts/[topic-name]/`의 Draft 읽기
+2. Draft 기반으로 초안 컨텐츠 생성
+3. 사용된 Draft → `archive/used-draft/`로 이동
+4. 생성된 초안 → `in-progress/`에 배치
+5. Claude AI와 대화형 고도화 작업 시작
+
 ### **approve** 명령
 - `in-progress/`에서 `archive/ready-to-publish/`로 이동
 - 고품질 컨텐츠 완성 확정
+- 메타태그 `status: ready-to-publish` 설정
 
-### **make** 명령 (drafts 기반)
-- `drafts/`의 토픽 정보로 초안 생성
-- 생성된 초안은 `archive/ready-to-publish/`에 보관
-- 필요시 추가 개선은 `in-progress/`에서 진행
+### **publish** 상태 관리 (메타태그)
+- `status: ready-to-publish` → 발행 준비 완료
+- `status: published` → 실제 발행 완료
 
 ## 분류 체계
 
