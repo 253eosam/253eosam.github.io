@@ -34,8 +34,13 @@
 - 예제 draft "claude-workflow-system-구축기" 생성
 - 환경 변경 추적 규칙을 CLAUDE.md에 명시
 - velog-fetcher 포스트 20개 자동 정리 스크립트 (`organize-velog-posts.sh`) 추가
-- 블로그 글 개선 방법론을 CLAUDE.md에 체계화
-- 글 톤 가이드라인 정립 (경험 공유 톤, 자연스러운 표현)
+- 블로그 글 개선 방법론을 CLAUDE.md에 체계화 (5가지 핵심 영역)
+- 글 톤 가이드라인 정립 (경험 공유 톤, 자연스러운 표현, 불필요한 섹션 금지)
+- Turbopack 글 샘플 개선 완료 (개선 방법론 적용 예시)
+- SWC 글 개선 완료 (개선 방법론 적용)
+- CONTENT-IMPROVEMENT-STATUS.md 생성 (59개 포스트 개선 진행 상황 추적)
+- WORKFLOW-MANAGEMENT.md 생성 (워크플로우 관리 가이드)
+- 개선 완료된 글 2개를 in-progress 디렉토리로 이동
 
 ### Migration
 - 기존 39개 블로그 포스트를 카테고리별로 재구성
