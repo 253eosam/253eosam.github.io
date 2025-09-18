@@ -33,8 +33,15 @@
 - 모든 자동화 스크립트에 실행 권한 부여 (`chmod +x`)
 - 예제 draft "claude-workflow-system-구축기" 생성
 - 환경 변경 추적 규칙을 CLAUDE.md에 명시
+- velog-fetcher 포스트 20개 자동 정리 스크립트 (`organize-velog-posts.sh`) 추가
 
 ### Migration
-- 39개 블로그 포스트를 카테고리별로 재구성
+- 기존 39개 블로그 포스트를 카테고리별로 재구성
+- velog-fetcher 20개 포스트를 기존 구조에 통합
+- 총 59개 포스트가 카테고리별로 정리됨:
+  - frontend: 38개 (기존 21개 + 신규 12개)
+  - dev-tools: 12개 (기존 7개 + 신규 4개)
+  - infrastructure: 6개 (기존 4개 + 신규 1개)
+  - patterns: 7개 (기존 3개 + 신규 3개)
 - 17개 이미지 파일을 각 포스트 디렉토리 내 images/ 폴더로 이동
 - 모든 이미지 참조 경로를 상대 경로로 수정

@@ -275,6 +275,9 @@ quality_score: '1-10점' # Claude와의 작업을 통한 품질 평가
 
 # 완성 후 아카이브 (in-progress → archive)
 ./tools/move-to-archive.sh "폴더명" [품질점수]
+
+# velog-fetcher 포스트 정리 (일회성)
+./tools/organize-velog-posts.sh
 ```
 
 모든 스크립트는 실행 권한이 자동으로 설정되며, 프로젝트 루트에서 실행해야 합니다.
