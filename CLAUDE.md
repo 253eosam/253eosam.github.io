@@ -41,25 +41,73 @@
 - 사용자가 archive 내용을 직접 velog에 작성
 - 발행 후 상태 업데이트
 
-# 저장소 구조
+# 저장소 구조 및 워크플로우
 
 ## 폴더 구조
 
 ```
 /
-├── drafts/                    # 작성 중인 초안들
+├── drafts/                    # 토픽 정보 제공 레이어
 │   ├── templates/            # Draft 템플릿
 │   │   └── draft-template.md # 기본 draft 템플릿
 │   └── [topic-name]/         # 토픽별 draft 폴더
-├── in-progress/              # Claude와 작업 중인 컨텐츠
+├── in-progress/              # AI ↔ 사용자 협업 작업 공간
 ├── archive/                  # 완성된 고품질 컨텐츠
-│   ├── ready-to-publish/     # Velog 발행 준비된 글
+│   ├── ready-to-publish/     # 발행 준비된 완성 글
 │   └── published/            # 발행 완료된 글
+├── content/posts/            # 기존 컨텐츠 (개선 대상)
 ├── assets/                   # 이미지, 파일 등 리소스
 │   ├── images/              # 생성된 이미지들
 │   └── templates/           # 이미지 템플릿
 └── tools/                   # 자동화 스크립트
 ```
+
+## 컨텐츠 워크플로우
+
+### 기존 컨텐츠 개선
+```
+content/posts/ → [rewrite] → in-progress/ → [approve] → archive/ready-to-publish/ → archive/published/
+```
+
+### 신규 컨텐츠 생성
+```
+drafts/ → [make] → archive/ready-to-publish/ → [필요시 개선] → in-progress/ → [approve] → archive/ready-to-publish/
+```
+
+## 디렉토리별 역할
+
+### `/drafts/` - 토픽 정보 제공 레이어
+- 사용자가 작성할 토픽과 방향성 정의
+- AI에게 컨텐츠 생성 정보 제공
+- **make** 명령으로 초안 생성
+
+### `/in-progress/` - 협업 작업 공간
+- AI와 사용자가 함께 컨텐츠 개선
+- **rewrite** 대상 파일들
+- 반복적 개선 작업 진행
+
+### `/archive/ready-to-publish/` - 완성된 컨텐츠
+- **approve** 된 고품질 컨텐츠
+- **make**로 생성된 초안 보관
+- 발행 준비 완료 상태
+
+### `/archive/published/` - 발행 완료
+- 실제 블로그에 발행된 글들
+
+## 명령어별 동작
+
+### **rewrite** 명령
+- 기존 컨텐츠를 `in-progress/`로 이동
+- 개선 작업 시작
+
+### **approve** 명령
+- `in-progress/`에서 `archive/ready-to-publish/`로 이동
+- 고품질 컨텐츠 완성 확정
+
+### **make** 명령 (drafts 기반)
+- `drafts/`의 토픽 정보로 초안 생성
+- 생성된 초안은 `archive/ready-to-publish/`에 보관
+- 필요시 추가 개선은 `in-progress/`에서 진행
 
 ## 분류 체계
 
