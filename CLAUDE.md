@@ -239,6 +239,46 @@ quality_score: '1-10점' # Claude와의 작업을 통한 품질 평가
 - 다른 플랫폼 연동 (Medium, 티스토리 등)
 - 자동 배포 스크립트 개발
 
+# 프로젝트 환경 변경 추적
+
+프로젝트 설정이나 환경이 변경될 때마다 다음을 업데이트합니다:
+
+## 자동 업데이트 규칙
+
+1. **새로운 도구/스크립트 추가시**
+   - tools/ 디렉토리의 스크립트는 실행 권한 자동 부여 (`chmod +x`)
+   - CLAUDE.md의 자동화 스크립트 섹션 업데이트
+   - CHANGELOG.md에 Added 섹션 기록
+
+2. **워크플로우 변경시**
+   - 관련 README 파일들 업데이트
+   - PROJECT-STATUS.md 현재 상태 반영
+   - CHANGELOG.md에 Changed 섹션 기록
+
+3. **디렉토리 구조 변경시**
+   - CLAUDE.md의 저장소 구조 섹션 업데이트
+   - 각 폴더별 README 파일 동기화
+   - CHANGELOG.md에 Added/Changed/Removed 적절히 기록
+
+4. **모든 변경사항**
+   - CHANGELOG.md에 날짜와 함께 상세 기록
+   - 버전 태그 관리 (Major.Minor.Patch)
+
+## 현재 사용 가능한 자동화 스크립트
+
+```bash
+# 새 draft 생성
+./tools/create-new-draft.sh "토픽명"
+
+# 작업 시작 (draft → in-progress)
+./tools/move-to-progress.sh "폴더명"
+
+# 완성 후 아카이브 (in-progress → archive)
+./tools/move-to-archive.sh "폴더명" [품질점수]
+```
+
+모든 스크립트는 실행 권한이 자동으로 설정되며, 프로젝트 루트에서 실행해야 합니다.
+
 # claude code 명령어
 
 `/claude_code_commands.md` 파일 참고
