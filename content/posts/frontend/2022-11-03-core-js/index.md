@@ -132,7 +132,7 @@ var a // 변할 수 있는 데이터를 만든다. 이 데이터의 식별자는
 a = 'abc'
 ```
 
-![변수 영역과 데이터 영역](/assets/post-img/2022-11-03-core-js/data_layer.png)
+![변수 영역과 데이터 영역](./images/data_layer.png)
 
 #### 참조타입
 
@@ -143,7 +143,7 @@ var obj1 = {
 }
 ```
 
-![참조형 타입의 변수 영영과 데이터 영역](/assets/post-img/2022-11-03-core-js/ref-type-data-layer.png)
+![참조형 타입의 변수 영영과 데이터 영역](./images/ref-type-data-layer.png)
 
 #### 이렇게 변수 영여과 데이터 영역을 나눠서 관리하는 이유는 무엇일까?
 
@@ -188,7 +188,7 @@ JS에서 배열은 객체이기 때문이다.
 
 ## 2. 실행 컨텍스트
 
-![실행 컨텍스트 콜 스택](/assets/post-img/2022-11-03-core-js/execution-context-call-stack.png)
+![실행 컨텍스트 콜 스택](./images/execution-context-call-stack.png)
 
 `실행 컨텍스트(execution context)`는 실행할 코드에 제공할 환경 정보들을 모아놓은 객체로, 자바스크립트의 동적 언어로서의 성격을 가장 잘 파악할 수 있는 개념이다.
 

@@ -63,19 +63,19 @@ HTML을 파싱하여 루트가 Document인 DOM 객체 트리를 구성한다.
 </html>
 ```
 
-![DOM Tree](https://junilhwang.github.io/TIL/assets/2.37c33d86.png)
+![DOM 트리](./images/dom-tree.png)
 
 #### CSSOM Tree 생성
 
 CSS를 파싱하여 CSSOM을 트리를 구성한다.
 
-![CSSOM](https://junilhwang.github.io/TIL/assets/3.ddd4c242.png)
+![CSSOM](./images/cssom.png)
 
 body, p, span 등 선택자가 노드로 생성되고 각 노드는 스타일을 참조
 
 ### 2. 스타일
 
-![렌더링](https://junilhwang.github.io/TIL/assets/4.709c7142.png)
+![렌더링 트리](./images/rendering-tree.png)
 #### Render Tree 생성
 
 DOM tree,, CSSOM Tree가 생성되면 스타일을 매칭시켜주는 과정을 거쳐 렌더 트리를 구성한다.  
@@ -90,7 +90,7 @@ Render Tree 배치, _Layout_(Reflow)
 
 - 뷰포트 내에서 요소들에 정확한 위치와 크기를 계산하는 과정
 
-![뷰포트 계산](https://junilhwang.github.io/TIL/assets/5.4111cc90.png)
+![레이아웃](./images/layout.png)
 
 ### 4. 페인트
 
@@ -98,7 +98,7 @@ Render Tree 그리기, _Paint_(Repaint)
 
 - 렌더링 트리의 각 노드를 화면의 실제 픽셀로 변환하는 마지막 단계
 
-![페인트](https://junilhwang.github.io/TIL/assets/6.7e200a01.png)
+![페인트](./images/paint.png)
 
 - 레이아웃이 완료될 때 브라우저가 'Paint Setup' 및 'Paint' 이벤트를 발생
 - 렌더링 트리를 화면의 픽셀로 변환
@@ -107,7 +107,7 @@ Render Tree 그리기, _Paint_(Repaint)
 
 화면에 표시하기 위해 페이지에서 페인트된 부분을 합치는 과정
 
-![compositing](https://junilhwang.github.io/TIL/assets/7.fff4c50d.png)
+![컴포지팅](./images/compositing.png)
 
 ## 렌더링 최적화
 

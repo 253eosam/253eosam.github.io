@@ -16,7 +16,7 @@ tags: [DOM, Browser, Vue.js, Event Handling]
 이벤트 버블링은 특정 화면 요소에서 이벤트가 발생하였을때 해당 이벤트가 더 상위의 요소들로 전달되는 특징을 말한다.
 기본적인 옵션으로 적용되어있다.
 
-![이벤트 버블링](/assets/posts/eventdelegation/event-bubbling.png)
+![이벤트 버블링](./images/placeholder.png)
 
 > Tip. HTML은 기본적으로 트리 구조를 갖고있다.
 
@@ -24,7 +24,7 @@ tags: [DOM, Browser, Vue.js, Event Handling]
 하지만 나도 브라우저의 이벤트 동작 원리를 공부하지 않았을땐 반대의 개념으로 이해하고있던터라 상당히 충격이였다.
 자세한 내용은 아래 코드를 보면서 이해해보면 좋을 것이다.
 
-![이벤트 버블링 코드](/assets/posts/eventdelegation/event-bubbling-code.png)
+![이벤트 버블링 코드](./images/placeholder.png)
 
 초록색 영역을 한번 클릭시 콘솔창에는 `green` > `blue` > `red` 순으로 찍히는 것을 불 수있다. <br>
 이것을 통해서 알수있는 것은 **왜 한번의 클릭으로 3개의 이벤트가 발생하였는가?**이다. <br>
@@ -40,11 +40,11 @@ tags: [DOM, Browser, Vue.js, Event Handling]
 
 이벤트 캡쳐는 이벤트 버블링과 반대 방향으로 진행되는 이벤트 전파 방식이다.
 
-![이벤트 캡쳐링](/assets/posts/eventdelegation/event-capture.png)
+![이벤트 캡쳐링](./images/placeholder.png)
 
 위 방식은 버블링과는 반대되는 개념인데 최상위 요소인 body 태그에서 해당 태그를 찾아 내려간다.
 
-![이벤트 캡쳐링 코드](/assets/posts/eventdelegation/event-capture-code.png)
+![이벤트 캡쳐링 코드](./images/placeholder.png)
 
 캡쳐링은 이벤트 옵션을 통해 설정할 수 있다.
 

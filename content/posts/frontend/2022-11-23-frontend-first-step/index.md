@@ -5,7 +5,7 @@ category: scrapbook
 tags: [JS framework, Vue.js, React, Angular, SPA]
 ---
 
-<img src="/assets/post-img/프론트엔드-개발-첫걸음/책표지.jpeg" class="thumbnail-img"/>
+<img src="./images/book-cover.jpeg" class="thumbnail-img"/>
 
 ## 책을 읽고 내 생각 정리
 
@@ -92,7 +92,7 @@ Backbone.js 라는 차세대 라이브러리가 나오면서(SPA의 구조를 �
 
 ### CSR (Clinent-side Rendering)
 
-![csr.png](/assets/post-img/프론트엔드-개발-첫걸음/csr.png)
+![CSR](./images/csr.png)
 
 대표적인 기술로 SPA가있다. 사실 이것말곤 모르겠다. 
 
@@ -100,9 +100,9 @@ Backbone.js 라는 차세대 라이브러리가 나오면서(SPA의 구조를 �
 
 ### SSR (Server-side Rendering)
 
-![ssr.png](/assets/post-img/프론트엔드-개발-첫걸음/ssr.png)
+![SSR](./images/ssr.png)
 
-![prerender.png](/assets/post-img/프론트엔드-개발-첫걸음/prerender.png)
+![Prerender](./images/prerender.png)
 
 일반적인 HTTP 응답 방식이다. 사용자 요청에따른 페이지를 서버측에서 넘겨주는 것으로 SPA보다 화면 전환은 느리지만 이미 완성된 html 페이지를 받아온다는 점에서 검색 엔진에 최적화되어있다. 
 
@@ -119,7 +119,7 @@ Backbone.js 라는 차세대 라이브러리가 나오면서(SPA의 구조를 �
 > MVC (Model - View - Controller)의 약자이다.
 > 
 
-![mvc.png](/assets/post-img/프론트엔드-개발-첫걸음/mvc.png)
+![MVC 패턴](./images/mvc.png)
 
 **모델**이란 데이터와 데이터에 접근하기 위한 기능, 여기에 다양한 로직을 보탠 것.
 
@@ -135,13 +135,13 @@ Backbone.js 라는 차세대 라이브러리가 나오면서(SPA의 구조를 �
 
 ### MVP 패턴
 
-![mvp.png](/assets/post-img/프론트엔드-개발-첫걸음/mvp.png)
+![MVP 패턴](./images/mvp.png)
 
 MVP의 MV 역시 (Model - View)를 의미한다. 여기서 P는 프리젠터(Presenter)가 추가된 패턴이다. 모델과 뷰 사이에 프리젠터가 위치하여 양자 간의 입출력 인터페이스 역할을 맡는다. 사용자가 모델의 정보를 수정하거나 읽으려면 반드시 뷰를 거쳐 프리젠터가 제공하는 인터페이스를 통해야한다.
 
 ### MVVM 패턴
 
-![mvvm.png](/assets/post-img/프론트엔드-개발-첫걸음/mvvm.png)
+![MVVM 패턴](./images/mvvm.png)
 
 VM이 V와 M사이에 위치한다는 점에서 프리젠터와 비슷하지만, 그 역할이 뷰와 모델간의 인터페이스 대신 양방향 데이터 바인딩을 담당한다는 점에서 다르다.
 
@@ -149,7 +149,7 @@ VM이 V와 M사이에 위치한다는 점에서 프리젠터와 비슷하지만,
 
 React가 유명해진 뒤로 MVP, MVVM과도 다른 또 다른 아키텍처인 Flux가 주목을 받았다. Flux는 페이스북에서 주창한 웹 애플리케이션용 아키텍처 패턴이다. Action, Dispatcher, Store, View 단계를 반복하는 형태로 웹 애플리케이션이 구성된다.
 
-![flux.png](/assets/post-img/프론트엔드-개발-첫걸음/flux.png)
+![Flux 패턴](./images/flux.png)
 
 위 그림으로 알수있는 내용으론 “Flux는 디스페처만이 스토어의 내용을 변경할 수 있다”라고 정의되어있다. 그리고 Flux에서 애플리케이션의 처리과정은 항상 단방향이라는 점을 알수있다.
 

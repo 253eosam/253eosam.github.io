@@ -40,7 +40,7 @@ const foo = new Foo(1,2)
 console.dir(foo)
 ```
 
-![constructor function](/assets/post-img/2022-11-08-function-keyword/constructor-function.png)
+![생성자 함수](./images/constructor-function.png)
 
 ES6에선 생성자 함수를 대체할 수 있는 `class`가 나왔습니다. 이 클래스를 이용해서 인스턴스를 생성하고 상속을 구현 가능하게 합니다.
 
@@ -62,7 +62,7 @@ console.dir(bar)
 
 ### 1. 고유 프로퍼티 체크
 
-![생성자함수와 class 비교](/assets/post-img/2022-11-08-function-keyword/constructor-console-log.png)
+![생성자함수와 class 비교](./images/constructor-console-log.png)
 
 위 그림은 foo와 bar를 콘솔에 출력한 화면입니다. 그림에서 `getArgs`를 보시면 생성자 함수에서는 진하게 표시되어있습니다. 이것이 뜻하는 것은 `getArgs`가 순회 대상이 된다는 뜻입니다. 즉 고유 속성이 아니지만 `for in`문법을 통해 접근이 가능하고 이것을 처리하기 위해선 `hasOwnProperty`와 같은 문법을 사용해서 조건처리를 해줘야합니다.
 
@@ -112,7 +112,7 @@ class Bar {
 console.dir(Bar)
 ```
 
-![함수와 클래스 자체 비교](/assets/post-img/2022-11-08-function-keyword/constructor-obj-compare.png)
+![함수와 클래스 자체 비교](./images/constructor-obj-compare.png)
 
 위 화면을 보면 Foo함수는 `arguments`와 `caller`가 `null`인 것을 확인할 수 있고, Bar 클래스는 `arguments`와 `caller`가 invoke되어야 결과를 확인 할 수 있으며, 리턴값은 에러를 던지고 있는것을 확인할 수 있습니다.
 
@@ -161,7 +161,7 @@ console.dir(foo);
 console.dir(bar);
 ```
 
-![arrow function vs 일반 함수](/assets/post-img/2022-11-08-function-keyword/arrow-function-compare.png)
+![화살표 함수 vs 일반 함수](./images/arrow-function-compare.png)
 
 위 화면을 보면 arrow function은 arguments, caller 역시 invoke 했을때 에러를 던지는 것을 알수 있습니다.
 
@@ -203,7 +203,7 @@ console.dir(obj1.method)
 console.dir(obj2.method)
 ```
 
-![객체 메소드와 메소드 축약형](/assets/post-img/2022-11-08-function-keyword/object-method.png)
+![객체 메소드와 메소드 축약형](./images/object-method.png)
 
 메소드 축약형의 경우 arrow function과 비슷합니다.. 하지만 차이점이라면 메소드 축약형은 메소드의 목적을 가지고 있기 때문에 this 바인딩이 됩니다.
 

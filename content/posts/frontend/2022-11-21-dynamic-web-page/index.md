@@ -36,7 +36,7 @@ tags: [동적 웹 페이지, WAS, 정적 웹 페이지, 웹 서버]
 
 ## 정적 페이지
 
-![정적 페이지 시퀀스](/assets/post-img/2022-11-21-%EB%8F%99%EC%A0%81-%EC%9B%B9-%ED%8E%98%EC%9D%B4%EC%A7%80/%EC%A0%95%EC%A0%81.png)
+![정적 페이지 시퀀스](./images/placeholder.png)
 
 내용이 자주 바뀌지 않는 정적 콘텐츠를 보여줄 때 사용하는 페이지.
 
@@ -45,7 +45,7 @@ tags: [동적 웹 페이지, WAS, 정적 웹 페이지, 웹 서버]
 
 ## 동적 웹 페이지의 종류
 
-![동적 페이지 시퀀스](/assets/post-img/2022-11-21-%EB%8F%99%EC%A0%81-%EC%9B%B9-%ED%8E%98%EC%9D%B4%EC%A7%80/%EB%8F%99%EC%A0%81.png)
+![동적 페이지 시퀀스](./images/placeholder.png)
 
 - Client-side rendering (CSR)
 - Server-side rendering (SSR)

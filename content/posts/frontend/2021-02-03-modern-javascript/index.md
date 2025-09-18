@@ -54,7 +54,7 @@ moment().startOf('day').fromNow() // 20 hours ago
 
 그치만 이건 어디까지나 moment.js를 현재 웹사이트에 포함시켰단 가정하에 이야기이다. [moment.js의 홈페이지](https://momentjs.com/)를 방문해 보면 아래와 같은 지시사항을 볼 수 있다.
 
-![monent.js install](/assets/posts/modern-javascript-explained-for-dinosaur/momentjs_install.png)
+![monent.js install](./images/placeholder.png)
 
 오른쪽 인스톨 섹션은 일단 무시하자. index.html이 들어있는 디렉토리에 `moment.min.js`를 다운로드 한다. 그러면 아래의 코드처럼 index.html에 `moment.min.js`를 추가 시킬 수 있다.
 
