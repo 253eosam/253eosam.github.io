@@ -1,0 +1,16 @@
+{
+  "title": "",
+  "date": "2025-09-19",
+  "category": "",
+  "tags": [],
+  "description": "",
+  "thumbnail": "thumbnail.jpg",
+  "status": "ready-to-publish",
+  "velog_url": "",
+  "quality_score": 8.0,
+  "workflow": {
+    "created_date": "2025-09-19",
+    "moved_to_archive": "2025-09-19 09:26:12",
+    "ready_for_publish": true
+  }
+}

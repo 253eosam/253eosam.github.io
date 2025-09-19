@@ -1,0 +1,33 @@
+{
+  "title": "JavaScript의 숨겨진 비밀: toString, instanceof, 그리고 프로토타입의 진실",
+  "date": "2025-09-19",
+  "category": "Frontend",
+  "tags": ["JavaScript", "prototype", "type-checking", "interview", "advanced"],
+  "description": "JavaScript 중급 개발자가 꼭 알아야 할 toString, instanceof, 프로토타입의 내부 동작 원리와 실무 활용법",
+  "thumbnail": "./images/01-javascript-type-system-overview.jpg",
+  "status": "ready-to-publish",
+  "velog_url": "",
+  "quality_score": 9.0,
+  "estimated_reading_time": "15분",
+  "word_count": "약 4,000단어",
+  "target_audience": "JavaScript 중급 개발자, 면접 준비생, TypeScript 사용자",
+  "key_topics": [
+    "Object.prototype.toString 내부 동작",
+    "instanceof 프로토타입 체인 탐색",
+    "원시 타입 vs 래퍼 객체",
+    "Symbol.toStringTag, Symbol.hasInstance",
+    "실무 타입 체크 유틸리티",
+    "면접 예상 질문"
+  ],
+  "workflow": {
+    "created_date": "2025-09-19",
+    "moved_to_archive": "2025-09-19 09:54:31",
+    "ready_for_publish": true,
+    "content_completeness": {
+      "structure": "완료",
+      "examples": "완료",
+      "interview_questions": "완료",
+      "practical_tips": "완료"
+    }
+  }
+}

@@ -54,6 +54,11 @@
    - `in-progress/`에서 Claude AI와 협업
    - 대화를 통한 반복적 품질 개선
    - 구조, 내용, 문체, 실용성 최적화
+   - **이미지 시스템 구축**:
+     - 글 내용에 전략적 이미지 플레이스홀더 삽입
+     - `/images/image-generation-prompts.md` 파일에 상세한 AI 이미지 생성 프롬프트 작성
+     - 각 이미지별 용도, 위치, 생성 프롬프트, 대체 텍스트 포함
+     - 일관된 스타일 가이드 및 기술적 요구사항 정의
 
 4. **approve로 완성 확정**
    - **approve** 명령으로 `archive/ready-to-publish/`로 이동
@@ -128,6 +133,7 @@ content/posts/ → [rewrite] → in-progress/ → [approve] → archive/ready-to
    - 섹션별 상세화 및 보완
    - 예제 추가 및 설명 강화
    - 문체 및 가독성 개선
+   - 이미지 플레이스홀더 및 생성 프롬프트 시스템 구축
 
 3. **최종 검토**
    - 전체 일관성 확인
@@ -256,36 +262,54 @@ quality_score: '1-10점' # Claude와의 작업을 통한 품질 평가
 ## 컨텐츠 개선 진행 상황
 
 ### 작업 개요
-총 59개 블로그 포스트의 품질 개선 작업을 진행 중입니다.
+총 58개 블로그 포스트의 품질 개선 작업을 진행 중입니다. (1개 삭제됨)
 
-### 완료된 포스트 (In-Progress로 이동 완료)
-- `in-progress/2025-09-17-turbopack-vite-yarn-berry-호환성-정리/` (개선 방법론 적용 완료)
-- `in-progress/2025-09-17-swc/` (개선 방법론 적용 완료)
-- `in-progress/2025-09-17-vite-typescript-프로젝트-모듈-경로-aliasing/` (개선 방법론 적용 완료)
-- `in-progress/2025-09-17-lodash-꼭-써야-할까-가벼운-대안-라이브러리-찾아보기/` (개선 방법론 적용 완료)
-- `in-progress/2022-11-20-git-checkout-file/` (개선 방법론 적용 완료)
-- `in-progress/2022-10-19-using-cache/` (개선 방법론 적용 완료)
-- `in-progress/2022-10-20-detail-setting/` (개선 방법론 적용 완료)
-- `in-progress/2022-11-20-git-reflog/` (개선 방법론 적용 완료)
-- `in-progress/2022-11-03-update-writer/` (개선 방법론 적용 완료)
-- `in-progress/2022-11-18-package-prefix/` (개선 방법론 적용 완료)
+### 완료된 포스트 (Archive로 이동 완료)
 
-### Dev-tools 카테고리 완료
-- ✅ `2022-10-20-detail-setting` (ESLint 설정 삽질 경험으로 개선)
-- ✅ `2022-10-19-simple-setting` (삭제됨 - 사용자 요청)
-- ✅ `2022-11-20-git-reflog` (git force push 복구 경험으로 개선)
-- ✅ `2022-11-03-update-writer` (회사/개인 프로젝트 작성자 실수 경험으로 개선)
-- ✅ `2022-11-18-package-prefix` (React 개발하면서 궁금했던 @ 패키지 탐구로 개선)
+#### 🎯 Ready-to-Publish (10개)
+**Dev-tools 관련 (완료)**:
+- `archive/ready-to-publish/2025-09-17-turbopack-vite-yarn-berry-호환성-정리/` (품질점수: 8.5/10)
+- `archive/ready-to-publish/2025-09-17-swc/` (품질점수: 8.0/10)
+- `archive/ready-to-publish/2022-10-19-using-cache/` (품질점수: 7.5/10)
+- `archive/ready-to-publish/2022-10-20-detail-setting/` (품질점수: 8.0/10)
+- `archive/ready-to-publish/2022-11-03-update-writer/` (품질점수: 7.5/10)
+- `archive/ready-to-publish/2022-11-18-package-prefix/` (품질점수: 8.0/10)
+- `archive/ready-to-publish/2022-11-20-git-checkout-file/` (품질점수: 7.5/10)
+- `archive/ready-to-publish/2022-11-20-git-reflog/` (품질점수: 8.0/10)
 
-### 진행률
-- **전체**: 59개 포스트
-- **완료**: 10개 (16.9%)
-- **in-progress**: 10개
-- **남은 작업**: 49개
-  - dev-tools: 0개 (완료)
-  - frontend: 38개
-  - infrastructure: 6개
-  - patterns: 7개
+**Frontend 관련 (완료)**:
+- `archive/ready-to-publish/2025-09-17-lodash-꼭-써야-할까-가벼운-대안-라이브러리-찾아보기/` (품질점수: 8.0/10)
+- `archive/ready-to-publish/2025-09-17-vite-typescript-프로젝트-모듈-경로-aliasing/` (품질점수: 7.5/10)
+
+#### 🔄 현재 In-Progress (4개)
+- `in-progress/2022-10-20-web-storage-api/` (Frontend - 진행 중)
+- `in-progress/2022-11-03-core-js/` (Frontend - 진행 중)
+- `in-progress/2022-11-23-frontend-first-step/` (Frontend - 진행 중)
+- `in-progress/2025-09-17-javascript-promiseall과-promiseallsettled-직접-구현해보기/` (Frontend - 진행 중)
+
+### 카테고리별 현황
+
+#### ✅ Dev-tools 카테고리 완료
+- **진행률**: 100% 완료 (6개 처리 완료)
+- **결과**: 5개 개선완료 + 1개 삭제
+- **평균 품질점수**: 7.8/10
+
+#### 🔄 Frontend 카테고리 진행 중
+- **완료**: 2개 (archive 이동)
+- **진행 중**: 4개 (in-progress)
+- **남은 작업**: 31개
+- **진행률**: 6/37 (16.2%)
+
+#### ⏳ 대기 중 카테고리
+- **Infrastructure**: 5개 대기
+- **Patterns**: 6개 대기
+
+### 전체 진행률
+- **전체**: 58개 포스트
+- **Archive 완료**: 10개 (17.2%)
+- **In-Progress**: 4개 (6.9%)
+- **남은 작업**: 44개 (75.9%)
+- **평균 품질점수**: 7.8/10
 
 ## 변경사항 기록
 
@@ -392,20 +416,35 @@ quality_score: '1-10점' # Claude와의 작업을 통한 품질 평가
 
 ## 이미지 생성 및 관리
 
-### 이미지 기획
-- 썸네일 컨셉 정의
-- 본문 설명 이미지 계획
-- 브랜딩 요소 고려
+### In-Progress 단계 이미지 워크플로우
 
-### 이미지 생성
-- AI 도구 활용한 이미지 생성
-- 일관된 스타일 유지
-- 해상도 및 파일 크기 최적화
+#### 1. 이미지 플레이스홀더 삽입
+- 글의 핵심 섹션에 전략적으로 이미지 플레이스홀더 배치
+- 형식: `![이미지 설명](./images/파일명.jpg)`
+- 썸네일, 설명 이미지, 비교 차트, 다이어그램 등 다양한 용도
+
+#### 2. 이미지 생성 프롬프트 시스템
+- 각 컨텐츠 폴더 내 `/images/image-generation-prompts.md` 파일 생성
+- 각 이미지별 상세 정보 포함:
+  - **용도 및 위치**: 이미지의 목적과 글 내 배치 위치
+  - **생성 프롬프트**: AI 이미지 생성 도구용 상세 프롬프트
+  - **대체 텍스트**: 접근성을 위한 alt text 제안
+  - **기술적 요구사항**: 해상도, 파일 형식, 색상 팔레트
+
+#### 3. 스타일 가이드라인
+- **공통 디자인 원칙**: 브랜드 색상, 폰트, 스타일 통일
+- **기술적 요구사항**: 최소 해상도, 16:9 비율, 웹 최적화
+- **접근성 고려**: 색맹 사용자 대비, 명확한 시각적 구분
+
+#### 4. 이미지 생성 및 적용
+- 사용자가 제공된 프롬프트로 AI 도구에서 이미지 생성
+- 생성된 이미지를 해당 파일명으로 저장
+- 필요시 크기 조정 및 웹 최적화 수행
 
 ### 파일 관리
-- 체계적 파일명 규칙
-- assets/images 폴더 정리
-- 백업 및 버전 관리
+- 체계적 파일명 규칙: `01-개요.jpg`, `02-비교차트.jpg` 등
+- 각 컨텐츠 폴더 내 `/images/` 디렉토리에 이미지 보관
+- 상대 경로 사용으로 이식성 확보
 
 ## 확장 계획
 
