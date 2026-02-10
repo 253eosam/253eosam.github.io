@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # in-progress를 archive로 이동하는 스크립트
+# index.md frontmatter에서 메타데이터를 자동 추출하여 metadata.json 생성
 
 set -e
 
@@ -15,7 +16,7 @@ if [ $# -eq 0 ]; then
 fi
 
 FOLDER_NAME="$1"
-QUALITY_SCORE="${2:-8.0}"
+QUALITY_SCORE="${2:-}"
 PROGRESS_PATH="in-progress/${FOLDER_NAME}"
 ARCHIVE_PATH="archive/ready-to-publish/${FOLDER_NAME}"
 
@@ -31,40 +32,184 @@ if [ -d "$ARCHIVE_PATH" ]; then
     exit 1
 fi
 
+# --- frontmatter 파싱 함수 ---
+
+# index.md 또는 content.md 찾기
+find_content_file() {
+    local dir="$1"
+    if [ -f "$dir/index.md" ]; then
+        echo "$dir/index.md"
+    elif [ -f "$dir/content.md" ]; then
+        echo "$dir/content.md"
+    elif [ -f "$dir/draft.md" ]; then
+        echo "$dir/draft.md"
+    else
+        echo ""
+    fi
+}
+
+# frontmatter 영역 추출 (--- 사이)
+extract_frontmatter() {
+    local file="$1"
+    sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d'
+}
+
+# frontmatter에서 단일 값 추출
+get_field() {
+    local frontmatter="$1"
+    local field="$2"
+    echo "$frontmatter" | grep -E "^${field}:" | head -1 | sed "s/^${field}:[[:space:]]*//" | sed 's/^["'"'"']//' | sed 's/["'"'"']$//'
+}
+
+# tags/tag 파싱 (3가지 형식 지원)
+parse_tags() {
+    local frontmatter="$1"
+
+    # 형식 C: tags: [tag1, tag2] 또는 tag: ['tag1', 'tag2']
+    local inline_tags
+    inline_tags=$(echo "$frontmatter" | grep -E "^(tags?):.*\[" | head -1 | sed -E 's/^tags?:[[:space:]]*//' | tr -d "[]'" | sed 's/"//g')
+    if [ -n "$inline_tags" ]; then
+        # 쉼표로 분리하여 JSON 배열로 변환
+        local result="["
+        local first=true
+        IFS=',' read -ra tag_arr <<< "$inline_tags"
+        for t in "${tag_arr[@]}"; do
+            t=$(echo "$t" | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
+            if [ -n "$t" ]; then
+                if [ "$first" = true ]; then
+                    first=false
+                else
+                    result+=", "
+                fi
+                result+="\"$t\""
+            fi
+        done
+        result+="]"
+        echo "$result"
+        return
+    fi
+
+    # 형식 B: YAML 배열
+    #   - tag1
+    #   - tag2
+    local in_tags=false
+    local result="["
+    local first=true
+    while IFS= read -r line; do
+        if echo "$line" | grep -qE "^(tags?):"; then
+            # 같은 줄에 값이 없으면 YAML 배열 시작
+            local val
+            val=$(echo "$line" | sed -E 's/^tags?:[[:space:]]*//')
+            if [ -z "$val" ]; then
+                in_tags=true
+                continue
+            fi
+        fi
+        if [ "$in_tags" = true ]; then
+            # 빈 줄 건너뛰기
+            if [ -z "$(echo "$line" | tr -d '[:space:]')" ]; then
+                continue
+            fi
+            if echo "$line" | grep -qE "^[[:space:]]+-"; then
+                local tag
+                tag=$(echo "$line" | sed 's/^[[:space:]]*-[[:space:]]*//' | sed 's/^["'"'"']//' | sed 's/["'"'"']$//')
+                if [ -n "$tag" ]; then
+                    if [ "$first" = true ]; then
+                        first=false
+                    else
+                        result+=", "
+                    fi
+                    result+="\"$tag\""
+                fi
+            else
+                break
+            fi
+        fi
+    done <<< "$frontmatter"
+    result+="]"
+    echo "$result"
+}
+
+# --- 메인 로직 ---
+
+# 콘텐츠 파일 찾기
+CONTENT_FILE=$(find_content_file "$PROGRESS_PATH")
+
+# frontmatter에서 메타데이터 추출
+FM_TITLE=""
+FM_DATE=""
+FM_CATEGORY=""
+FM_TAGS="[]"
+FM_DESCRIPTION=""
+FM_STATUS="ready-to-publish"
+FM_QUALITY=""
+
+if [ -n "$CONTENT_FILE" ]; then
+    FRONTMATTER=$(extract_frontmatter "$CONTENT_FILE")
+
+    if [ -n "$FRONTMATTER" ]; then
+        FM_TITLE=$(get_field "$FRONTMATTER" "title")
+        FM_DATE=$(get_field "$FRONTMATTER" "date")
+        FM_CATEGORY=$(get_field "$FRONTMATTER" "category")
+        FM_DESCRIPTION=$(get_field "$FRONTMATTER" "description")
+        FM_QUALITY=$(get_field "$FRONTMATTER" "quality_score")
+        FM_TAGS=$(parse_tags "$FRONTMATTER")
+    fi
+fi
+
+# 날짜: frontmatter에 없으면 폴더명에서 추출, 그것도 없으면 오늘 날짜
+if [ -z "$FM_DATE" ]; then
+    FM_DATE=$(echo "$FOLDER_NAME" | grep -oE '^[0-9]{4}-[0-9]{2}-[0-9]{2}' || date '+%Y-%m-%d')
+fi
+# ISO 형식 날짜를 YYYY-MM-DD로 정규화
+FM_DATE=$(echo "$FM_DATE" | grep -oE '^[0-9]{4}-[0-9]{2}-[0-9]{2}')
+
+# quality_score: 인자 > frontmatter > 기본값 8.0
+if [ -n "$QUALITY_SCORE" ]; then
+    : # 인자 우선
+elif [ -n "$FM_QUALITY" ]; then
+    QUALITY_SCORE="$FM_QUALITY"
+else
+    QUALITY_SCORE="8.0"
+fi
+
 # 폴더 이동
 mv "$PROGRESS_PATH" "$ARCHIVE_PATH"
 
 # 최종 content.md 파일 확인
-CONTENT_FILE=""
+VERSIONED_FILE=""
 for file in "$ARCHIVE_PATH"/content-v*.md; do
     if [ -f "$file" ]; then
-        CONTENT_FILE="$file"
+        VERSIONED_FILE="$file"
     fi
 done
 
-if [ -z "$CONTENT_FILE" ]; then
-    echo "⚠️  경고: content-v*.md 파일을 찾을 수 없습니다."
-    echo "📝 $ARCHIVE_PATH/content.md 파일을 수동으로 생성하세요."
-else
-    # 가장 높은 버전을 content.md로 복사
-    cp "$CONTENT_FILE" "$ARCHIVE_PATH/content.md"
-    echo "✅ $CONTENT_FILE을 content.md로 복사했습니다."
+if [ -n "$VERSIONED_FILE" ]; then
+    cp "$VERSIONED_FILE" "$ARCHIVE_PATH/content.md"
+    echo "✅ $VERSIONED_FILE을 content.md로 복사했습니다."
 fi
+
+# JSON 문자열 이스케이프
+escape_json() {
+    echo "$1" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g'
+}
+
+ESCAPED_TITLE=$(escape_json "$FM_TITLE")
+ESCAPED_DESC=$(escape_json "$FM_DESCRIPTION")
 
 # metadata.json 생성
 cat > "$ARCHIVE_PATH/metadata.json" << EOF
 {
-  "title": "",
-  "date": "$(date '+%Y-%m-%d')",
-  "category": "",
-  "tags": [],
-  "description": "",
-  "thumbnail": "thumbnail.jpg",
+  "title": "$ESCAPED_TITLE",
+  "date": "$FM_DATE",
+  "category": "$FM_CATEGORY",
+  "tags": $FM_TAGS,
+  "description": "$ESCAPED_DESC",
   "status": "ready-to-publish",
   "velog_url": "",
   "quality_score": $QUALITY_SCORE,
   "workflow": {
-    "created_date": "$(date '+%Y-%m-%d')",
+    "created_date": "$FM_DATE",
     "moved_to_archive": "$(date '+%Y-%m-%d %H:%M:%S')",
     "ready_for_publish": true
   }
@@ -77,7 +222,7 @@ cat > "$ARCHIVE_PATH/workflow-history.md" << EOF
 
 ## 프로젝트 개요
 
-- **시작일**: $(date '+%Y-%m-%d')
+- **시작일**: $FM_DATE
 - **완료일**: $(date '+%Y-%m-%d')
 - **품질 점수**: $QUALITY_SCORE/10
 
@@ -90,27 +235,21 @@ cat > "$ARCHIVE_PATH/workflow-history.md" << EOF
 ### 2. In-Progress 작업
 - Claude 협업 컨텐츠 생성
 - 반복적 품질 개선
-- 이미지 및 자료 추가
 
 ### 3. Archive 준비
 - 최종 검토 완료
 - 메타데이터 정리
 - 발행 준비 완료
 
-## 주요 성과
-
-- 최종 컨텐츠 품질: $QUALITY_SCORE/10
-- 타겟 독자 만족도 예상: 높음
-- Velog 발행 준비: 완료
-
 ## 다음 단계
 
-- [ ] Velog에 수동 발행
-- [ ] URL 및 성과 추적
+- [ ] Velog에 발행
 - [ ] published 폴더로 이동
-
 EOF
 
 echo "✅ $FOLDER_NAME이 archive/ready-to-publish로 이동되었습니다."
-echo "📝 메타데이터를 완성하세요: $ARCHIVE_PATH/metadata.json"
-echo "🎯 품질 점수: $QUALITY_SCORE/10"
+echo "📋 메타데이터 자동 추출 완료:"
+echo "   제목: ${FM_TITLE:-'(없음)'}"
+echo "   카테고리: ${FM_CATEGORY:-'(없음)'}"
+echo "   날짜: $FM_DATE"
+echo "   품질점수: $QUALITY_SCORE/10"
