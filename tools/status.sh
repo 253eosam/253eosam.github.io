@@ -76,16 +76,9 @@ get_quality_score() {
 
 # --- 데이터 수집 ---
 
-DRAFTS=$(count_folders "drafts" 2>/dev/null)
-# templates 폴더 제외
-if [ -d "drafts/templates" ]; then
-    DRAFTS=$((DRAFTS - 1))
-fi
-[ "$DRAFTS" -lt 0 ] && DRAFTS=0
-
-IN_PROGRESS=$(count_folders "in-progress")
-READY=$(count_folders "archive/ready-to-publish")
-PUBLISHED=$(count_folders "archive/published")
+IN_PROGRESS=$(count_folders "content/in-progress")
+READY=$(count_folders "content/ready-to-publish")
+PUBLISHED=$(count_folders "content/published")
 
 # content/posts 카테고리별 카운트
 FRONTEND=$(count_posts_by_category "frontend")
@@ -94,13 +87,13 @@ INFRA=$(count_posts_by_category "infrastructure")
 PATTERNS=$(count_posts_by_category "patterns")
 UNPROCESSED=$((FRONTEND + DEVTOOLS + INFRA + PATTERNS))
 
-TOTAL=$((DRAFTS + IN_PROGRESS + READY + PUBLISHED + UNPROCESSED))
+TOTAL=$((IN_PROGRESS + READY + PUBLISHED + UNPROCESSED))
 COMPLETED=$((READY + PUBLISHED))
 
 # quality_score 평균 계산
 SCORE_SUM=0
 SCORE_COUNT=0
-for meta in archive/ready-to-publish/*/metadata.json archive/published/*/metadata.json; do
+for meta in content/ready-to-publish/*/metadata.json content/published/*/metadata.json; do
     if [ -f "$meta" ]; then
         score=$(get_quality_score "$meta")
         if [ -n "$score" ] && [ "$score" != "0" ]; then
@@ -129,7 +122,6 @@ echo -e "  $(progress_bar "$COMPLETED" "$TOTAL")"
 echo ""
 
 # 워크플로우 단계별
-echo -e "  ${GRAY}📝 Drafts:${RESET}              $DRAFTS"
 echo -e "  ${YELLOW}🔄 In-Progress:${RESET}         $IN_PROGRESS"
 echo -e "  ${GREEN}✅ Ready-to-Publish:${RESET}    $READY"
 echo -e "  ${BLUE}📤 Published:${RESET}           $PUBLISHED"
@@ -152,7 +144,7 @@ echo ""
 # 최근 완료 포스트 (archive에서 최신 3개)
 echo -e "${BOLD}최근 완료 포스트${RESET}"
 RECENT_COUNT=0
-for dir in $(ls -dt archive/ready-to-publish/*/ archive/published/*/ 2>/dev/null | head -3); do
+for dir in $(ls -dt content/ready-to-publish/*/ content/published/*/ 2>/dev/null | head -3); do
     if [ -d "$dir" ]; then
         folder=$(basename "$dir")
         score=""
@@ -173,7 +165,7 @@ done
 if [ "$IN_PROGRESS" -gt 0 ]; then
     echo ""
     echo -e "${BOLD}현재 작업 중${RESET}"
-    for dir in in-progress/*/; do
+    for dir in content/in-progress/*/; do
         [ -d "$dir" ] && echo -e "  ${YELLOW}•${RESET} $(basename "$dir")"
     done
 fi

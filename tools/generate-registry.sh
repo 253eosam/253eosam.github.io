@@ -118,32 +118,22 @@ def extract_post(dir_path, location, status):
 
 # --- Collect data ---
 posts = []
-counts = {"draft": 0, "in_progress": 0, "ready_to_publish": 0, "published": 0, "unprocessed": 0}
+counts = {"in_progress": 0, "ready_to_publish": 0, "published": 0, "unprocessed": 0}
 categories = {}
 scores = []
 
-# 1. drafts
-if os.path.isdir("drafts"):
-    for folder in sorted(os.listdir("drafts")):
-        if folder == "templates":
-            continue
-        dir_path = os.path.join("drafts", folder)
+# 1. content/in-progress
+ip_dir = "content/in-progress"
+if os.path.isdir(ip_dir):
+    for folder in sorted(os.listdir(ip_dir)):
+        dir_path = os.path.join(ip_dir, folder)
         if not os.path.isdir(dir_path):
             continue
-        posts.append(extract_post(dir_path, "drafts", "draft"))
-        counts["draft"] += 1
-
-# 2. in-progress
-if os.path.isdir("in-progress"):
-    for folder in sorted(os.listdir("in-progress")):
-        dir_path = os.path.join("in-progress", folder)
-        if not os.path.isdir(dir_path):
-            continue
-        posts.append(extract_post(dir_path, "in-progress", "in_progress"))
+        posts.append(extract_post(dir_path, ip_dir, "in_progress"))
         counts["in_progress"] += 1
 
-# 3. archive/ready-to-publish
-rtp_dir = "archive/ready-to-publish"
+# 2. content/ready-to-publish
+rtp_dir = "content/ready-to-publish"
 if os.path.isdir(rtp_dir):
     for folder in sorted(os.listdir(rtp_dir)):
         dir_path = os.path.join(rtp_dir, folder)
@@ -158,8 +148,8 @@ if os.path.isdir(rtp_dir):
         if cat:
             categories[cat] = categories.get(cat, 0) + 1
 
-# 4. archive/published
-pub_dir = "archive/published"
+# 3. content/published
+pub_dir = "content/published"
 if os.path.isdir(pub_dir):
     for folder in sorted(os.listdir(pub_dir)):
         dir_path = os.path.join(pub_dir, folder)
@@ -174,7 +164,7 @@ if os.path.isdir(pub_dir):
         if cat:
             categories[cat] = categories.get(cat, 0) + 1
 
-# 5. content/posts
+# 4. content/posts
 content_dir = "content/posts"
 if os.path.isdir(content_dir):
     for cat_name in sorted(os.listdir(content_dir)):
@@ -210,5 +200,5 @@ with open(OUTPUT, 'w') as f:
 
 print(f"✅ {OUTPUT} 생성 완료")
 print(f"   총 {total}개 포스트 등록")
-print(f"   (draft: {counts['draft']}, in-progress: {counts['in_progress']}, ready: {counts['ready_to_publish']}, published: {counts['published']}, unprocessed: {counts['unprocessed']})")
+print(f"   (in-progress: {counts['in_progress']}, ready: {counts['ready_to_publish']}, published: {counts['published']}, unprocessed: {counts['unprocessed']})")
 PYTHON_SCRIPT

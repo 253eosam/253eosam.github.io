@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ready-to-publish → published로 이동하는 스크립트
+# content/ready-to-publish → content/published로 이동하는 스크립트
 
 set -e
 cd "$(dirname "$0")/.."
@@ -17,8 +17,8 @@ fi
 
 FOLDER_NAME="$1"
 VELOG_URL="${2:-}"
-SOURCE="archive/ready-to-publish/${FOLDER_NAME}"
-DEST="archive/published/${FOLDER_NAME}"
+SOURCE="content/ready-to-publish/${FOLDER_NAME}"
+DEST="content/published/${FOLDER_NAME}"
 
 # 소스 폴더 존재 확인
 if [ ! -d "$SOURCE" ]; then
@@ -33,7 +33,7 @@ if [ -d "$DEST" ]; then
 fi
 
 # published 폴더 생성
-mkdir -p "archive/published"
+mkdir -p "content/published"
 
 # 폴더 이동
 mv "$SOURCE" "$DEST"
@@ -59,6 +59,6 @@ else
     echo "⚠️  metadata.json이 없습니다. 수동으로 생성하세요."
 fi
 
-echo "✅ $FOLDER_NAME이 archive/published로 이동되었습니다."
+echo "✅ $FOLDER_NAME이 content/published로 이동되었습니다."
 [ -n "$VELOG_URL" ] && echo "🔗 Velog URL: $VELOG_URL"
 echo "📅 발행일: $(date '+%Y-%m-%d')"

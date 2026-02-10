@@ -1,12 +1,13 @@
 #!/bin/bash
 
-# in-progress를 archive로 이동하는 스크립트
+# content/in-progress를 content/ready-to-publish로 이동하는 스크립트
 # index.md frontmatter에서 메타데이터를 자동 추출하여 metadata.json 생성
 
 set -e
+cd "$(dirname "$0")/.."
 
 usage() {
-    echo "사용법: $0 <progress-폴더명> [quality-score]"
+    echo "사용법: $0 <폴더명> [품질점수]"
     echo "예시: $0 \"2024-03-15-react-hooks-정리\" 8.5"
     exit 1
 }
@@ -17,8 +18,8 @@ fi
 
 FOLDER_NAME="$1"
 QUALITY_SCORE="${2:-}"
-PROGRESS_PATH="in-progress/${FOLDER_NAME}"
-ARCHIVE_PATH="archive/ready-to-publish/${FOLDER_NAME}"
+PROGRESS_PATH="content/in-progress/${FOLDER_NAME}"
+ARCHIVE_PATH="content/ready-to-publish/${FOLDER_NAME}"
 
 # in-progress 폴더 존재 확인
 if [ ! -d "$PROGRESS_PATH" ]; then
@@ -228,15 +229,12 @@ cat > "$ARCHIVE_PATH/workflow-history.md" << EOF
 
 ## 워크플로우 단계
 
-### 1. Draft 기획
+### 1. 기획 + 작성
 - Draft template 작성
-- 토픽 및 구조 정의
-
-### 2. In-Progress 작업
 - Claude 협업 컨텐츠 생성
 - 반복적 품질 개선
 
-### 3. Archive 준비
+### 2. 완성
 - 최종 검토 완료
 - 메타데이터 정리
 - 발행 준비 완료
@@ -247,7 +245,7 @@ cat > "$ARCHIVE_PATH/workflow-history.md" << EOF
 - [ ] published 폴더로 이동
 EOF
 
-echo "✅ $FOLDER_NAME이 archive/ready-to-publish로 이동되었습니다."
+echo "✅ $FOLDER_NAME이 content/ready-to-publish로 이동되었습니다."
 echo "📋 메타데이터 자동 추출 완료:"
 echo "   제목: ${FM_TITLE:-'(없음)'}"
 echo "   카테고리: ${FM_CATEGORY:-'(없음)'}"
