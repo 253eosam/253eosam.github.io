@@ -1,9 +1,16 @@
 {
-  "title": "",
+  "title": "쿠키 vs localStorage vs sessionStorage: 실제 프로젝트에서 어떻게 선택했을까?",
   "date": "2025-09-19",
-  "category": "",
-  "tags": [],
-  "description": "",
+  "category": "frontend",
+  "tags": [
+    "tags: 웹저장소",
+    "localStorage",
+    "sessionStorage",
+    "Cookie",
+    "브라우저저장소",
+    "성능테스트"
+  ],
+  "description": "사용자 인증 서비스 개발 과정에서 브라우저 저장소별 특성을 직접 테스트하고 적용한 경험을 바탕으로, 상황에 맞는 저장소 선택 기준을 정리했습니다.",
   "thumbnail": "thumbnail.jpg",
   "status": "ready-to-publish",
   "velog_url": "",

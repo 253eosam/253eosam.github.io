@@ -1,9 +1,14 @@
 {
-  "title": "",
+  "title": "Vite + TypeScript에서 import 경로를 깔끔하게 만드는 방법",
   "date": "2025-09-19",
   "category": "",
-  "tags": [],
-  "description": "",
+  "tags": [
+    "alias",
+    "typescript",
+    "vite",
+    "모듈-경로"
+  ],
+  "description": "상대 경로로 인한 import 지옥에서 벗어나기 위해 Vite와 TypeScript에서 절대 경로 설정을 해봤습니다. 실제 적용 과정과 주의사항을 공유합니다.",
   "thumbnail": "thumbnail.jpg",
   "status": "ready-to-publish",
   "velog_url": "",

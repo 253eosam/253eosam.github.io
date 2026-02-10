@@ -1,9 +1,14 @@
 {
-  "title": "",
+  "title": "회사 이메일로 개인 프로젝트 커밋했을 때 되돌린 방법",
   "date": "2025-09-19",
-  "category": "",
-  "tags": [],
-  "description": "",
+  "category": "git",
+  "tags": [
+    "tags: Git",
+    "GitHub",
+    "개발환경",
+    "협업"
+  ],
+  "description": "여러 프로젝트를 오가다 작성자 설정을 실수해서 회사 이메일로 개인 프로젝트에 커밋했던 경험과 해결 과정을 정리했습니다.",
   "thumbnail": "thumbnail.jpg",
   "status": "ready-to-publish",
   "velog_url": "",
