@@ -17,14 +17,11 @@
 모든 스크립트는 프로젝트 루트에서 실행합니다.
 
 ```bash
-# 새 draft 생성
-./tools/create-new-draft.sh "토픽명"
+# 새 글 시작 (content/in-progress/에 생성)
+./tools/new.sh "토픽명"
 
-# 작업 시작 (draft → in-progress)
-./tools/move-to-progress.sh "폴더명"
-
-# 완성 후 아카이브 (in-progress → archive, frontmatter 자동 파싱)
-./tools/move-to-archive.sh "폴더명" [품질점수]
+# 글 완성 (in-progress → ready-to-publish, 메타데이터 자동 추출)
+./tools/done.sh "폴더명" [품질점수]
 
 # 발행 처리 (ready-to-publish → published)
 ./tools/publish.sh "폴더명" "https://velog.io/@253eosam/..."
@@ -40,44 +37,31 @@
 
 ### 신규 컨텐츠 생성 플로우
 
-1. **Draft Template 생성 및 작성**
-   - `drafts/templates/draft-template.md` 사용하여 새로운 draft 생성
-   - `drafts/[topic-name]/` 폴더에 토픽별 draft 작성
-   - 토픽, 목차, 글의 컨셉, 타겟 독자, 목적 상세 정의
+1. **새 글 시작** (`./tools/new.sh "토픽명"`)
+   - `content/in-progress/YYYY-MM-DD-<토픽명>/`에 작업 폴더 생성
+   - `content/templates/draft-template.md` 기반 draft.md 자동 복사
+   - Draft 작성 + Claude AI와 대화형 컨텐츠 생성 및 품질 개선
 
-2. **make content 명령 실행**
-   - **make content** 명령으로 Draft 기반 초안 생성
-   - 사용된 Draft → `archive/used-draft/`로 자동 이동
-   - 생성된 초안 → `in-progress/`에 배치
-
-3. **Claude AI와 대화형 고도화**
-   - `in-progress/`에서 Claude AI와 협업
-   - 대화를 통한 반복적 품질 개선
-   - 구조, 내용, 문체, 실용성 최적화
-
-4. **approve로 완성 확정**
-   - **approve** 명령으로 `archive/ready-to-publish/`로 이동
-   - 메타태그 `status: ready-to-publish` 설정
+2. **글 완성** (`./tools/done.sh "폴더명" [품질점수]`)
+   - `content/in-progress/` → `content/ready-to-publish/`로 이동
+   - frontmatter 파싱 → metadata.json 자동 생성
    - 최종 검토 및 메타데이터 완성
 
-5. **발행 및 상태 관리**
+3. **발행** (`./tools/publish.sh "폴더명" [velog-url]`)
    - 사용자가 실제 블로그에 발행
-   - `./tools/publish.sh`로 `archive/published/`로 이동
+   - `content/ready-to-publish/` → `content/published/`로 이동
 
 ### 폴더 구조
 
 ```
 /
-├── drafts/                    # Draft 작성 영역
-│   ├── templates/            # Draft 템플릿
-│   │   └── draft-template.md # 기본 draft 템플릿
-│   └── [topic-name]/         # 토픽별 draft 폴더
-├── in-progress/              # AI ↔ 사용자 협업 작업 공간
-├── archive/                  # 완성된 고품질 컨텐츠
-│   ├── used-draft/          # 사용된 draft 보관
-│   ├── ready-to-publish/     # 발행 준비된 완성 글
-│   └── published/            # 발행 완료된 글
-├── content/posts/            # 기존 컨텐츠 (개선 대상)
+├── content/
+│   ├── templates/            # Draft 템플릿 보관
+│   │   └── draft-template.md
+│   ├── in-progress/          # 기획+작성 (new.sh로 생성)
+│   ├── ready-to-publish/     # 발행 준비된 완성 글 (done.sh)
+│   ├── published/            # 발행 완료된 글 (publish.sh)
+│   └── posts/                # 기존 컨텐츠 (개선 대상)
 ├── content-registry.json     # 전체 포스트 현황 (자동 생성)
 └── tools/                   # 자동화 스크립트
 ```
@@ -86,17 +70,15 @@
 
 #### 기존 컨텐츠 개선
 ```
-content/posts/ → [rewrite] → in-progress/ → [approve] → archive/ready-to-publish/ → [publish] → archive/published/
+content/posts/ → [rewrite] → content/in-progress/ → [done] → content/ready-to-publish/ → [publish] → content/published/
 ```
 
 #### 신규 컨텐츠 생성
 ```
-1. Draft Template 생성 → drafts/
-2. Draft 작성 완료
-3. [make content] → drafts/ 이동 → archive/used-draft/ + 초안 생성 → in-progress/
-4. in-progress/에서 Claude AI와 대화형 고도화 작업
-5. [approve] → in-progress/ → archive/ready-to-publish/
-6. [publish] → archive/ready-to-publish/ → archive/published/
+1. [new] → content/in-progress/에 작업 폴더 생성 (draft.md 포함)
+2. content/in-progress/에서 기획 + Claude AI와 대화형 컨텐츠 생성
+3. [done] → content/in-progress/ → content/ready-to-publish/
+4. [publish] → content/ready-to-publish/ → content/published/
 ```
 
 ## 글 작성 가이드라인
