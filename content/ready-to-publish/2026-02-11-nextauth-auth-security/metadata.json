@@ -1,0 +1,15 @@
+{
+  "title": "NextAuth 인증 보안 완전 정리",
+  "date": "2026-02-11",
+  "category": "보안/인증",
+  "tags": ["NextAuth", "JWT", "CSRF", "HttpOnly", "SameSite", "Cookie", "Authentication", "Security"],
+  "description": "NextAuth 5의 인증 처리 흐름과 보안 메커니즘(JWT, CSRF, HttpOnly Cookie, SameSite)을 상세하게 정리한다",
+  "status": "ready-to-publish",
+  "velog_url": "",
+  "quality_score": 9,
+  "workflow": {
+    "created_date": "2026-02-11",
+    "moved_to_archive": "2026-02-11 16:45:18",
+    "ready_for_publish": true
+  }
+}
