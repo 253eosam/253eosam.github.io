@@ -1,0 +1,20 @@
+{
+  "title": "React 프로젝트에서 @types, @babel 등 '@' 패키지 이름의 정체",
+  "date": "2025-09-19",
+  "category": "npm",
+  "tags": [
+    "tags: NPM",
+    "JavaScript",
+    "개발환경",
+    "Package"
+  ],
+  "description": "React 개발하면서 매번 설치하는 @types/react, @babel/core 등의 패키지 이름에 붙은 '@' 기호가 궁금해서 찾아본 스코프 패키지의 정체와 실무에서 활용하는 방법을 정리했습니다.",
+  "thumbnail": "thumbnail.jpg",
+  "status": "completed",
+  "quality_score": 8.0,
+  "workflow": {
+    "created_date": "2025-09-19",
+    "moved_to_archive": "2025-09-19 09:26:20",
+    "ready_for_publish": true
+  }
+}

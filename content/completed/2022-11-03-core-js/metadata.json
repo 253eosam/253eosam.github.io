@@ -1,0 +1,22 @@
+{
+  "title": "this.processData is not a function 에러는 왜 생겼을까? 코어 자바스크립트로 해결한 실무 문제들",
+  "date": "2025-09-19",
+  "category": "frontend",
+  "tags": [
+    "tags: JavaScript",
+    "실행컨텍스트",
+    "this바인딩",
+    "클로저",
+    "데이터타입",
+    "성능개선"
+  ],
+  "description": "프로덕션에서 발생한 this 바인딩 에러를 시작으로 코어 자바스크립트 개념들을 실무에 적용하며 해결한 구체적 사례들을 정리했습니다. 버그 발생률 85% 감소 효과를 확인했습니다.",
+  "thumbnail": "thumbnail.jpg",
+  "status": "completed",
+  "quality_score": 8.5,
+  "workflow": {
+    "created_date": "2025-09-19",
+    "moved_to_archive": "2025-09-19 17:01:50",
+    "ready_for_publish": true
+  }
+}
