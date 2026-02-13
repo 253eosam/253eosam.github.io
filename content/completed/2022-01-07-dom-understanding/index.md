@@ -57,11 +57,11 @@ HTML 문서의 태그들은 자바스크립트에서 노드가 된다. Node는 �
 
 아래는 탐색을 위한 노드의 주요 속성들이다.
 
-![노드의 관계](./images/node-relationship.png)
+<!-- 이미지 누락 -->
 
 `<li>` 태그는 Node 타입이기도 하고 실제로는 HTMLLIElement 타입이기도하다. 그리고 HTMLLIElement는 HTMLElment를 상속하고 HTMLElement는 Element를 상속하고 Element는 Node를 상속한다. 그렇기 때문에 `<li>` 태그는 다음과 같이 Element의 속성으로도 탐색이 가능하다.
 
-![요소의 관계](./images/element-relationship.png)
+<!-- 이미지 누락 -->
 
 여기서 중요한 점은 **Node의 속성을 이용하면 텍스트노드나 코멘트 노드에 접근이 가능하고 Element의 속성은 Element만 접근이 가능**하다. 그래서 적절한 속성을 이용해서 탐색해야 원하는 결과를 얻을 수 있다.
 

@@ -2,7 +2,7 @@
 title: "Hydration, Layout Shift, Lazy Load, Chunk 등의 개념 정리"
 date: "2025-09-17T07:46:21.480Z"
 tags:
-  - @loadable/component
+  - '@loadable/component'
   - CSR
   - Layout Shift
   - Lazy loading
@@ -11,22 +11,6 @@ tags:
   - chunk
   - emotion
   - hydration
-  - <Skeleton />
-  - <Skeleton
-  - <Suspense fallback={<Skeleton />}>
-  - <Suspense
-  - <CSSTransition in={show} timeout={300} classNames="fade" unmountOnExit>
-  - <CSSTransition
-  - <HeavyComponent />
-  - <HeavyComponent
-  - </CSSTransition>
-  - </CSSTransition
-  - </Suspense>
-  - </Suspense
-  - <div css={style}>
-  - <div
-  - </div>
-  - </div
 description: "이 문서는 React 기반 SSR/CSR 렌더링에서 자주 등장하는 개념들인 hydration, layout shift, skeleton UI, chunk, @loadable/component, 그리고 Emotion에 대해 자세히 설명합니다.
 
 Hydration 시 La"

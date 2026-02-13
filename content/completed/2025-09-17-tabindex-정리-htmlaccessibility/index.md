@@ -3,17 +3,6 @@ title: "TabIndex 정리 (HTML/Accessibility)"
 date: "2025-09-17T07:46:04.895Z"
 tags:
   - html
-  - <button>
-  - <button
-  - </button>
-  - </button
-  - <button tabindex="0">
-  - <div tabindex="-1" id="modal">
-  - <div
-  - </div>
-  - </div
-  - <div tabindex="1">
-  - <div tabindex="2">
 description: "tabindex는 HTML 요소의 키보드 포커스 순서를 지정하는 속성입니다. 웹 접근성을 향상시키는 데 중요한 역할을 합니다.기본적으로 대부분의 form 요소(&lt;input>, &lt;button>, &lt;a href> 등)는 자동으로 포커스를 받을 수 있음그 외"
 url: "https://velog.io/@253eosam/TabIndex-%EC%A0%95%EB%A6%AC-HTMLAccessibility"
 ---

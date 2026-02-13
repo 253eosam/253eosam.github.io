@@ -4,10 +4,6 @@ date: "2025-09-17T07:46:08.124Z"
 tags:
   - CSS
   - 프린트
-  - <div class="print-bg">
-  - <div
-  - </div>
-  - </div
 description: "브라우저의 프린트 기능을 사용시 배경 그래픽이 빠지는 경우가 발생합니다. 이런경우 프린트의 옵션에 “배경 그래픽” 체크를 체크하여 진행하면 배경색이 채워진채 프린트됩니다. 하지만 매번 사용자에게 옵션 체크를 확인 시키고 요구하는 행위는 비효율적이므로 이것을 개발단에서 "
 url: "https://velog.io/@253eosam/%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EC%9D%B8%EC%87%84-%EC%8B%9C-%EB%B0%B0%EA%B2%BD-%EC%9D%B4%EB%AF%B8%EC%A7%80%EA%B0%80-%EC%B6%9C%EB%A0%A5%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0%EB%B2%95"
 ---

@@ -1,0 +1,46 @@
+---
+interface Props {
+  current?: 'home' | 'note';
+}
+
+const { current = 'home' } = Astro.props;
+---
+
+<header class="header">
+  <div class="header-inner container">
+    <a href="/" class="logo">253eosam notes</a>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .logo {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .logo:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+</style>

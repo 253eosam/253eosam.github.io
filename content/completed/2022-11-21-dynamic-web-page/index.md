@@ -36,7 +36,7 @@ tags: [동적 웹 페이지, WAS, 정적 웹 페이지, 웹 서버]
 
 ## 정적 페이지
 
-![정적 페이지 시퀀스](./images/placeholder.png)
+<!-- 이미지 누락 -->
 
 내용이 자주 바뀌지 않는 정적 콘텐츠를 보여줄 때 사용하는 페이지.
 
@@ -45,7 +45,7 @@ tags: [동적 웹 페이지, WAS, 정적 웹 페이지, 웹 서버]
 
 ## 동적 웹 페이지의 종류
 
-![동적 페이지 시퀀스](./images/placeholder.png)
+<!-- 이미지 누락 -->
 
 - Client-side rendering (CSR)
 - Server-side rendering (SSR)

@@ -31,24 +31,24 @@ tags: [Docker, DB, MySQL]
 
 2. 설치가 완료되면 기본적으로 튜토리얼을 실행시켜 사용하기 전 올바르게 설치되어있는지 확인할 수 있습니다. (선택)
 
-   ![docker01](./images/placeholder.png)
+   <!-- 이미지 누락 -->
 
    위 명령어를 통해 도커에서 제공하는 기본 스타트 프로젝트를 클론 받습니다.
 
-   ![docker02](./images/placeholder.png)
+   <!-- 이미지 누락 -->
 
    클론 받은 경로로 이동하여 도커 파일을 빌드합니다.
 
    빌드를 성공하면 도커 이미지가 생성됩니다.
 
-   ![docker03](./images/placeholder.png)
+   <!-- 이미지 누락 -->
 
    생성한 도커 이미지 파일을 80포트로 실행한다. 이렇게 되면 도커 컨테이너가 올라가게 된다. (접속가능)
    브라우저에 localhost로 접속해보면 아래와 같은 화면을 볼 수 있습니다. 😋
 
    아래와 같은 화면이 뜨면 도커가 올바르게 실행되고 있다는 뜻입니다.
 
-   ![docker04](./images/placeholder.png)
+   <!-- 이미지 누락 -->
 
    도커에는 도커 허브라는 이미지를 공유하는 커뮤니티 공간이 있는데 github과 비슷합니다.
 
@@ -56,8 +56,8 @@ tags: [Docker, DB, MySQL]
 
    또 자신만의 배포 환경이나 배포 버전을 관리하여 배포하고 싶은 서버에서 클론받아 실행시켜 편리하게 환경을 구축 할 수 있습니다.
 
-   ![docker05](./images/placeholder.png)
-   ![docker06](./images/placeholder.png)
+   <!-- 이미지 누락 -->
+   <!-- 이미지 누락 -->
 
 ## MySQL 컨테이너 실행
 
@@ -66,12 +66,12 @@ tags: [Docker, DB, MySQL]
 일단 원하는 DB와 버전을 확인합니다. 저는 `MySQL 5.7.30` 버전을 사용하기로 했습니다.
 터미널을 열어 `docker pull mysql:tag` 명령어를 실행합니다 (tag에는 버전을 기입)
 
-![docker](./images/placeholder.png)
+<!-- 이미지 누락 -->
 
 pull을 성공적으로 했다면 mysql 이미지가 생겼을 것이다.
 `docker images` 명령어를 통해 확인할 수 있습니다.
 
-![docker](./images/placeholder.png)
+<!-- 이미지 누락 -->
 
 이제 이미지를 통해 컨테이너를 생성하고 실행해보겠습니다.
 
@@ -91,7 +91,7 @@ docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234 --name to-do-noti-2007-db
 명령어를 실행하면 이제 백그라운에서 mysql container를 실행합니다.
 확인을 해보고 싶다면 `docker ps` 명령어를 입력해봅니다.
 
-![docker](./images/placeholder.png)
+<!-- 이미지 누락 -->
 
 > 혹시나 실행되지 않는다면 기존의 설치된 DB와 포트가 충돌했을 수 있습니다.
 
@@ -104,7 +104,7 @@ docker exec -it to-do-noti-2007-db-mysql bash
 
 명령어를 통해 컨테이너의 bash로 접속합니다. 다음 `mysql -u root -p` 명령어를 통해 설치한 mysql로 접속합니다.
 
-![docker](./images/placeholder.png)
+<!-- 이미지 누락 -->
 
 ## [심화] docker-compose로 관리
 

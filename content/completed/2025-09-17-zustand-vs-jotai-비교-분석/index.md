@@ -4,27 +4,6 @@ date: "2025-09-17T07:46:34.732Z"
 tags:
   - Jotai
   - zustand
-  - <div>
-  - <div
-  - <p>
-  - <p
-  - </p>
-  - </p
-  - <button onClick={() => setCount((c) => c + 1)}>
-  - <button
-  - </button>
-  - </button
-  - </div>
-  - </div
-  - <>
-  - <
-  - <Counter />
-  - <Counter
-  - <Display />
-  - <Display
-  - </>
-  - </
-  - <button onClick={increment}>
 description: "\"어떤 상태 관리 라이브러리가 더 좋을까?\"React에서 상태 관리는 필수적입니다. 오늘은 대표적인 상태 관리 라이브러리인 Jotai와 Zustand를 비교하며 각각의 장단점을 살펴보겠습니다.Jotai는 atomic 패턴을 기반으로 상태를 독립적인 단위(atom)로 관"
 url: "https://velog.io/@253eosam/Zustand-vs-Jotai-%EB%B9%84%EA%B5%90-%EB%B6%84%EC%84%9D"
 ---

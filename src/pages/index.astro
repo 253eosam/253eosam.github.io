@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import NoteCard from '../components/NoteCard.astro';
+import CategoryFilter from '../components/CategoryFilter.astro';
+import { normalize } from '../lib/normalize';
+
+const raw = await getCollection('notes');
+const notes = raw
+  .map((entry) => ({
+    ...normalize(entry.id, entry.data),
+  }))
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+const categories = [...new Set(notes.map((n) => n.category))].sort();
+---
+
+<BaseLayout title="253eosam notes">
+  <Header current="home" />
+  <main class="container">
+    <section class="hero">
+      <h1 class="hero-title">학습 노트</h1>
+      <p class="hero-desc">{notes.length}개의 노트</p>
+    </section>
+    <CategoryFilter categories={categories} />
+    <section class="note-list">
+      {
+        notes.map((note) => (
+          <NoteCard
+            title={note.title}
+            date={note.date}
+            category={note.category}
+            description={note.description}
+            slug={note.slug}
+            tags={note.tags}
+          />
+        ))
+      }
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-2xl) 0 0;
+  }
+
+  .hero-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-desc {
+    margin-top: var(--space-xs);
+    font-size: 0.95rem;
+    color: var(--color-text-tertiary);
+  }
+
+  .note-list {
+    padding-bottom: var(--space-3xl);
+  }
+</style>

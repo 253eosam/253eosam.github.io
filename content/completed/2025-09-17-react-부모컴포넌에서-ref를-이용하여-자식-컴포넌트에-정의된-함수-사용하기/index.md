@@ -3,18 +3,6 @@ title: "[React] 부모컴포넌에서 ref를 이용하여 자식 컴포넌트에
 date: "2025-09-17T07:46:41.246Z"
 tags:
   - React
-  - <div>
-  - <div
-  - <button onClick={handleClick}>
-  - <button
-  - </button>
-  - </button
-  - <Child ref={childRef} />
-  - <Child
-  - </div>
-  - </div
-  - <input type="text" value={text} readOnly />
-  - <input
 description: "자식 컴포넌트 각각의 상태와 한 버튼에대한 실행 함수가 다를때, 자식에서 버튼에 대한 실행 함수를 정의하여 실행되는 로직을 다르게 가지고갈 수 있다.부모 컴포넌트에 useRef를 정의한다. 자식 컴포넌트에서 실행할 함수 타입을 정의한다. 그리고 자식 컴포넌트에 ref "
 url: "https://velog.io/@253eosam/React-%EB%B6%80%EB%AA%A8%EC%BB%B4%ED%8F%AC%EB%84%8C%EC%97%90%EC%84%9C-ref%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-%EC%9E%90%EC%8B%9D-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%EC%97%90-%EC%A0%95%EC%9D%98%EB%90%9C-%ED%95%A8%EC%88%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"
 ---

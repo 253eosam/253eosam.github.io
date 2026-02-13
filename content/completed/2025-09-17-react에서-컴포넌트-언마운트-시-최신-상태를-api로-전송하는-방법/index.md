@@ -3,11 +3,6 @@ title: "React에서 컴포넌트 언마운트 시 최신 상태를 API로 전송
 date: "2025-09-17T07:45:55.001Z"
 tags:
   - React
-  - <input
-      value={inputValue}
-      onChange={(e) => setInputValue(e.target.value)}
-    />
-  - <input
 description: "React를 사용하다 보면 컴포넌트가 언마운트(unmount) 될 때 특정 상태의 최신 값을 API로 전송해야 하는 상황이 종종 있습니다. 예를 들어, 입력 중인 내용을 저장하거나 페이지 이탈 직전에 데이터를 백엔드에 전송하는 경우입니다.하지만 단순히 useEffect"
 url: "https://velog.io/@253eosam/React%EC%97%90%EC%84%9C-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%96%B8%EB%A7%88%EC%9A%B4%ED%8A%B8-%EC%8B%9C-%EC%B5%9C%EC%8B%A0-%EC%83%81%ED%83%9C%EB%A5%BC-API%EB%A1%9C-%EC%A0%84%EC%86%A1%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95"
 ---
