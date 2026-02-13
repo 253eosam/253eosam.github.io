@@ -15,17 +15,19 @@
 /
 ├── CLAUDE.md                 # 프로젝트 가이드라인 (이 문서)
 ├── content/
-│   ├── in-progress/          # 작성 중인 노트
-│   └── completed/            # 완성된 노트
+│   ├── YYYY-MM-DD-토픽명/    # 각 노트 폴더
+│   │   └── index.md          # 노트 본문
+│   └── ...
 ```
 
 ## 워크플로우
 
-### 새 노트 시작
+### 새 노트 작성
 
-1. `content/in-progress/YYYY-MM-DD-토픽명/` 폴더 생성
-2. 폴더 안에 `note.md` 파일 생성 (아래 메타데이터 포함)
+1. `content/YYYY-MM-DD-토픽명/` 폴더 생성
+2. 폴더 안에 `index.md` 파일 생성 (아래 메타데이터 포함)
 3. Claude AI와 대화하며 내용 정리 및 보완
+4. commit/push하면 자동 배포
 
 ```markdown
 ---
@@ -34,15 +36,9 @@ date: 'YYYY-MM-DD'
 category: '카테고리명'
 tags: ['태그1', '태그2']
 description: '한줄 요약'
-status: 'in-progress'
+status: 'completed'
 ---
 ```
-
-### 노트 완성
-
-1. 내용 검토 및 품질 체크리스트 확인
-2. frontmatter의 `status`를 `completed`로 변경
-3. `content/in-progress/폴더명/` → `content/completed/폴더명/`으로 이동
 
 ## Claude AI의 역할
 
@@ -154,7 +150,7 @@ date: 'YYYY-MM-DD'
 category: '카테고리명'
 tags: ['태그1', '태그2']
 description: '한줄 요약'
-status: 'in-progress'
+status: 'completed'
 ---
 
 # 주제 이름
@@ -206,7 +202,7 @@ graph LR
 ## 파일 명명 규칙
 
 - **폴더명**: `YYYY-MM-DD-토픽명` (예: `2024-03-15-react-hooks`)
-- **노트 파일**: 폴더 안에 `note.md` 또는 `draft.md`
+- **노트 파일**: 폴더 안에 `index.md`
 
 ## 품질 체크리스트
 

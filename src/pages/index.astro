@@ -20,7 +20,7 @@ const categories = [...new Set(notes.map((n) => n.category))].sort();
   <Header current="home" />
   <main class="container">
     <section class="hero">
-      <h1 class="hero-title">학습 노트</h1>
+      <h1 class="hero-title">Posting</h1>
       <p class="hero-desc">{notes.length}개의 노트</p>
     </section>
     <CategoryFilter categories={categories} />
