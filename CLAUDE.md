@@ -36,7 +36,6 @@ date: 'YYYY-MM-DD'
 category: '카테고리명'
 tags: ['태그1', '태그2']
 description: '한줄 요약'
-status: 'completed'
 ---
 ```
 
@@ -152,7 +151,6 @@ date: 'YYYY-MM-DD'
 category: '카테고리명'
 tags: ['태그1', '태그2']
 description: '한줄 요약'
-status: 'completed'
 ---
 
 # 주제 이름
