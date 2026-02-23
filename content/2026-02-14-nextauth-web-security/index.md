@@ -68,9 +68,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 | JWT 유틸 | `src/utils/jwt.ts` |
 | 인증 유틸 | `src/utils/auth.ts` |
 | 미들웨어 | `src/middleware.ts` |
-| 로그인 페이지 | `src/app/member/sign-in/` |
-| 서버 액션 | `src/app/member/sign-in/actions.ts` |
-| Axios 인터셉터 | `packages/generated/api/.../axios-instance.ts` |
+| 로그인 페이지 | `src/app/(auth)/sign-in/` |
+| 서버 액션 | `src/app/(auth)/sign-in/actions.ts` |
+| Axios 인터셉터 | `src/lib/axios-instance.ts` |
 
 ### 타입 시스템
 
@@ -81,10 +81,10 @@ NextAuth에서 데이터가 흘러가는 3개의 타입 레이어가 있다.
 { id, name, email, accessToken, refreshToken }
 
 // 2. JWT (서버 내부 — 쿠키에 암호화 저장)
-{ accessToken, refreshToken, id, name, roles, memberType, memberStatus, phone, email, loginChannel }
+{ accessToken, refreshToken, id, name, roles, role, status, phone, email, provider }
 
 // 3. Session (클라이언트 노출)
-{ accessToken, memberType, memberStatus, loginChannel, user: { id, name, roles, phone, email, columnWriterCode } }
+{ accessToken, role, status, provider, user: { id, name, roles, phone, email } }
 ```
 
 `refreshToken`은 JWT 레이어에만 존재하고 Session에는 의도적으로 포함하지 않는다.
@@ -109,12 +109,12 @@ SignInForm (클라이언트)
 이 함수에서 외부 백엔드 API를 호출하고, 결과에 따라 User 객체를 반환하거나 에러를 던진다.
 
 ```ts
-// authorize() 내부 — 일반 회원 로그인
-const result = await fetch('/v1/login', {
-  body: { memberId, password, connectionIp, loginChannel: '901001', mmAgreeEvt: 0 }
+// authorize() 내부 — 회원 로그인
+const result = await fetch('/api/login', {
+  body: { username, password }
 })
 
-if (result.code === 'R20000') {
+if (result.code === 'SUCCESS') {
   return {
     id: credentials.username,
     name: credentials.username,
@@ -125,22 +125,13 @@ if (result.code === 'R20000') {
 }
 ```
 
-authorize()는 3가지 로그인 모드를 지원한다.
-
-| 모드 | 조건 | 동작 |
-|------|------|------|
-| 일반 회원 로그인 | 기본 | `POST /v1/login` 호출 |
-| 게스트(비회원) 로그인 | `credentials.type === 'guest'` | `guestTempLogin()` API 호출, 임시 토큰 발급 |
-| 테스트 모드 | 개발 환경 + `TEST_REFRESH_TOKEN` 존재 | 환경변수로 자동 인증 우회 |
-
-에러 코드별 처리도 분기된다.
+백엔드 API의 응답 코드에 따라 에러 처리를 분기할 수 있다.
 
 | 코드 | 의미 |
 |------|------|
-| `R20000` | 성공 |
-| `R40106` | 로그인 실패 |
-| `R40107` | 비밀번호 5회 연속 실패 |
-| `R40108` | 사이트 이관 동의 필요 |
+| `SUCCESS` | 성공 |
+| `LOGIN_FAILED` | 로그인 실패 |
+| `ACCOUNT_LOCKED` | 비밀번호 연속 실패로 잠금 |
 
 ### 2단계: JWT 콜백 — 토큰 저장 및 갱신
 
@@ -157,9 +148,9 @@ async jwt({ token, user }) {
 
     // 백엔드 accessToken을 직접 디코딩해서 회원정보 추출
     const decoded = decodeJWT(user.accessToken)
-    token.name = decoded.MM_MEM_NM
-    token.roles = decoded.ROLES
-    token.memberType = decoded.MM_MEM_TYPE
+    token.name = decoded.username
+    token.roles = decoded.roles
+    token.role = decoded.userType
     // ...
     return token  // NextAuth가 이 token을 쿠키에 암호화하여 저장
   }
@@ -199,7 +190,7 @@ JWT 콜백 이후 `session` 콜백이 실행된다.
 ```ts
 async session({ session, token }) {
   session.accessToken = token.accessToken
-  session.memberType = token.memberType
+  session.role = token.role
   session.user.id = token.id
   session.user.name = token.name
   session.user.roles = token.roles
@@ -223,7 +214,7 @@ const { data: session, update } = useSession()
 session.user.name       // "홍길동"
 session.user.id         // "test1234"
 session.accessToken     // "eyJ..." (API 호출용)
-session.memberType      // "MEMBER" 또는 "ORDER"(비회원)
+session.role            // "MEMBER" 또는 "GUEST"
 ```
 
 `useSession()`이 호출되면 내부적으로 다음 과정이 일어난다.
@@ -243,7 +234,7 @@ Axios Interceptor가 모든 API 요청에 자동으로 Bearer 토큰을 추가�
 | 클라이언트 | `getSession()` → `session.accessToken` |
 | 서버 | `auth()` → `session.accessToken` |
 
-Orval로 자동 생성된 모든 API 호출에 이 인터셉터가 적용되므로, 개별 API 호출에서 토큰을 수동으로 넣을 필요가 없다.
+자동 생성된 API 클라이언트의 모든 호출에 이 인터셉터가 적용되므로, 개별 API 호출에서 토큰을 수동으로 넣을 필요가 없다.
 
 
 
@@ -252,7 +243,7 @@ Orval로 자동 생성된 모든 API 호출에 이 인터셉터가 적용되므�
 ```ts
 async function onLogout(accessToken) {
   // 1. 백엔드에 토큰 무효화 요청
-  await fetch('/v1/login/logout-all', { body: { accessToken } })
+  await fetch('/api/logout', { body: { accessToken } })
 
   // 2. NextAuth 세션 쿠키 삭제
   await signOut({ redirect: false })
@@ -263,9 +254,9 @@ async function onLogout(accessToken) {
 NextAuth의 `signOut()`은 쿠키만 삭제한다.
 백엔드 토큰 무효화는 별도로 해야 하므로, `onLogout()` 함수에서 백엔드 API를 먼저 호출한 뒤 `signOut()`을 호출한다.
 
-### 7단계: 게스트 세션 자동 정리
+### 7단계: 임시 세션 자동 정리
 
-`guest-session-guard.tsx` 컴포넌트가 `memberType === 'ORDER'`인 게스트 세션을 감지하고, 구매 페이지에서 이탈(언마운트) 시 자동으로 `onLogout()`을 호출한다.
+게스트 사용자처럼 임시 세션을 발급하는 경우, 특정 페이지에서 이탈할 때 자동으로 `onLogout()`을 호출하여 세션을 정리할 수 있다.
 임시 토큰이 불필요하게 남아 있지 않도록 하는 장치다.
 
 ### 8단계: 미들웨어에서의 인증
@@ -293,7 +284,7 @@ sequenceDiagram
     C->>SA: handleSignIn(username, password)
     SA->>NA: signIn('credentials', {...})
     NA->>NA: authorize() 콜백 실행
-    NA->>BE: POST /v1/login
+    NA->>BE: POST /api/login
     BE-->>NA: { accessToken, refreshToken }
     NA->>NA: jwt 콜백 (토큰 + 회원정보 저장)
     NA->>NA: session 콜백 (refreshToken 제외)
@@ -303,7 +294,7 @@ sequenceDiagram
     C->>NA: useSession() → GET /api/auth/session
     NA->>NA: 쿠키 복호화 → jwt 콜백
     alt 토큰 만료 임박 (5분 이내)
-        NA->>BE: POST /v1/login/refresh
+        NA->>BE: POST /api/refresh
         BE-->>NA: 새 토큰
     end
     NA->>NA: session 콜백
@@ -518,9 +509,9 @@ Site   = 도메인의 eTLD+1 부분만    (더 느슨한 비교)
 **eTLD+1**이란 effective Top-Level Domain(`.com`, `.co.kr`, `.github.io` 등) + 바로 앞 한 단계까지를 의미한다.
 
 ```
-https://sdijbooks.com           → Site: sdijbooks.com
-https://api.sdijbooks.com       → Site: sdijbooks.com  (같은 사이트)
-https://dev.sdijbooks.com:3000  → Site: sdijbooks.com  (같은 사이트)
+https://mysite.com           → Site: mysite.com
+https://api.mysite.com       → Site: mysite.com  (같은 사이트)
+https://dev.mysite.com:3000  → Site: mysite.com  (같은 사이트)
 https://evil.com                → Site: evil.com        (다른 사이트)
 ```
 
@@ -613,18 +604,18 @@ CSRF 방어가 전혀 없으므로 다른 방어 수단이 필수다.
 
 ### 공격 시나리오
 
-1. 사용자가 `sdijbooks.com`에 로그인 (세션 쿠키 저장)
+1. 사용자가 `mysite.com`에 로그인 (세션 쿠키 저장)
 2. 사용자가 악성 사이트 `evil.com` 방문
 3. `evil.com`의 HTML에 숨겨진 코드:
 
 ```html
-<form action="https://sdijbooks.com/api/auth/signout" method="POST">
+<form action="https://mysite.com/api/auth/signout" method="POST">
   <input type="submit" value="무료 쿠폰 받기">
 </form>
 ```
 
-4. 사용자가 "무료 쿠폰 받기"를 클릭하면 브라우저가 `sdijbooks.com`으로 POST 요청을 전송한다.
-   브라우저가 자동으로 `sdijbooks.com`의 쿠키를 함께 전송하고, 서버는 정상 요청으로 인식하여 로그아웃을 처리한다.
+4. 사용자가 "무료 쿠폰 받기"를 클릭하면 브라우저가 `mysite.com`으로 POST 요청을 전송한다.
+   브라우저가 자동으로 `mysite.com`의 쿠키를 함께 전송하고, 서버는 정상 요청으로 인식하여 로그아웃을 처리한다.
 
 브라우저는 해당 도메인의 쿠키를 자동으로 포함하므로, 다른 사이트에서 보낸 요청도 인증된 요청처럼 보인다.
 
@@ -651,7 +642,7 @@ evil.com → POST /api/auth/signout
   → 서버가 거부
 ```
 
-CSRF 토큰은 JavaScript로만 읽을 수 있고, 브라우저의 **동일 출처 정책(Same-Origin Policy)** 때문에 `evil.com`의 JavaScript는 `sdijbooks.com`의 응답을 읽을 수 없다.
+CSRF 토큰은 JavaScript로만 읽을 수 있고, 브라우저의 **동일 출처 정책(Same-Origin Policy)** 때문에 `evil.com`의 JavaScript는 `mysite.com`의 응답을 읽을 수 없다.
 따라서 공격자는 CSRF 토큰 값을 알아낼 수 없다.
 
 ## CORS와 CSRF의 관계
@@ -680,13 +671,13 @@ CORS는 **응답 읽기**만 차단한다. 서버는 이미 요청을 처리한 
 
 ```html
 <!-- evil.com — Simple Request 공격 -->
-<form action="https://sdijbooks.com/api/auth/signout" method="POST">
+<form action="https://mysite.com/api/auth/signout" method="POST">
   <!-- Content-Type: application/x-www-form-urlencoded (기본값) -->
 </form>
 ```
 
 ```
-1. 브라우저가 POST 요청을 sdijbooks.com으로 전송  ← 전송됨
+1. 브라우저가 POST 요청을 mysite.com으로 전송  ← 전송됨
 2. 쿠키도 자동으로 포함                            ← 포함됨
 3. 서버가 요청을 처리                              ← 처리됨
 4. 응답을 evil.com에서 읽으려 함
@@ -705,7 +696,7 @@ CORS는 **응답 읽기**만 차단한다. 서버는 이미 요청을 처리한 
 
 ```js
 // evil.com — Preflight가 필요한 요청
-fetch('https://sdijbooks.com/api/some-action', {
+fetch('https://mysite.com/api/some-action', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ ... }),
@@ -759,7 +750,7 @@ eyJhbGciOiJIUzI1NiJ9.eyJNTV9NRU1fSUQiOiJ0ZXN0MTIzNCIsImV4cCI6MTcxOH0.abc123signa
 
 ```json
 Header:   { "alg": "HS256", "typ": "JWT" }
-Payload:  { "MM_MEM_ID": "test1234", "exp": 1718... }
+Payload:  { "userId": "test1234", "exp": 1718... }
 Signature: HMAC-SHA256(header + "." + payload, 비밀키)
 ```
 
@@ -796,8 +787,8 @@ Signature = HMAC-SHA256(
   "exp": 1718000000,           // 만료 시간 (Expiration)
   "iat": 1717900000,           // 발급 시간 (Issued At)
   "nbf": 1717900000,           // 사용 시작 시간 (Not Before)
-  "iss": "api.sdijbooks.com",  // 발급자 (Issuer)
-  "aud": "sdijbooks.com",      // 수신자 (Audience)
+  "iss": "api.mysite.com",  // 발급자 (Issuer)
+  "aud": "mysite.com",      // 수신자 (Audience)
   "sub": "test1234"            // 주체 (Subject)
 }
 ```
