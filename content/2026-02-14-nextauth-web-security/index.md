@@ -34,7 +34,7 @@ Next.js 환경에서는 **NextAuth**(현재 Auth.js)가 이 인증/세션 관리
 NextAuth 자체가 인증을 수행하는 것은 아니다.
 실제 인증(아이디/비밀번호 검증)은 외부 백엔드 API가 담당하고, NextAuth는 그 결과를 안전하게 저장하고 관리하는 **세션 관리 프록시** 역할을 한다.
 
-이 노트에서는 NextAuth 5(beta)를 사용하는 실제 프로젝트를 기반으로 인증 흐름을 추적하고, 이 과정에서 등장하는 웹 보안 메커니즘(CSRF, CORS, SameSite, HttpOnly, JWT 등)을 하나씩 파고든다.
+이 노트에서는 NextAuth 5(beta)의 인증 흐름을 단계별로 추적하고, 이 과정에서 등장하는 웹 보안 메커니즘(CSRF, CORS, SameSite, HttpOnly, JWT 등)을 하나씩 파고든다.
 
 ## NextAuth 초기화와 핵심 구성
 
@@ -81,10 +81,12 @@ NextAuth에서 데이터가 흘러가는 3개의 타입 레이어가 있다.
 { id, name, email, accessToken, refreshToken }
 
 // 2. JWT (서버 내부 — 쿠키에 암호화 저장)
-{ accessToken, refreshToken, id, name, roles, role, status, phone, email, provider }
+// userType: 사용자 유형 (MEMBER, GUEST 등)
+// roles: 권한 목록 (ADMIN, EDITOR 등)
+{ accessToken, refreshToken, id, name, roles, userType, status, phone, email, provider }
 
 // 3. Session (클라이언트 노출)
-{ accessToken, role, status, provider, user: { id, name, roles, phone, email } }
+{ accessToken, userType, status, provider, user: { id, name, roles, phone, email } }
 ```
 
 `refreshToken`은 JWT 레이어에만 존재하고 Session에는 의도적으로 포함하지 않는다.
@@ -92,7 +94,7 @@ NextAuth에서 데이터가 흘러가는 3개의 타입 레이어가 있다.
 
 ## 인증 흐름 상세
 
-전체 인증 흐름은 8단계로 나뉜다.
+전체 인증 흐름은 7단계로 나뉜다.
 
 ### 1단계: 로그인 요청 — authorize() 실행
 
@@ -146,11 +148,12 @@ async jwt({ token, user }) {
     token.accessToken = user.accessToken
     token.refreshToken = user.refreshToken
 
-    // 백엔드 accessToken을 직접 디코딩해서 회원정보 추출
+    // 백엔드가 토큰만 반환하고 사용자 정보를 별도로 제공하지 않는 경우,
+    // accessToken의 payload를 직접 디코딩하여 회원정보를 추출할 수 있다.
     const decoded = decodeJWT(user.accessToken)
     token.name = decoded.username
     token.roles = decoded.roles
-    token.role = decoded.userType
+    token.userType = decoded.userType
     // ...
     return token  // NextAuth가 이 token을 쿠키에 암호화하여 저장
   }
@@ -190,7 +193,7 @@ JWT 콜백 이후 `session` 콜백이 실행된다.
 ```ts
 async session({ session, token }) {
   session.accessToken = token.accessToken
-  session.role = token.role
+  session.userType = token.userType
   session.user.id = token.id
   session.user.name = token.name
   session.user.roles = token.roles
@@ -214,7 +217,7 @@ const { data: session, update } = useSession()
 session.user.name       // "홍길동"
 session.user.id         // "test1234"
 session.accessToken     // "eyJ..." (API 호출용)
-session.role            // "MEMBER" 또는 "GUEST"
+session.userType        // "MEMBER" 또는 "GUEST"
 ```
 
 `useSession()`이 호출되면 내부적으로 다음 과정이 일어난다.
@@ -254,12 +257,11 @@ async function onLogout(accessToken) {
 NextAuth의 `signOut()`은 쿠키만 삭제한다.
 백엔드 토큰 무효화는 별도로 해야 하므로, `onLogout()` 함수에서 백엔드 API를 먼저 호출한 뒤 `signOut()`을 호출한다.
 
-### 7단계: 임시 세션 자동 정리
+> **Q: 게스트처럼 임시 세션을 발급하는 경우 정리는 어떻게 하나?**
+> 특정 페이지에서 이탈할 때 자동으로 `onLogout()`을 호출하는 가드 컴포넌트를 만들 수 있다.
+> 임시 토큰이 불필요하게 남아 있지 않도록 하는 장치다.
 
-게스트 사용자처럼 임시 세션을 발급하는 경우, 특정 페이지에서 이탈할 때 자동으로 `onLogout()`을 호출하여 세션을 정리할 수 있다.
-임시 토큰이 불필요하게 남아 있지 않도록 하는 장치다.
-
-### 8단계: 미들웨어에서의 인증
+### 7단계: 미들웨어에서의 인증
 
 ```ts
 // middleware.ts
@@ -408,7 +410,7 @@ Server Action에서 호출하는 `signIn()`은 `@/lib/auth`에서 import한 **�
 API Route를 HTTP로 호출하는 것이 아니라, NextAuth 내부 로직을 같은 서버 프로세스 안에서 직접 실행한다.
 
 ```ts
-// ❌ 클라이언트용 (이 프로젝트에서는 로그인에 사용하지 않음)
+// ❌ 클라이언트용 (Credentials + Server Action 방식에서는 사용하지 않음)
 import { signIn } from 'next-auth/react'
 
 // ✅ 서버용 (Server Action에서 사용)
@@ -740,7 +742,7 @@ fetch('https://mysite.com/api/some-action', {
 JWT(JSON Web Token)는 `.`으로 구분된 3개의 파트로 구성된다.
 
 ```
-eyJhbGciOiJIUzI1NiJ9.eyJNTV9NRU1fSUQiOiJ0ZXN0MTIzNCIsImV4cCI6MTcxOH0.abc123signature
+eyJhbGciOiJIUzI1NiJ9.eyJ...(생략)...}.abc123signature
  ────────────────────  ──────────────────────────────────────────────────  ──────────────
       Header                              Payload                          Signature
 ```
@@ -820,9 +822,9 @@ Signature = HMAC-SHA256(
 RSA와 같은 비대칭키 방식이지만 키 크기가 작다.
 RSA보다 짧은 키로 동일 보안 수준을 제공하므로, 토큰 크기를 절약할 수 있다.
 
-### 이 프로젝트의 이중 JWT
+### 이중 JWT 구조
 
-이 프로젝트에는 두 종류의 JWT가 존재한다.
+Credentials Provider와 외부 백엔드를 함께 사용하면 두 종류의 JWT가 존재하게 된다.
 
 **백엔드 JWT (accessToken, refreshToken)**
 
