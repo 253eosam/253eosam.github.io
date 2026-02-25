@@ -1,6 +1,6 @@
 ---
 interface Props {
-  current?: 'home' | 'note';
+  current?: 'home' | 'note' | 'resume';
 }
 
 const { current = 'home' } = Astro.props;
@@ -8,7 +8,11 @@ const { current = 'home' } = Astro.props;
 
 <header class="header">
   <div class="header-inner container">
-    <a href="/" class="logo">253eosam notes</a>
+    <a href="/" class="logo">253eosam</a>
+    <nav class="nav">
+      <a href="/" class:list={['nav__link', { active: current === 'home' || current === 'note' }]}>Notes</a>
+      <a href="/resume" class:list={['nav__link', { active: current === 'resume' }]}>Resume</a>
+    </nav>
   </div>
 </header>
 
@@ -28,6 +32,7 @@ const { current = 'home' } = Astro.props;
   .header-inner {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
   }
 
@@ -42,5 +47,27 @@ const { current = 'home' } = Astro.props;
   .logo:hover {
     color: var(--color-primary);
     text-decoration: none;
+  }
+
+  .nav {
+    display: flex;
+    gap: var(--space-lg);
+  }
+
+  .nav__link {
+    font-size: 0.9375rem;
+    color: var(--color-text-tertiary);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav__link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .nav__link.active {
+    color: var(--color-text);
+    font-weight: 600;
   }
 </style>

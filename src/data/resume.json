@@ -1,0 +1,205 @@
+{
+  "profile": {
+    "name": "이성준",
+    "role": "프론트엔드 개발자",
+    "email": "253eosam@gmail.com",
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/253eosam" },
+      { "label": "Blog", "url": "https://velog.io/@253eosam/posts" }
+    ],
+    "introduction": "비즈니스 도메인과 프로젝트 히스토리 이해를 바탕으로 안정적인 서비스 운영을 추구하는 6년차 FE 개발자입니다.",
+    "highlights": [
+      "서비스 전 과정(기획-개발-배포-운영) 경험 보유",
+      "스타트업 초기 멤버로 참여하여 실무자의 요구사항을 분석하고 구현한 경험",
+      "대규모 트래픽(동시 접속 16,000명) 안정적 처리",
+      "개발 경험 개선(DX)을 통한 팀 생산성 향상",
+      "이커머스 어드민 장기 유지보수 및 개선"
+    ]
+  },
+  "skills": ["TypeScript", "Nuxt.js", "Next.js", "TailwindCSS", "styled-components", "Git", "Vue.js", "React"],
+  "experience": [
+    {
+      "company": "하이컨시",
+      "role": "팀원",
+      "department": "FE개발팀",
+      "period": "2025.04 - 재직 중",
+      "duration": "11개월",
+      "employmentType": "정규직",
+      "description": "교육 컨텐츠 판매 및 서비스 제공",
+      "projects": [
+        {
+          "name": "시대인재C 서비스 오픈 참여 및 유지보수",
+          "url": "https://www.sdijc.com/main/survival-pro",
+          "description": "시대인재 데이터를 활용한 모의고사 컨텐츠를 제공",
+          "techStack": ["Nuxt", "SCSS"],
+          "team": "FE 2명 / 오픈 이후 운영",
+          "details": [
+            { "text": "SSR과 CSR 페이지 전략적으로 사용하여 서버 리소스 감소" },
+            { "text": "디자인 시스템 기반의 컴포넌트 개발 및 리팩토링(hook-form 사용을 위한)" },
+            { "text": "반응형 디자인 퍼블리싱(PC/Tablet/Mobile) + SCSS, Hook을 이용한 반응형 분기 유틸리티 개발" },
+            { "text": "ESLint 적용 + git commit formatter 라이브러리 개발 및 적용" },
+            {
+              "text": "선착순 모집 페이지 (동시 접속자 16,000명) 대응",
+              "subItems": [
+                "CSR + S3를 이용한 서버 리소스 절감",
+                "캐싱 가능한 API 데이터 캐싱 (TTL적용)",
+                "로딩중 화면 개선 (렌더링 로딩 → API 응답 로딩 + 대기중인시간)"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "시대인재 북스 마이그레이션 참여",
+          "url": "https://sdijbooks.com/",
+          "description": "도서 판매 서비스",
+          "techStack": ["Next", "tailwindcss", "pnpm", "monorepo", "zustand", "daisyUI", "orval", "react-query"],
+          "team": "FE 2명, 퍼블리싱 1명 / 프로젝트 관리",
+          "details": [
+            { "text": "디자인 산출물 기준으로 UI Framework + tailwind setting으로 디자인 시스템 개발 + storybook 셋팅" },
+            { "text": "반응형 디자인 퍼블리싱(PC/Tablet/Mobile)" },
+            { "text": "ASP + 서비스 분석 후 페이지 마이그레이션 작업" },
+            { "text": "전시 → 주문 → 결제 프로세스 처리 작업" },
+            { "text": "API Code Generator orval을 이용하여 swagger API 추출하여 리소스 감소" },
+            {
+              "text": "CI/CD 구축",
+              "subItems": [
+                "ECS를 사용한 배포환경이 마련되어 있어, docker file을 작성하고 build 환경을 셋팅",
+                "pm2를 사용하여 vCPU 최대 성능 이용"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "company": "팀리부뜨",
+      "role": "팀원",
+      "department": "제품개발팀",
+      "period": "2023.09 - 2024.12",
+      "duration": "1년 4개월",
+      "employmentType": "정규직",
+      "description": "무역 사무업무 솔루션 제공",
+      "projects": [
+        {
+          "name": "askyour.trade 서비스 오픈 및 유지보수",
+          "url": "https://askyour.trade",
+          "description": "무역사무 솔루션 제공, B2B/B2C",
+          "techStack": ["React", "Styled-component", "react-query", "zustand"],
+          "team": "FE 1명",
+          "details": [
+            {
+              "text": "메일 서비스 분석/설계/개발",
+              "subItems": [
+                "레이아웃 기반 라우팅을 설계하여 화면 구조 최적화",
+                "Froala editor 커스텀하여 기능 확장 : 서명, 템플릿 기능 추가",
+                "AI 기반 기능을 custom hook으로 개발 + UI Atomic 구조로 쪼개어 3개의 페이지에서 재사용",
+                "Headless 기반으로 디자인 시스템 컴포넌트 구현",
+                "SSE와 Web Notification API를 활용하여 서비스 접속 시 실시간 수신 메일 알림 기능 개발"
+              ]
+            },
+            {
+              "text": "수입화물 모니터링",
+              "subItems": [
+                "타 서비스 + 실무자 요구사항 분석 후 구현화 : 관세청 유니패스번호를 참고하여 실시간 모니터링 페이지",
+                "주기적으로 조회 API 호출 로직 구현 및 UI/UX",
+                "window와 popup 간의 상태 동기화"
+              ]
+            },
+            {
+              "text": "전자도장 기능 개발",
+              "subItems": [
+                "fabric.js와 pdf.js를 활용하여 pdf페이지를 이미지화하고, canvas로 편집 기능 개발",
+                "편집한 이미지를 조합하여 pdf로 출력 기능 개발"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "askyour.trade 어드민",
+          "description": "askyour.trade 서비스 관리 어드민",
+          "techStack": ["React", "Material-UI", "Styled-component", "react-query", "zustand"],
+          "team": "FE 2명",
+          "details": [
+            { "text": "프로젝트 기능 개발 및 유지보수" },
+            { "text": "UI-Framework를 이용한 화면 개발" }
+          ]
+        }
+      ]
+    },
+    {
+      "company": "위메프",
+      "role": "팀원",
+      "department": "프론트개발그룹 | FE백오피스팀",
+      "period": "2020.07 - 2023.05",
+      "duration": "2년 11개월",
+      "employmentType": "정규직",
+      "description": "이커머스",
+      "projects": [
+        {
+          "name": "위메프 어드민 유지보수",
+          "description": "위메프에 등록된 각 상품의 고유 아이디를 부여하여 동일한 상품을 비교하고 데이터 통일 목적",
+          "techStack": ["Vue.js", "Vuex", "Element-UI", "Hygen", "React"],
+          "team": "5명",
+          "details": [
+            { "text": "프로젝트 기능 개발 및 유지보수" },
+            { "text": "Vue 버전업(v2 → v3) 마이그레이션 작업 및 일부 컴포넌트 리팩토링 참여" },
+            { "text": "페이지 개발건 기획 및 작업 추상화하여 반복작업 영역 CLI를 통해 자동 생성 툴 개발" }
+          ]
+        },
+        {
+          "name": "위메프 여행·레저 서비스 유지보수",
+          "description": "위메프 여행, 숙박, 액티비티, 공연티켓을 판매하는 서비스",
+          "techStack": ["Vue.js", "Vuex", "vue-property-decorator", "vue-class-component", "JSP", "jQuery"],
+          "team": "6명",
+          "details": [
+            { "text": "여행 레저 프로젝트 기능 개발 및 유지보수" },
+            { "text": "공연 티켓 프로젝트 마이그레이션 : JSP → Vue 전환 (팀 내 개발 환경 및 스펙 통일화)" }
+          ]
+        }
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "정보처리기사",
+      "organization": "한국산업인력공단",
+      "date": "2019.05"
+    }
+  ],
+  "education": [
+    {
+      "institution": "금오공과대학교",
+      "major": "컴퓨터소프트웨어공학과",
+      "period": "2013.03 - 2019.08",
+      "degree": "학사"
+    },
+    {
+      "institution": "운암고등학교",
+      "major": "",
+      "period": "2010.03 - 2013.02",
+      "degree": ""
+    }
+  ],
+  "activities": [
+    {
+      "name": "사내 알고리즘 스터디",
+      "organization": "(주)위메프",
+      "period": "2022",
+      "description": "JavaScript 알고리즘 스터디 진행",
+      "details": [
+        "기본적인 자료구조 개념 설명 및 구현 방법 학습",
+        "알고리즘 풀이 방법 및 효율적인 접근 방식 공유"
+      ],
+      "link": { "label": "다룬 알고리즘 및 자료구조", "url": "https://253eosam.github.io/algo-wiki/" }
+    },
+    {
+      "name": "SSAFY 2기(구미)",
+      "organization": "삼성전자",
+      "period": "2019",
+      "description": "SSAFY(Samsung Software Academy For Youth)는 삼성에서 운영하는 소프트웨어 개발자 양성 과정으로, 약 1년간 집중적인 교육과 실무 프로젝트를 수행하는 프로그램이다.",
+      "details": [
+        "알고리즘 문제 해결 능력 향상, 풀스택 웹 개발, 팀 프로젝트 경험, 협업 툴 활용 등을 중점적으로 학습"
+      ]
+    }
+  ]
+}
