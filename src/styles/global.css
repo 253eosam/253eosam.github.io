@@ -90,3 +90,14 @@ img {
     font-size: 18px;
   }
 }
+
+/* ── Print ── */
+@media print {
+  .header {
+    display: none;
+  }
+
+  body {
+    font-size: 11pt;
+  }
+}

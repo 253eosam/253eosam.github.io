@@ -70,4 +70,10 @@ const { current = 'home' } = Astro.props;
     color: var(--color-text);
     font-weight: 600;
   }
+
+  @media print {
+    .header {
+      display: none;
+    }
+  }
 </style>
