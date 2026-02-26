@@ -51,9 +51,14 @@ const { profile, skills, experience, certifications, education, activities } = r
         {experience.map((exp) => (
           <div class="exp">
             <div class="exp__header">
-              <div>
-                <h3 class="exp__company">{exp.company}</h3>
-                <p class="exp__role">{exp.role}{exp.department && ` · ${exp.department}`}</p>
+              <div class="exp__info">
+                {exp.logo && (
+                  <img src={exp.logo} alt={`${exp.company} 로고`} class="exp__logo" width="36" height="36" />
+                )}
+                <div>
+                  <h3 class="exp__company">{exp.company}</h3>
+                  <p class="exp__role">{exp.role}{exp.department && ` · ${exp.department}`}</p>
+                </div>
               </div>
               <div class="exp__meta">
                 <span class="exp__period">{exp.period}</span>
@@ -262,6 +267,20 @@ const { profile, skills, experience, certifications, education, activities } = r
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
+  }
+
+  .exp__info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .exp__logo {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    object-fit: contain;
+    flex-shrink: 0;
   }
 
   .exp__company {
