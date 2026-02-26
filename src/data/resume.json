@@ -1,6 +1,7 @@
 {
   "profile": {
     "name": "이성준",
+    "profileImage": "/images/profile.svg",
     "role": "프론트엔드 개발자",
     "email": "253eosam@gmail.com",
     "links": [
