@@ -1,6 +1,7 @@
 {
   "profile": {
     "name": "이성준",
+    "profileImage": "/images/profile.svg",
     "role": "프론트엔드 개발자",
     "email": "253eosam@gmail.com",
     "links": [
@@ -20,6 +21,7 @@
   "experience": [
     {
       "company": "하이컨시",
+      "logo": "/images/company/hiconsy.svg",
       "role": "팀원",
       "department": "FE개발팀",
       "period": "2025.04 - 재직 중",
@@ -73,6 +75,7 @@
     },
     {
       "company": "팀리부뜨",
+      "logo": "/images/company/team-reboot.svg",
       "role": "팀원",
       "department": "제품개발팀",
       "period": "2023.09 - 2024.12",
@@ -128,6 +131,7 @@
     },
     {
       "company": "위메프",
+      "logo": "/images/company/wemakeprice.svg",
       "role": "팀원",
       "department": "프론트개발그룹 | FE백오피스팀",
       "period": "2020.07 - 2023.05",
