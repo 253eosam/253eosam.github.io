@@ -21,7 +21,7 @@
   "experience": [
     {
       "company": "하이컨시",
-      "logo": "/images/company/hiconsy.svg",
+      "logo": "/images/company/hiconsy.webp",
       "role": "팀원",
       "department": "FE개발팀",
       "period": "2025.04 - 재직 중",
@@ -75,7 +75,7 @@
     },
     {
       "company": "팀리부뜨",
-      "logo": "/images/company/team-reboot.svg",
+      "logo": "/images/company/team-reboot.png",
       "role": "팀원",
       "department": "제품개발팀",
       "period": "2023.09 - 2024.12",
@@ -131,7 +131,7 @@
     },
     {
       "company": "위메프",
-      "logo": "/images/company/wemakeprice.svg",
+      "logo": "/images/company/wemakeprice.jpg",
       "role": "팀원",
       "department": "프론트개발그룹 | FE백오피스팀",
       "period": "2020.07 - 2023.05",
