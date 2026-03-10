@@ -3,7 +3,7 @@ title: 'git push --force로 팀 작업을 날렸을 때 살린 방법'
 layout: post
 category: git
 tags: [git, reflog, 데이터복구, 실수복구]
-description: 'rebase 후 git push --force로 팀원들 작업까지 날려버린 절망적인 상황에서 git reflog로 모든 것을 복구한 실제 경험담입니다. 단계별 복구 과정과 예방법을 공유합니다.'
+description: 'git reflog를 이용하여 force push로 날아간 커밋을 복구하는 방법을 설명한다.'
 ---
 
 금요일 오후 6시, 퇴근 직전에 일어난 최악의 상황이었습니다. rebase 후 `git push --force`를 잘못 실행해서 3일간의 작업이 순식간에 사라져버렸어요.

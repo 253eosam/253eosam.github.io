@@ -9,7 +9,7 @@ tags:
 description: "요즘 관심사인 디자인시스템 개발 및 유지보수 중에서 픽셀에 대한 내용을 정리하는 글입니다.
 
 CSS에서는 다양한 길이 단위를 사용하여 요소의 크기, 여백, 글꼴 크기 등을 조절합니다. 그중에서도 가장 많이 사용되는 단위인 px, em, rem에 대해 자세히 살펴보겠습니"
-url: "https://velog.io/@253eosam/CSS-%EA%B8%B8%EC%9D%B4-%EB%8B%A8%EC%9C%84-%EC%A0%95%EB%A6%AC-px-em-rem"
+external: "https://velog.io/@253eosam/CSS-%EA%B8%B8%EC%9D%B4-%EB%8B%A8%EC%9C%84-%EC%A0%95%EB%A6%AC-px-em-rem"
 ---
 
 > 요즘 관심사인 디자인시스템 개발 및 유지보수 중에서 픽셀에 대한 내용을 정리하는 글입니다.

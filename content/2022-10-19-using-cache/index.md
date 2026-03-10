@@ -3,7 +3,7 @@ title: "API 호출 200ms에서 5ms로 줄인 JavaScript 캐싱 적용기"
 category: javascript
 layout: post
 tag: ['javascript', 'cache', 'performance', 'memoization']
-description: "반복적인 API 호출과 복잡한 계산으로 성능 이슈가 발생한 프로젝트에서 캐싱을 적용해 응답 시간을 대폭 개선한 경험을 공유합니다. 실제 성능 측정 결과와 함께 설명합니다."
+description: 'JavaScript에서 캐싱을 적용하여 API 호출 성능을 개선하는 방법을 설명한다.'
 ---
 
 회사 프로젝트에서 사용자 대시보드 페이지 로딩이 3-4초씩 걸리면서 사용성에 문제가 생겼습니다. 원인을 분석해보니 같은 API를 여러 번 호출하고, 동일한 데이터 변환 로직을 반복 실행하고 있었어요.

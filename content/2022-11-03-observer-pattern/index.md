@@ -3,6 +3,7 @@ title: Observer pattern
 layout: post
 category: Pattern
 tags: [Observer]
+description: '옵저버 패턴의 개념과 구현 방법을 디자인 패턴 관점에서 정리한다.'
 ---
 
 ## 디자인패턴
@@ -37,7 +38,7 @@ ResizeObserver reference code of Web Observer API
 
 ## hook 과 observer 차이점
 
-hook은 컴포넌트에 묶여서 상태를 관리한다면, observer는 독립적으로 존재하는 객체임
+hook은 컴포넌트에 묶여서 상태를 관리한다면, observer는 독립적으로 존재하는 객체입니다
 
 observer는 이벤트 실행되기전까지 state 값을 변경하지않음, 하지만 useEffect는 React의 렌더가 될때까지 이벤트의 실행을 미루고, state를 관련되어 있는 컴포넌트에 바인딩
 또, useEffect는 값을 방출하지않지만, oberser는 변경된 값을 push하여 호출한 구독자에게 알려줌(여기서 사이드 발생우려)

@@ -4,7 +4,7 @@ date: "2025-09-17T07:46:48.593Z"
 tags:
   - sse
 description: "클라이언트에게 서버로부터 실시간 업데이트를 허용하는 웹 기술.text/event-stream 타입으로 서버에서 클라이언트에 단방향 통신을 할 수 있습니다. 클라이언트에서 매번 요청없이 한번의 연결을 통해 서버와 통신해야하는 경우WebSocket 방식보다 라이트한 방식을"
-url: "https://velog.io/@253eosam/SSE"
+external: "https://velog.io/@253eosam/SSE"
 ---
 
 # SSE(Server-Sent-Event)란?

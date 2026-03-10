@@ -14,7 +14,7 @@ tags:
 description: "이 문서는 React 기반 SSR/CSR 렌더링에서 자주 등장하는 개념들인 hydration, layout shift, skeleton UI, chunk, @loadable/component, 그리고 Emotion에 대해 자세히 설명합니다.
 
 Hydration 시 La"
-url: "https://velog.io/@253eosam/Hydration-Layout-Shift-Lazy-Load-Chunk-%EB%93%B1-%ED%95%B5%EC%8B%AC-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC"
+external: "https://velog.io/@253eosam/Hydration-Layout-Shift-Lazy-Load-Chunk-%EB%93%B1-%ED%95%B5%EC%8B%AC-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC"
 ---
 
 > Nuxt 코드를 살펴보는도중 ClinentOnly를 이용하여 svg아이콘을 처리하는 코드를 봤습니다. 실제 화면에서도 켄텐츠가 모두 렌더링되고 아이콘이 뚝하고 나오는 모습을 봤고 당장 개선하고싶은 마음에 clientOnly라는 컴포넌트를 조사하게 되었습니다. 이 글은 'ClientOnly가 최선인지'에서 시작해서 의식의 흐름대로 찾아보고 정리한 글입니다. 가벼운 마음으로 읽어주시면 감사하겠습니다 😄

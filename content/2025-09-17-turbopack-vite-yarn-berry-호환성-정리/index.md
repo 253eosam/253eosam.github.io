@@ -8,7 +8,7 @@ tags:
   - yarn-berry
   - 번들러-비교
 description: "개발 서버가 느려서 커피 한 잔 마실 시간이 생긴다면? Turbopack과 Vite, 두 차세대 번들러의 진짜 성능을 비교해보고 Yarn Berry와의 호환성까지 실제 테스트 결과로 알아봅시다."
-url: "https://velog.io/@253eosam/Turbopack-Vite-Yarn-Berry-%ED%98%B8%ED%99%98%EC%84%B1-%EC%A0%95%EB%A6%AC"
+external: "https://velog.io/@253eosam/Turbopack-Vite-Yarn-Berry-%ED%98%B8%ED%99%98%EC%84%B1-%EC%A0%95%EB%A6%AC"
 ---
 
 최근 회사에서 Next.js 프로젝트 빌드 속도가 너무 느려서 Turbopack과 Vite를 테스트해봤습니다. Yarn Berry 환경에서 실제로 사용해본 경험을 정리해봤어요.

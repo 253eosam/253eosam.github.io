@@ -3,7 +3,7 @@ title: "React vs Vue vs Angular: 3개 모두 써본 후 내린 현실적 결론"
 date: "2022-11-23"
 category: frontend
 tags: [React, Vue, Angular, 프레임워크비교, 개발경험, 성능측정]
-description: "스타트업에서 3년간 React 블로그, Vue 대시보드, Angular ERP를 개발하며 각 프레임워크의 실제 차이점을 측정했습니다. 동일 기능 구현 시 개발시간과 성능 지표를 비교 분석한 결과를 공유합니다."
+description: 'React, Vue, Angular 세 프레임워크를 실제 사용 경험 기반으로 비교 분석한다.'
 status: "ready-to-publish"
 quality_score: "7.5"
 ---

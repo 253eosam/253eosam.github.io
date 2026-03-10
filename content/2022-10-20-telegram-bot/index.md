@@ -3,6 +3,7 @@ title: 텔레그램 봇 만들기
 category: javascript
 layout: post
 tags: [ telegram , bot ]
+description: '텔레그램 Bot API를 이용하여 봇을 만드는 방법을 설명한다.'
 ---
 
 ## 📖 들어가기

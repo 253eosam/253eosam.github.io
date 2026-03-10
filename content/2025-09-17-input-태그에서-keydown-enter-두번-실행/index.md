@@ -7,7 +7,7 @@ tags:
   - enter
   - keydown
 description: "한글 입력 시 React의 keydown 이벤트가 두 번 호출되는 문제는 주로 한글의 자음과 모음이 합성되는 과정에서 발생합니다. 이 현상은 입력 방식 편집기(IMD)의 특성으로 인해 발생하며, 이를 해결하기 위한 여러 방법이 있습니다.한글 입력 시, 사용자가 자음과 "
-url: "https://velog.io/@253eosam/input-%ED%83%9C%EA%B7%B8%EC%97%90%EC%84%9C-keyDown-Enter-%EB%91%90%EB%B2%88-%EC%8B%A4%ED%96%89"
+external: "https://velog.io/@253eosam/input-%ED%83%9C%EA%B7%B8%EC%97%90%EC%84%9C-keyDown-Enter-%EB%91%90%EB%B2%88-%EC%8B%A4%ED%96%89"
 ---
 
 한글 입력 시 React의 **`keydown`** 이벤트가 두 번 호출되는 문제는 주로 한글의 자음과 모음이 합성되는 과정에서 발생합니다. 이 현상은 입력 방식 편집기(IMD)의 특성으로 인해 발생하며, 이를 해결하기 위한 여러 방법이 있습니다.

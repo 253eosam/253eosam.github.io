@@ -3,7 +3,7 @@ title: "레거시 ESLint 설정을 뜯어고치면서 배운 실무 설정법"
 category: javascript
 layout: post
 tags: [JavaScript, ESLint, Vue.js, TypeScript, 개발환경]
-description: "팀의 복잡한 ESLint 패키지 의존성 문제를 해결하면서 배운 실무 ESLint 설정 방법을 정리했습니다. Vue + TypeScript 멀티 프로젝트 환경에서의 실제 경험담입니다."
+description: 'ESLint와 Prettier의 실무 설정 방법과 레거시 설정 개선 과정을 정리한다.'
 ---
 
 회사에서 담당한 프로젝트의 ESLint 설정이 완전히 망가져서 3주간 삽질한 경험을 공유하려고 합니다.

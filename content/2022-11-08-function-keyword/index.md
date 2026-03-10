@@ -3,6 +3,7 @@ title: 'JS function 키워드 지양하는건 어떨까?'
 layout: post
 category: 'javascript'
 tags: ['function', 'arrow', 'generator']
+description: 'JavaScript에서 function 키워드 대신 화살표 함수를 사용해야 하는 이유를 설명한다.'
 ---
 
 > 해당 글은 [[Javascript미세팀] function은 아예 쓰지 마세요](https://www.youtube.com/watch?v=LPEwb5plEoU) 영상을 참고하여 작성하였습니다.

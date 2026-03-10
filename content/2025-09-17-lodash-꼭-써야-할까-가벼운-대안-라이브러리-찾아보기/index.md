@@ -6,7 +6,7 @@ tags:
   - package
   - bundle-optimization
 description: "프로젝트 번들 크기가 3MB를 넘어가면서 lodash를 대체하거나 최적화해야 했던 경험을 공유합니다. 실제 측정한 성능 차이와 대안 라이브러리들을 비교해봤습니다."
-url: "https://velog.io/@253eosam/lodash-%EA%BC%AD-%EC%8D%A8%EC%95%BC-%ED%95%A0%EA%B9%8C-%EA%B0%80%EB%B2%BC%EC%9A%B4-%EB%8C%80%EC%95%88-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%B0%BE%EC%95%84%EB%B3%B4%EA%B8%B0"
+external: "https://velog.io/@253eosam/lodash-%EA%BC%AD-%EC%8D%A8%EC%95%BC-%ED%95%A0%EA%B9%8C-%EA%B0%80%EB%B2%BC%EC%9A%B4-%EB%8C%80%EC%95%88-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%B0%BE%EC%95%84%EB%B3%B4%EA%B8%B0"
 ---
 
 회사 프로젝트에서 번들 크기가 3MB를 넘어가면서 로딩 속도 문제가 심각해졌습니다. 원인을 분석해보니 lodash 전체를 import하는 곳이 여러 군데 있었고, 실제로는 5-6개 함수만 사용하고 있었어요.

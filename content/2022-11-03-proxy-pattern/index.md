@@ -3,6 +3,7 @@ title: Proxy Pattern
 layout: post
 category: Pattern
 tags: [proxy]
+description: '중간에서 흐름을 제어하는 프록시 패턴의 개념과 활용법을 정리한다.'
 ---
 
 > **중간에서 흐름을 제어하는 역할**

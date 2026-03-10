@@ -7,7 +7,7 @@ tags:
   - vite
   - 모듈-경로
 description: "상대 경로로 인한 import 지옥에서 벗어나기 위해 Vite와 TypeScript에서 절대 경로 설정을 해봤습니다. 실제 적용 과정과 주의사항을 공유합니다."
-url: "https://velog.io/@253eosam/Vite-TypeScript-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%AA%A8%EB%93%88-%EA%B2%BD%EB%A1%9C-aliasing"
+external: "https://velog.io/@253eosam/Vite-TypeScript-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%AA%A8%EB%93%88-%EA%B2%BD%EB%A1%9C-aliasing"
 ---
 
 회사 프로젝트에서 Vue 3 + Vite + TypeScript 스택으로 어드민 시스템을 개발하면서 import 경로 때문에 고생했던 경험을 공유하려고 합니다.

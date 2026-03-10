@@ -5,7 +5,7 @@ tags:
   - JavaScript
   - algorithm
 description: "JavaScript에서는 Number 객체의 toString() 메서드를 이용하면 손쉽게 숫자를 다양한 진법으로 변환할 수 있습니다. 이번 글에서는 10진수를 이진법(2진수)로 변환하고 다시 10진수로 되돌리는 방법을 알아보겠습니다.toString(radix) 메서드를"
-url: "https://velog.io/@253eosam/JavaScript%EC%97%90%EC%84%9C-%EC%88%AB%EC%9E%90%EB%A5%BC-%EC%9D%B4%EC%A7%84%EB%B2%95%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98%ED%95%98%EA%B3%A0-%EB%8B%A4%EC%8B%9C-10%EC%A7%84%EB%B2%95%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95"
+external: "https://velog.io/@253eosam/JavaScript%EC%97%90%EC%84%9C-%EC%88%AB%EC%9E%90%EB%A5%BC-%EC%9D%B4%EC%A7%84%EB%B2%95%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98%ED%95%98%EA%B3%A0-%EB%8B%A4%EC%8B%9C-10%EC%A7%84%EB%B2%95%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95"
 ---
 
 JavaScript에서는 `Number` 객체의 `toString()` 메서드를 이용하면 손쉽게 숫자를 다양한 진법으로 변환할 수 있습니다. 이번 글에서는 10진수를 이진법(2진수)로 변환하고 다시 10진수로 되돌리는 방법을 알아보겠습니다.

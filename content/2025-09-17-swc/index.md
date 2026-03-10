@@ -8,7 +8,7 @@ tags:
   - vite
   - 빌드-최적화
 description: "회사 프로젝트의 TypeScript 빌드가 너무 느려서 SWC를 도입해봤습니다. tsc와 함께 사용하는 방법과 실제 성능 개선 결과를 공유합니다."
-url: "https://velog.io/@253eosam/SWC"
+external: "https://velog.io/@253eosam/SWC"
 ---
 
 최근 회사에서 TypeScript 프로젝트 빌드 시간이 너무 오래 걸려서 개발 생산성이 떨어지는 문제가 있었습니다. SWC를 도입해서 실제로 얼마나 빨라지는지 테스트해봤어요.

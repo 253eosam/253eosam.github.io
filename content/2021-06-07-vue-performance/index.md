@@ -3,7 +3,8 @@ layout: post
 title: 'Vue.js Performance - 대용량 데이터 처리 방법'
 categories: Develop
 tags: [JavaScript, Vue.js]
-link: https://kdydesign.github.io/2019/04/10/vuejs-performance/
+external: 'https://kdydesign.github.io/2019/04/10/vuejs-performance/'
+description: 'Vue.js에서 대용량 데이터를 효율적으로 처리하는 성능 최적화 방법을 정리한다.'
 ---
 <!-- 
 # 📖 들어가기
