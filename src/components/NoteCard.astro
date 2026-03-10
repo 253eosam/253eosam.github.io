@@ -31,9 +31,8 @@ function formatDate(dateStr: string): string {
       <time class="card-date" datetime={date}>{formatDate(date)}</time>
       {isExternal && <span class="card-external">external</span>}
     </div>
-    <h2 class="card-title">
+    <h2 class:list={["card-title", { "card-title--external": isExternal }]}>
       {title}
-      {isExternal && <span class="external-icon" aria-hidden="true" />}
     </h2>
     {description && <p class="card-desc">{description}</p>}
     {
@@ -102,9 +101,6 @@ function formatDate(dateStr: string): string {
   }
 
   .card-title {
-    display: flex;
-    align-items: center;
-    gap: 6px;
     font-size: 1.1rem;
     font-weight: 600;
     line-height: 1.4;
@@ -112,11 +108,10 @@ function formatDate(dateStr: string): string {
     transition: color 0.15s;
   }
 
-  .external-icon::after {
-    content: "↗";
+  .card-title--external::after {
+    content: '↗';
     display: inline-block;
     margin-left: 2px;
-    font-size: 0.75em;
   }
 
   .card-desc {

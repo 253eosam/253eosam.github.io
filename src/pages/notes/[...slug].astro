@@ -49,7 +49,7 @@ function formatDate(dateStr: string): string {
         <div class="external-bookmark">
           <p>이 노트는 외부 사이트의 북마크입니다.</p>
           <a href={link} target="_blank" rel="noopener noreferrer" class="external-link-btn">
-            외부 사이트로 이동 <span class="external-icon" aria-hidden="true" />
+            <span class="external-link-text">외부 사이트로 이동</span>
           </a>
         </div>
       ) : (
@@ -156,10 +156,9 @@ function formatDate(dateStr: string): string {
     text-decoration: none;
   }
 
-  .external-icon::after {
-    content: "↗";
+  .external-link-text::after {
+    content: '↗';
     display: inline-block;
     margin-left: 2px;
-    font-size: 0.75em;
   }
 </style>
