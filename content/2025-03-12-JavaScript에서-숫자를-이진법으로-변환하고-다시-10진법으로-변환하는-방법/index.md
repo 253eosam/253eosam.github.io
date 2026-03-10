@@ -1,7 +1,7 @@
 ---
 title: 'JavaScript에서 숫자를 이진법으로 변환하고 다시 10진법으로 변환하는 방법'
 date: '2025-03-12'
-category: 'velog'
+category: 'javascript'
 tags: ['JavaScript', 'algorithm']
 description: 'JavaScript에서는 Number 객체의 toString() 메서드를 이용하면 손쉽게 숫자를 다양한 진법으로 변환할 수 있습니다. 이번 글에서는 10진수를 이진법(2진수)로 변환하고 다시 10진수로 되돌리는 방법을 알아보겠습니다.toString(radix) 메서드를'
 ---

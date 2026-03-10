@@ -1,7 +1,7 @@
 ---
 title: 'TabIndex 정리 (HTML/Accessibility)'
 date: '2025-05-21'
-category: 'velog'
+category: 'frontend'
 tags: ['html']
 description: 'tabindex는 HTML 요소의 키보드 포커스 순서를 지정하는 속성입니다. 웹 접근성을 향상시키는 데 중요한 역할을 합니다.'
 ---

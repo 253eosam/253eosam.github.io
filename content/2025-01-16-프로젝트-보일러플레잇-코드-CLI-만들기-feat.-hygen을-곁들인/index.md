@@ -1,7 +1,7 @@
 ---
 title: '보일러플레이트 코드 자동 생성기 만들기 (feat. Hygen을 곁들인)'
 date: '2025-01-16'
-category: 'velog'
+category: 'npm'
 tags: ['JavaScript', 'cli', 'hygen', 'tool']
 description: 'hygen을 이용하여 미리 작성해둔 템플릿코드를 생성해주는 툴을 개발하고, 쉽게 사용하기 위해서 CLI 기반의 프롬프트 개발을 진행하는 내용을 정리하였습니다. Node package인 Hygen은 CLI를 이용하여 미리 만들어둔 템플릿을 원하는 위치에 원하는 형식으로 '
 ---

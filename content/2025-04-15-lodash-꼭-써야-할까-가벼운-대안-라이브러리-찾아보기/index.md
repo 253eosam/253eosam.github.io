@@ -1,7 +1,7 @@
 ---
 title: 'lodash 꼭 써야 할까? 가벼운 대안 라이브러리 찾아보기'
 date: '2025-04-15'
-category: 'velog'
+category: 'npm'
 tags: ['lodash', 'package']
 description: '외부 라이브러리 사용이 많은 lodash. 바로 쓰기 편하고 평가가 높은 라이브러리이지만, 모든 프로젝트에서 무조건 사용하는 것이 좋은 선택일지는 고민이 따릅니다.이 글에서는 lodash의 성능 문제 여부와, 대안으로 고려할 만한 가벼운 유틸리티 라이브러리들을 소개해 '
 ---

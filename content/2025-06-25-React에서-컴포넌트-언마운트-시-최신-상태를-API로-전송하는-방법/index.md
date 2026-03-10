@@ -1,7 +1,7 @@
 ---
 title: 'React에서 컴포넌트 언마운트 시 최신 상태를 API로 전송하는 방법'
 date: '2025-06-25'
-category: 'velog'
+category: 'frontend'
 tags: ['React']
 description: 'React를 사용하다 보면 컴포넌트가 언마운트(unmount) 될 때 특정 상태의 최신 값을 API로 전송해야 하는 상황이 종종 있습니다. 예를 들어, 입력 중인 내용을 저장하거나 페이지 이탈 직전에 데이터를 백엔드에 전송하는 경우입니다.하지만 단순히 useEffect'
 ---

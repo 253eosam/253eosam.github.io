@@ -1,7 +1,7 @@
 ---
 title: 'Hydration, Layout Shift, Lazy Load, Chunk 등의 개념 정리'
 date: '2025-04-23'
-category: 'velog'
+category: 'frontend'
 tags: ['@loadable/component', 'CSR', 'Layout Shift', 'Lazy loading', 'SSR', 'Skeleton-UI', 'chunk', 'emotion', 'hydration']
 description: '이 문서는 React 기반 SSR/CSR 렌더링에서 자주 등장하는 개념들인 hydration, layout shift, skeleton UI, chunk, @loadable/component, 그리고 Emotion에 대해 자세히 설명합니다.'
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'Vite + TypeScript 프로젝트 모듈 경로 aliasing'
 date: '2025-01-16'
-category: 'velog'
+category: 'frontend'
 tags: ['alias', 'typescript', 'vite']
 description: '프로젝트 vite와 typescript를 사용하는 작업 공간에서 alias를 통해 절대경로를 설정하는 방법에대해서 설명한다.'
 ---

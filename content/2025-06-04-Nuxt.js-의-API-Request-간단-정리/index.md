@@ -1,7 +1,7 @@
 ---
 title: 'Nuxt.js 의 API Request 간단 정리'
 date: '2025-06-04'
-category: 'velog'
+category: 'frontend'
 tags: ['nuxt']
 description: 'Nuxt3 \$fetch, useAsyncData, useFetch 차이 정리용도: 클라이언트 사이드 HTTP 요청 처리특징: ofetch 기반, Node.js 및 브라우저 환경 자동 감지주의사항: SSR 시 사용 시 중복 호출 위험, 초기 데이터 패칭에 부적합사용 '
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'CSS 길이 단위 정리: px, em, rem'
 date: '2025-04-23'
-category: 'velog'
+category: 'frontend'
 tags: ['CSS Unit', 'em', 'px', 'rem']
 description: '요즘 관심사인 디자인시스템 개발 및 유지보수 중에서 픽셀에 대한 내용을 정리하는 글입니다. CSS에서는 다양한 길이 단위를 사용하여 요소의 크기, 여백, 글꼴 크기 등을 조절합니다.'
 ---

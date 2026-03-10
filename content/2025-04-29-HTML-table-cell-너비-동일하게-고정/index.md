@@ -1,7 +1,7 @@
 ---
 title: '[HTML] table cell 너비 동일하게 고정'
 date: '2025-04-29'
-category: 'velog'
+category: 'frontend'
 tags: ['Table', 'html']
 description: '모든 셀의 너비를 같게 고정하는 방법예제화면코드결과'
 ---

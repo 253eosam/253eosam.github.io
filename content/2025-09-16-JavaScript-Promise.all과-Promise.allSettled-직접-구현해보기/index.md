@@ -1,7 +1,7 @@
 ---
 title: 'JavaScript Promise.all과 Promise.allSettled 직접 구현해보기'
 date: '2025-09-16'
-category: 'velog'
+category: 'javascript'
 tags: ['promise', '동시성']
 description: 'Promise는 JavaScript의 비동기 처리를 위한 핵심 개념입니다. 특히 여러 개의 비동기 작업을 동시에 처리할 때 Promise.all과 Promise.allSettled를 자주 사용하게 되는데, 이들이 내부적으로 어떻게 동작하는지 직접 구현해보면서 이해해보겠'
 ---

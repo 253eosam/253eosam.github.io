@@ -1,7 +1,7 @@
 ---
 title: 'Zustand vs Jotai 비교 분석'
 date: '2025-03-12'
-category: 'velog'
+category: 'frontend'
 tags: ['Jotai', 'zustand']
 description: '"어떤 상태 관리 라이브러리가 더 좋을까?"React에서 상태 관리는 필수적입니다. 오늘은 대표적인 상태 관리 라이브러리인 Jotai와 Zustand를 비교하며 각각의 장단점을 살펴보겠습니다.Jotai는 atomic 패턴을 기반으로 상태를 독립적인 단위(atom)로 관'
 ---

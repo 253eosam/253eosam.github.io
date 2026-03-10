@@ -1,7 +1,7 @@
 ---
 title: 'Jenkins와 github trigger설정'
 date: '2025-06-05'
-category: 'velog'
+category: 'devops'
 tags: ['TRIGGER', 'github', 'jenkins']
 description: '새로운 개발팀에 합류하고, CI/CD tool인 jenkins build가 git에 trigger되지 않아 불편했던 경험을 개선 후 그 과정을 기록으로 남깁니다.'
 ---

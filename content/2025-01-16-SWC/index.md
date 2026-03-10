@@ -1,7 +1,7 @@
 ---
 title: 'SWC'
 date: '2025-01-16'
-category: 'velog'
+category: 'frontend'
 tags: ['React', 'swc', 'typescript', 'vite']
 description: 'SWC(Speedy Web Compiler) 는 매우 빠른 웹 컴파일러 입니다. Rust 언어로 개발되어 높은 성능을 제공합니다.JS, TS 코드를 트랜스파일하고 컴파일합니다.기존 Babel과 TSC 보다 성능이 좋으며 대체 가능합니다.컴파일과 번들링 모두를 처리할 수'
 ---

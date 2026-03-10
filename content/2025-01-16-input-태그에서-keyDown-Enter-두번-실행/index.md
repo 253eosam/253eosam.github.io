@@ -1,7 +1,7 @@
 ---
 title: 'input 태그에서 keyDown ''Enter'' 두번 실행'
 date: '2025-01-16'
-category: 'velog'
+category: 'frontend'
 tags: ['Event', 'React', 'enter', 'keydown']
 description: '한글 입력 시 React의 keydown 이벤트가 두 번 호출되는 문제는 주로 한글의 자음과 모음이 합성되는 과정에서 발생합니다. 이 현상은 입력 방식 편집기(IME)의 특성으로 인해 발생하며, 이를 해결하기 위한 여러 방법이 있습니다.한글 입력 시, 사용자가 자음과 '
 ---

@@ -1,7 +1,7 @@
 ---
 title: 'Turbopack, Vite, Yarn Berry 호환성 정리'
 date: '2025-04-29'
-category: 'velog'
+category: 'frontend'
 tags: ['Turbopack', 'next.js', 'vite', 'yarn-berry']
 description: 'Turbopack은 Vercel에서 개발한 초고속 웹 번들러입니다. Rust 언어로 제작되어 Webpack 대비 최대 10배 이상 빠른 빌드 속도를 제공합니다. Turbopack은 Next.js를 기반으로 최적화되어 있으며, Cold Start, Hot Module R'
 ---
