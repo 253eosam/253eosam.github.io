@@ -11,7 +11,7 @@ const { current = 'home' } = Astro.props;
     <a href="/" class="logo">253eosam</a>
     <nav class="nav">
       <a href="/" class:list={['nav__link', { active: current === 'home' || current === 'note' }]}>Notes</a>
-      <a href="https://253eosam.github.io/algo-wiki/" class="nav__link" target="_blank" rel="noopener noreferrer">Algo Wiki</a>
+      <a href="https://253eosam.github.io/algo-wiki/" class="nav__link nav__link--external" target="_blank" rel="noopener noreferrer">Algo Wiki</a>
       <a href="/resume" class:list={['nav__link', { active: current === 'resume' }]}>Resume</a>
     </nav>
   </div>
@@ -65,6 +65,13 @@ const { current = 'home' } = Astro.props;
   .nav__link:hover {
     color: var(--color-text);
     text-decoration: none;
+  }
+
+  .nav__link--external::after {
+    content: '↗';
+    display: inline-block;
+    margin-left: 2px;
+    font-size: 0.75em;
   }
 
   .nav__link.active {
