@@ -1,7 +1,7 @@
 ---
 title: 동적 웹 페이지
 layout: post
-category: Front-end
+category: frontend
 tags: [동적 웹 페이지, WAS, 정적 웹 페이지, 웹 서버]
 description: '정적 웹 페이지와 동적 웹 페이지의 차이점과 동작 방식을 설명한다.'
 ---

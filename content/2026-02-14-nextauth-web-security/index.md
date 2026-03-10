@@ -1,7 +1,7 @@
 ---
 title: 'NextAuth 인증 시스템과 웹 보안'
 date: '2026-02-14'
-category: '웹 보안'
+category: 'web-security'
 tags: ['NextAuth', 'JWT', 'CSRF', 'CORS', 'SameSite', 'HttpOnly', 'Cookie', 'Next.js']
 description: 'NextAuth 5 기반 인증 흐름과 CSRF, CORS, SameSite, JWT 등 웹 보안 메커니즘을 정리한다'
 status: 'completed'

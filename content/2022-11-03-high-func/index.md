@@ -1,6 +1,6 @@
 ---
 title: 고차함수
-category: JavaScript
+category: javascript
 layout: post
 description: '고차함수의 정의와 JavaScript에서의 활용 방법을 설명한다.'
 ---

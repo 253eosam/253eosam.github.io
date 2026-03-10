@@ -1,6 +1,6 @@
 ---
 title: 클로저(Closure)
-category: front-end
+category: frontend
 layout: post
 tags: [ JavaScript , closure ]
 description: 'JavaScript 클로저의 개념과 실행 컨텍스트 기반 동작 원리를 설명한다.'

@@ -1,6 +1,6 @@
 ---
 title: 엑셀 파일 읽기
-category: front-end
+category: frontend
 layout: post
 tags: [ SheetJS, Excel ]
 description: '서버에서 엑셀 파일을 읽어 데이터를 처리하는 방법을 정리한다.'

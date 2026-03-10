@@ -1,6 +1,6 @@
 ---
 title: Map of JavaScript
-category: JavaScript
+category: javascript
 layout: post
 description: 'JavaScript Map 자료구조의 특성과 Object와의 차이점을 정리한다.'
 ---

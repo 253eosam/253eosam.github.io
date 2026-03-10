@@ -1,6 +1,6 @@
 ---
 title: JavaScript 동작 방법과 이해
-category: front-end
+category: frontend
 layout: post
 tags: [ JavaScript ]
 description: '싱글 스레드 기반 JavaScript의 동작 원리와 비동기 처리 방식을 설명한다.'

@@ -1,7 +1,7 @@
 ---
 title: Observer pattern
 layout: post
-category: Pattern
+category: pattern
 tags: [Observer]
 description: '옵저버 패턴의 개념과 구현 방법을 디자인 패턴 관점에서 정리한다.'
 ---

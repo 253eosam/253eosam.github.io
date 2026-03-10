@@ -1,6 +1,6 @@
 ---
 title: Modal 컴포넌트 만들기
-category: front-end
+category: frontend
 layout: post
 tags: [ Vue.js ]
 description: '프론트엔드에서 Modal 컴포넌트를 직접 구현하는 방법을 설명한다.'

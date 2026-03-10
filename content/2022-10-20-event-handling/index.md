@@ -1,6 +1,6 @@
 ---
 title: 브라우저 이벤트 핸들링
-category: front-end
+category: frontend
 layout: post
 tags: [ JavaScript , eventHandler ]
 description: '브라우저 이벤트의 전파 과정과 핸들링 방법을 정리한다.'

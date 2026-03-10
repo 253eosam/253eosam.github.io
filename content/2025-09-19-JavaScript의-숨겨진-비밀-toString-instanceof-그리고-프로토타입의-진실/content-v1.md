@@ -1,7 +1,7 @@
 ---
 title: 'JavaScript의 숨겨진 비밀: toString, instanceof, 그리고 프로토타입의 진실'
 date: '2025-09-19'
-category: 'Frontend'
+category: 'frontend'
 tags: ['JavaScript', 'prototype', 'type-checking', 'interview', 'advanced']
 description: 'JavaScript 중급 개발자가 꼭 알아야 할 toString, instanceof, 프로토타입의 내부 동작 원리와 실무 활용법'
 thumbnail: ''

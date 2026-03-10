@@ -1,6 +1,6 @@
 ---
 title: 데이터 상태 관리 - 그것을 알려주마 
-category: front-end
+category: frontend
 layout: post
 tags: [ AngularJs , jQuery, Redux ]
 description: '프론트엔드 상태 관리의 개념과 다양한 관리 방식을 비교 정리한다.'

@@ -1,7 +1,7 @@
 ---
 title: Vue data reactivity
 layout: post
-category: front-end
+category: frontend
 tags: [Vue.js]
 description: 'Vue.js의 데이터 반응성 시스템의 동작 원리를 설명한다.'
 ---

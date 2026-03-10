@@ -1,6 +1,6 @@
 ---
 title: 브라우저 렌더링
-category: front-end
+category: frontend
 layout: post
 tags: [ browser ]
 description: '웹 브라우저의 렌더링 과정과 내부 동작 원리를 단계별로 설명한다.'
