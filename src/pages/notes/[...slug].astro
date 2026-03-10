@@ -16,6 +16,7 @@ export async function getStaticPaths() {
 }
 
 const { entry, note } = Astro.props;
+const link = entry.data.external as string | undefined;
 const { Content } = await render(entry);
 
 function formatDate(dateStr: string): string {
@@ -44,9 +45,18 @@ function formatDate(dateStr: string): string {
           )
         }
       </header>
-      <div class="prose">
-        <Content />
-      </div>
+      {link ? (
+        <div class="external-bookmark">
+          <p>이 노트는 외부 사이트의 북마크입니다.</p>
+          <a href={link} target="_blank" rel="noopener noreferrer" class="external-link-btn">
+            외부 사이트로 이동 <span class="external-icon" aria-hidden="true" />
+          </a>
+        </div>
+      ) : (
+        <div class="prose">
+          <Content />
+        </div>
+      )}
       <footer class="note-footer">
         <a href="/" class="back-link">&larr; 목록으로</a>
       </footer>
@@ -114,5 +124,42 @@ function formatDate(dateStr: string): string {
 
   .back-link:hover {
     color: var(--color-primary);
+  }
+
+  .external-bookmark {
+    text-align: center;
+    padding: var(--space-3xl) 0;
+  }
+
+  .external-bookmark p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .external-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--color-primary);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .external-link-btn:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+
+  .external-icon::after {
+    content: "↗";
+    display: inline-block;
+    margin-left: 2px;
+    font-size: 0.75em;
   }
 </style>

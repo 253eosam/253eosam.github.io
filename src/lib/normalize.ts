@@ -16,6 +16,7 @@ export interface NormalizedNote {
   tags: string[];
   description: string;
   slug: string;
+  link?: string;
 }
 
 /**
@@ -77,6 +78,8 @@ export function normalize(id: string, data: RawData): NormalizedNote {
   // 중복 제거
   const uniqueTags = [...new Set(tags)];
 
+  const link = data.external as string | undefined;
+
   return {
     title: data.title,
     date,
@@ -84,5 +87,6 @@ export function normalize(id: string, data: RawData): NormalizedNote {
     tags: uniqueTags,
     description: data.description ?? '',
     slug: extractSlugFromId(id),
+    ...(link ? { link } : {}),
   };
 }

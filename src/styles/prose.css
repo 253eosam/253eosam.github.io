@@ -131,13 +131,16 @@
 }
 
 /* Table */
+.prose .table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
 .prose table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1em 0;
   font-size: 0.9rem;
-  display: block;
-  overflow-x: auto;
 }
 
 .prose th,

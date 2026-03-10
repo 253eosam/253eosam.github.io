@@ -34,6 +34,7 @@ const categories = [...new Set(notes.map((n) => n.category))].sort();
             description={note.description}
             slug={note.slug}
             tags={note.tags}
+            link={note.link}
           />
         ))
       }

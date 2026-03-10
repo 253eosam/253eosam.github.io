@@ -6,9 +6,13 @@ interface Props {
   description: string;
   slug: string;
   tags: string[];
+  link?: string;
 }
 
-const { title, date, category, description, slug, tags } = Astro.props;
+const { title, date, category, description, slug, tags, link } = Astro.props;
+
+const isExternal = !!link;
+const href = isExternal ? link : `/notes/${slug}`;
 
 function formatDate(dateStr: string): string {
   const [y, m, d] = dateStr.split('-');
@@ -17,12 +21,20 @@ function formatDate(dateStr: string): string {
 ---
 
 <article class="note-card" data-category={category}>
-  <a href={`/notes/${slug}`} class="card-link">
+  <a
+    href={href}
+    class="card-link"
+    {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+  >
     <div class="card-meta">
       <span class="card-category">{category}</span>
       <time class="card-date" datetime={date}>{formatDate(date)}</time>
+      {isExternal && <span class="card-external">external</span>}
     </div>
-    <h2 class="card-title">{title}</h2>
+    <h2 class="card-title">
+      {title}
+      {isExternal && <span class="external-icon" aria-hidden="true" />}
+    </h2>
     {description && <p class="card-desc">{description}</p>}
     {
       tags.length > 0 && (
@@ -77,12 +89,34 @@ function formatDate(dateStr: string): string {
     color: var(--color-text-tertiary);
   }
 
+  .card-external {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-text-tertiary);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 1px 6px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
   .card-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     font-size: 1.1rem;
     font-weight: 600;
     line-height: 1.4;
     margin-bottom: var(--space-xs);
     transition: color 0.15s;
+  }
+
+  .external-icon::after {
+    content: "↗";
+    display: inline-block;
+    margin-left: 2px;
+    font-size: 0.75em;
   }
 
   .card-desc {
