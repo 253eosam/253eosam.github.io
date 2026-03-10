@@ -1,6 +1,7 @@
 ---
 layout: post
 title: '이벤트 핸들링'
+category: 'frontend'
 categories: Develop
 tags: [DOM, Browser, Vue.js, Event Handling]
 description: '이벤트 위임, 버블링, 캡처링 등 이벤트 핸들링 개념을 정리한다.'

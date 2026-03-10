@@ -1,5 +1,6 @@
 ---
 title: "TabIndex 정리 (HTML/Accessibility)"
+category: 'frontend'
 date: "2025-09-17T07:46:04.895Z"
 tags:
   - html

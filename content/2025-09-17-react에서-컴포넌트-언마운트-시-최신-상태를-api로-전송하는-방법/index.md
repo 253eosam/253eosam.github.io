@@ -1,5 +1,6 @@
 ---
 title: "React에서 컴포넌트 언마운트 시 최신 상태를 API로 전송하는 방법"
+category: 'frontend'
 date: "2025-09-17T07:45:55.001Z"
 tags:
   - React

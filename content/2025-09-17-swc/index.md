@@ -1,5 +1,6 @@
 ---
 title: "SWC로 TypeScript 빌드 속도를 70배 빨리 만든 방법"
+category: 'frontend'
 date: "2025-09-17T07:46:44.506Z"
 tags:
   - React

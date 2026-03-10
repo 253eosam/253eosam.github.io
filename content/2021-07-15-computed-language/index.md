@@ -1,6 +1,7 @@
 ---
 layout: post
 title: '컴퓨터 언어의 변형'
+category: 'CS'
 categories: Develop
 tags: [CS, compiler, interpreter, JVM, VM]
 description: '프로그래밍 언어의 종류와 각 언어의 특성을 비교하여 정리한다.'

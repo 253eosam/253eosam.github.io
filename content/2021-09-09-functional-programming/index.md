@@ -1,6 +1,7 @@
 ---
 layout: post
 title: '함수형 프로그래밍'
+category: 'pattern'
 categories: Develop
 tags:
 description: '함수형 프로그래밍의 핵심 개념과 JavaScript에서의 적용 방법을 정리한다.'

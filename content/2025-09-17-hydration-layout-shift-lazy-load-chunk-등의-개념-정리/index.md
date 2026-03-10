@@ -1,5 +1,6 @@
 ---
 title: "Hydration, Layout Shift, Lazy Load, Chunk 등의 개념 정리"
+category: 'frontend'
 date: "2025-09-17T07:46:21.480Z"
 tags:
   - '@loadable/component'

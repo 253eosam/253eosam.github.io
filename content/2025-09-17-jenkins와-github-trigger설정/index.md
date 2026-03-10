@@ -1,5 +1,6 @@
 ---
 title: "Jenkins와 github trigger설정"
+category: 'devops'
 date: "2025-09-17T07:45:58.200Z"
 tags:
   - TRIGGER

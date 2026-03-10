@@ -1,6 +1,7 @@
 ---
 layout: post
 title: '문서 객체 모델(DOM) 이해하기'
+category: 'frontend'
 categories: Develop
 tags: [DOM]
 description: 'DOM의 개념과 HTML 문서를 프로그래밍적으로 조작하는 방법을 설명한다.'

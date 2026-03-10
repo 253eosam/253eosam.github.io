@@ -1,5 +1,6 @@
 ---
 title: "[HTML] table cell 너비 동일하게 고정"
+category: 'frontend'
 date: "2025-09-17T07:46:14.639Z"
 tags:
   - Table

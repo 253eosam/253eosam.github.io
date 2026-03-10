@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'JavaScript는 인터프린터 언어'
+category: 'javascript'
 categories: Develop
 tags: [JavaScript]
 external: 'https://oowgnoj.dev/review/advanced-js-1'

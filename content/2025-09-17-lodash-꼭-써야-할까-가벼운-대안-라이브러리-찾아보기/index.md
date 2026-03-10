@@ -1,5 +1,6 @@
 ---
 title: "번들 크기 3MB에서 300KB로 줄인 lodash 최적화 경험"
+category: 'npm'
 date: "2025-09-17T07:46:31.356Z"
 tags:
   - lodash

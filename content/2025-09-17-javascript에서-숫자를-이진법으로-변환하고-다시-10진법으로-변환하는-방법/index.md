@@ -1,5 +1,6 @@
 ---
 title: "JavaScript에서 숫자를 이진법으로 변환하고 다시 10진법으로 변환하는 방법"
+category: 'javascript'
 date: "2025-09-17T07:46:38.019Z"
 tags:
   - JavaScript

@@ -1,5 +1,6 @@
 ---
 title: "[React] 부모컴포넌에서 ref를 이용하여 자식 컴포넌트에 정의된 함수 사용하기"
+category: 'frontend'
 date: "2025-09-17T07:46:41.246Z"
 tags:
   - React

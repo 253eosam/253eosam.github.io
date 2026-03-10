@@ -1,6 +1,7 @@
 ---
 layout: post
 title: '구닥다리 공룡을 위한 오늘날의 JavaScript'
+category: 'javascript'
 categories: Develop
 tags: [JavaScript, NPM, webpack, babel]
 description: '모듈 번들러와 트랜스파일러 등 현대 JavaScript 생태계의 발전 과정을 설명한다.'

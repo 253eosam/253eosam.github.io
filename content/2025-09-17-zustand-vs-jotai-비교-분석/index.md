@@ -1,5 +1,6 @@
 ---
 title: "Zustand vs Jotai 비교 분석."
+category: 'frontend'
 date: "2025-09-17T07:46:34.732Z"
 tags:
   - Jotai

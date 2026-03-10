@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Vue Code Style'
+category: 'frontend'
 categories: Develop
 tags: []
 description: 'Vue.js 프레임워크를 깔끔하게 사용하기 위한 코드 스타일 가이드를 정리한다.'

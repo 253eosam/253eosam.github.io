@@ -1,5 +1,6 @@
 ---
 title: "Vite + TypeScript에서 import 경로를 깔끔하게 만드는 방법"
+category: 'frontend'
 date: "2025-09-17T07:46:54.843Z"
 tags:
   - alias

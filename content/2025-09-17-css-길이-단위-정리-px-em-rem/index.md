@@ -1,5 +1,6 @@
 ---
 title: "CSS 길이 단위 정리: px, em, rem"
+category: 'frontend'
 date: "2025-09-17T07:46:18.105Z"
 tags:
   - CSS Unit

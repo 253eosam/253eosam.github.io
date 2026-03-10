@@ -1,5 +1,6 @@
 ---
 title: "Nuxt.js 의 API Request 간단 정리"
+category: 'frontend'
 date: "2025-09-17T07:46:01.572Z"
 tags:
   - nuxt

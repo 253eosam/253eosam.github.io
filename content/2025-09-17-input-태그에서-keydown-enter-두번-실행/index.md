@@ -1,5 +1,6 @@
 ---
 title: "input 태그에서 keyDown 'Enter' 두번 실행"
+category: 'frontend'
 date: "2025-09-17T07:46:51.734Z"
 tags:
   - Event

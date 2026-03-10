@@ -1,6 +1,7 @@
 ---
 layout: post
 title: '[WEB] PRG 패턴'
+category: 'pattern'
 categories: Develop
 tags: [Web]
 description: 'POST-Redirect-GET 패턴의 개념과 중복 요청 방지 원리를 설명한다.'

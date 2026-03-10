@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Vue.js Performance - 대용량 데이터 처리 방법'
+category: 'frontend'
 categories: Develop
 tags: [JavaScript, Vue.js]
 external: 'https://kdydesign.github.io/2019/04/10/vuejs-performance/'

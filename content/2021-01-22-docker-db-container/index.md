@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Docker를 사용해서 간단한 로컬 DB 셋팅
+category: 'devops'
 categories: Develop
 tags: [Docker, DB, MySQL]
 description: 'Docker 컨테이너를 이용하여 로컬 환경에서 DB를 빠르게 셋팅하는 방법을 정리한다.'

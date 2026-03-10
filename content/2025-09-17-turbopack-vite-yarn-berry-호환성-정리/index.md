@@ -1,5 +1,6 @@
 ---
 title: "Turbopack vs Vite: 어떤 번들러가 진짜 빠를까? (feat. Yarn Berry)"
+category: 'frontend'
 date: "2025-09-17T07:46:11.506Z"
 tags:
   - Turbopack

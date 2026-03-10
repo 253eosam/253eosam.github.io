@@ -1,5 +1,6 @@
 ---
 title: "브라우저 인쇄 시 배경 이미지가 출력되지 않는 문제 해결법"
+category: 'frontend'
 date: "2025-09-17T07:46:08.124Z"
 tags:
   - CSS
