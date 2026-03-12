@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import rehypeFixLiteralStrong from './src/plugins/rehype-fix-literal-strong.mjs';
 import rehypeWrapTable from './src/plugins/rehype-wrap-table.mjs';
 
 export default defineConfig({
@@ -7,6 +8,6 @@ export default defineConfig({
     shikiConfig: {
       theme: 'github-dark',
     },
-    rehypePlugins: [rehypeWrapTable],
+    rehypePlugins: [rehypeFixLiteralStrong, rehypeWrapTable],
   },
 });
