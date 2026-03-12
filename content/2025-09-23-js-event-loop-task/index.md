@@ -71,6 +71,7 @@ JavaScript 엔진 자체에서 생성하는 작업입니다. 매크로 태스크
 | `process.nextTick` | Node.js (최고 우선순위) |
 
 > **Q: `queueMicrotask()`는 `Promise.resolve().then()`과 무엇이 다른가?**
+>
 > 동작 타이밍은 동일하지만 `queueMicrotask()`는 Promise 객체를 생성하지 않으므로 오버헤드가 적습니다. 마이크로 태스크를 직접 등록할 목적이라면 `queueMicrotask()`가 더 적합합니다.
 
 ## 이벤트 루프의 실행 순서
@@ -191,6 +192,7 @@ async 안의 setTimeout
 `await` 키워드를 만나면 함수 실행이 일시 중단되고, `await` 이후 코드가 마이크로 태스크 큐에 등록됩니다. 따라서 `console.log('2')`가 먼저 실행되고, 이어서 마이크로 태스크인 `await 이후`가 실행됩니다.
 
 > **Q: `await`는 내부적으로 어떻게 변환되는가?**
+>
 > `await expr` 이후의 코드는 `Promise.resolve(expr).then(이후코드)`와 동등하게 변환됩니다. 결국 `.then()` 콜백과 같은 마이크로 태스크 타이밍에 실행되는 것입니다.
 
 ## 흔한 함정과 디버깅
@@ -234,6 +236,7 @@ Promise.resolve()
 `.then()` 안에서 `Promise.resolve()`를 반환하면 추가 마이크로 태스크 틱이 필요합니다. 그 사이에 다른 마이크로 태스크가 먼저 실행될 수 있으므로 주의해야 합니다.
 
 > **Q: 왜 Promise를 반환하면 추가 틱이 생기는가?**
+>
 > `.then()`이 Promise를 반환하면 해당 Promise의 resolve를 기다리기 위해 내부적으로 추가 `.then()` 호출이 발생합니다. 이 과정에서 마이크로 태스크가 한 번 더 큐에 등록되어 실행 순서가 밀리게 됩니다.
 
 ### 실행 순서 분석 절차
@@ -267,6 +270,7 @@ setImmediate
 Node.js의 마이크로 태스크 우선순위는 `process.nextTick` > `Promise` 순서입니다. `setImmediate`는 이벤트 루프의 check 페이즈에서 실행되므로 `setTimeout`보다 뒤에 올 수도, 앞에 올 수도 있습니다 (타이머 해상도에 따라 달라집니다).
 
 > **Q: `setImmediate`와 `setTimeout(fn, 0)`의 순서가 불확정적인 이유는?**
+>
 > `setTimeout(fn, 0)`은 실제로 최소 1ms의 딜레이를 가집니다. 이벤트 루프 진입 시점에 1ms가 이미 경과했으면 timer 페이즈에서 `setTimeout`이 먼저 실행되고, 아직 경과하지 않았으면 check 페이즈의 `setImmediate`가 먼저 실행됩니다.
 
 ## 실무 활용
