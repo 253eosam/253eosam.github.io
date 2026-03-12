@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
 import { normalize } from '../../lib/normalize';
 
 export async function getStaticPaths() {
@@ -17,7 +18,12 @@ export async function getStaticPaths() {
 
 const { entry, note } = Astro.props;
 const link = entry.data.external as string | undefined;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+const tocHeadings = headings.filter(
+  (heading) =>
+    (heading.depth === 2 || heading.depth === 3) && heading.text.trim() !== '목차'
+);
+const hasToc = tocHeadings.length > 0 && !link;
 
 function formatDate(dateStr: string): string {
   const [y, m, d] = dateStr.split('-');
@@ -28,43 +34,277 @@ function formatDate(dateStr: string): string {
 <BaseLayout title={note.title} description={note.description}>
   <Header current="note" />
   <main class="container">
-    <article class="note">
-      <header class="note-header">
-        <div class="note-meta">
-          <span class="note-category">{note.category}</span>
-          <time datetime={note.date}>{formatDate(note.date)}</time>
-        </div>
-        <h1 class="note-title">{note.title}</h1>
-        {
-          note.tags.length > 0 && (
-            <div class="note-tags">
-              {note.tags.map((tag) => (
-                <span class="note-tag">{tag}</span>
-              ))}
-            </div>
-          )
-        }
-      </header>
-      {link ? (
-        <div class="external-bookmark">
-          <p>이 노트는 외부 사이트의 북마크입니다.</p>
-          <a href={link} target="_blank" rel="noopener noreferrer" class="external-link-btn">
-            <span class="external-link-text">외부 사이트로 이동</span>
-          </a>
-        </div>
-      ) : (
-        <div class="prose">
-          <Content />
-        </div>
-      )}
-      <footer class="note-footer">
-        <a href="/" class="back-link">&larr; 목록으로</a>
-      </footer>
-    </article>
+    <div class="note-layout">
+      <article class="note">
+        <header class="note-header">
+          <div class="note-meta">
+            <span class="note-category">{note.category}</span>
+            <time datetime={note.date}>{formatDate(note.date)}</time>
+          </div>
+          <h1 class="note-title">{note.title}</h1>
+          {
+            note.tags.length > 0 && (
+              <div class="note-tags">
+                {note.tags.map((tag) => (
+                  <span class="note-tag">{tag}</span>
+                ))}
+              </div>
+            )
+          }
+        </header>
+        {link ? (
+          <div class="external-bookmark">
+            <p>이 노트는 외부 사이트의 북마크입니다.</p>
+            <a href={link} target="_blank" rel="noopener noreferrer" class="external-link-btn">
+              <span class="external-link-text">외부 사이트로 이동</span>
+            </a>
+          </div>
+        ) : (
+          <div class="prose">
+            <Content />
+          </div>
+        )}
+        <footer class="note-footer">
+          <a href="/" class="back-link">&larr; 목록으로</a>
+        </footer>
+      </article>
+    </div>
   </main>
+  {
+    hasToc && (
+      <div class="toc-mobile" id="toc-mobile">
+        <button
+          class="toc-fab"
+          id="toc-fab"
+          type="button"
+          aria-label="목차 열기"
+          aria-controls="toc-popup"
+          aria-expanded="false"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M5 7.5h14M5 12h14M5 16.5h14M3.75 7.5h.5M3.75 12h.5M3.75 16.5h.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.8"
+            />
+          </svg>
+        </button>
+        <div class="toc-overlay" id="toc-overlay"></div>
+        <div class="toc-popup" id="toc-popup" aria-hidden="true">
+          <div class="toc-popup-header">
+            <span>목차</span>
+            <button class="toc-popup-close" id="toc-popup-close" type="button" aria-label="목차 닫기">
+              &times;
+            </button>
+          </div>
+          <div class="toc-popup-body">
+            <TableOfContents headings={tocHeadings} showTitle={false} />
+          </div>
+        </div>
+      </div>
+    )
+  }
 </BaseLayout>
 
+<script type="module" is:inline>
+  const mermaidBlocks = Array.from(
+    document.querySelectorAll('.prose pre[data-language="mermaid"]')
+  );
+
+  if (mermaidBlocks.length > 0) {
+    const { default: mermaid } = await import(
+      'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs'
+    );
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'neutral',
+    });
+
+    for (const [index, block] of mermaidBlocks.entries()) {
+      const code = block.querySelector('code');
+      const source = code?.textContent?.trim();
+
+      if (!source) {
+        continue;
+      }
+
+      try {
+        const renderId = `mermaid-${index}-${Math.random().toString(36).slice(2)}`;
+        const { svg } = await mermaid.render(renderId, source);
+        const container = document.createElement('div');
+        container.className = 'mermaid-diagram';
+        container.innerHTML = svg;
+        block.replaceWith(container);
+      } catch (error) {
+        console.error('Failed to render Mermaid diagram:', error);
+      }
+    }
+  }
+</script>
+
+{
+  hasToc && (
+    <script is:inline>
+      const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+      const noteHeadings = Array.from(document.querySelectorAll('.prose h2[id], .prose h3[id]')).filter(
+        (heading) => heading.id !== '목차'
+      );
+
+      if (tocLinks.length > 0 && noteHeadings.length > 0) {
+        const mobileToc = document.getElementById('toc-mobile');
+        const fab = document.getElementById('toc-fab');
+        const popup = document.getElementById('toc-popup');
+        const overlay = document.getElementById('toc-overlay');
+        const closeButton = document.getElementById('toc-popup-close');
+        const visibleSlugs = new Set();
+        let activeSlug = '';
+        let frameId = 0;
+
+        const getScrollOffset = () => {
+          const styles = getComputedStyle(document.documentElement);
+          const headerHeight = parseFloat(styles.getPropertyValue('--header-height')) || 56;
+          const spaceMd = parseFloat(styles.getPropertyValue('--space-md')) || 16;
+          return headerHeight + spaceMd;
+        };
+
+        const setActiveLink = (slug) => {
+          if (!slug || slug === activeSlug) {
+            return;
+          }
+
+          activeSlug = slug;
+
+          for (const link of tocLinks) {
+            link.classList.toggle('active', link.dataset.slug === slug);
+          }
+        };
+
+        const getFallbackSlug = () => {
+          const scrollLine = window.scrollY + getScrollOffset() + 8;
+          let currentSlug = noteHeadings[0].id;
+
+          for (const heading of noteHeadings) {
+            if (heading.offsetTop <= scrollLine) {
+              currentSlug = heading.id;
+            } else {
+              break;
+            }
+          }
+
+          return currentSlug;
+        };
+
+        const updateActiveHeading = () => {
+          frameId = 0;
+
+          const intersectingHeadings = noteHeadings.filter((heading) => visibleSlugs.has(heading.id));
+          const nextSlug =
+            intersectingHeadings.length > 0
+              ? intersectingHeadings.sort(
+                  (a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top
+                )[0].id
+              : getFallbackSlug();
+
+          setActiveLink(nextSlug);
+        };
+
+        const scheduleActiveHeadingUpdate = () => {
+          if (frameId !== 0) {
+            return;
+          }
+
+          frameId = window.requestAnimationFrame(updateActiveHeading);
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.target.id) {
+                continue;
+              }
+
+              if (entry.isIntersecting) {
+                visibleSlugs.add(entry.target.id);
+              } else {
+                visibleSlugs.delete(entry.target.id);
+              }
+            }
+
+            scheduleActiveHeadingUpdate();
+          },
+          {
+            rootMargin: '-80px 0px -60% 0px',
+            threshold: 0,
+          }
+        );
+
+        for (const heading of noteHeadings) {
+          observer.observe(heading);
+        }
+
+        window.addEventListener('scroll', scheduleActiveHeadingUpdate, { passive: true });
+        window.addEventListener('resize', scheduleActiveHeadingUpdate);
+        scheduleActiveHeadingUpdate();
+
+        const setMobileTocOpen = (isOpen) => {
+          if (!mobileToc || !fab || !popup) {
+            return;
+          }
+
+          mobileToc.classList.toggle('is-open', isOpen);
+          fab.setAttribute('aria-expanded', String(isOpen));
+          popup.setAttribute('aria-hidden', String(!isOpen));
+          document.body.classList.toggle('toc-open', isOpen);
+        };
+
+        fab?.addEventListener('click', () => setMobileTocOpen(true));
+        overlay?.addEventListener('click', () => setMobileTocOpen(false));
+        closeButton?.addEventListener('click', () => setMobileTocOpen(false));
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            setMobileTocOpen(false);
+          }
+        });
+
+        for (const link of tocLinks) {
+          link.addEventListener('click', (event) => {
+            const slug = link.dataset.slug;
+            const target = slug ? document.getElementById(slug) : null;
+
+            if (!target) {
+              return;
+            }
+
+            event.preventDefault();
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const top = target.getBoundingClientRect().top + window.scrollY - getScrollOffset();
+
+            window.scrollTo({
+              top,
+              behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            });
+
+            window.history.pushState(null, '', `#${target.id}`);
+            setActiveLink(target.id);
+            setMobileTocOpen(false);
+          });
+        }
+      }
+    </script>
+  )
+}
+
 <style>
+  .note-layout {
+    display: block;
+  }
+
   .note {
     padding: var(--space-2xl) 0 var(--space-3xl);
   }
@@ -160,5 +400,118 @@ function formatDate(dateStr: string): string {
     content: '↗';
     display: inline-block;
     margin-left: 2px;
+  }
+
+  .toc-mobile {
+    position: relative;
+  }
+
+  .toc-fab {
+    position: fixed;
+    right: var(--space-md);
+    bottom: var(--space-lg);
+    z-index: 50;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border: 0;
+    border-radius: 9999px;
+    background: var(--color-text);
+    color: #fff;
+    box-shadow: 0 12px 24px rgba(26, 26, 26, 0.18);
+    cursor: pointer;
+  }
+
+  .toc-fab svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .toc-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(17, 24, 39, 0.36);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+  }
+
+  .toc-popup {
+    position: fixed;
+    right: var(--space-md);
+    bottom: calc(var(--space-lg) + 64px);
+    z-index: 100;
+    width: min(calc(100vw - (var(--space-md) * 2)), 320px);
+    max-height: min(65vh, 480px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease;
+  }
+
+  .toc-popup-header {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .toc-popup-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .toc-popup-close {
+    border: 0;
+    background: transparent;
+    color: var(--color-text-secondary);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .toc-mobile.is-open .toc-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .toc-mobile.is-open .toc-popup {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  @media (min-width: 640px) {
+    .toc-fab {
+      right: var(--space-lg);
+    }
+
+    .toc-popup {
+      right: var(--space-lg);
+    }
+  }
+
+  :global(body.toc-open) {
+    overflow: hidden;
   }
 </style>

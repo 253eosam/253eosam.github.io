@@ -1,0 +1,85 @@
+---
+interface HeadingItem {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: HeadingItem[];
+  showTitle?: boolean;
+}
+
+const { headings = [], showTitle = true } = Astro.props;
+const filteredHeadings = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+
+{
+  filteredHeadings.length > 0 && (
+    <nav class="toc" aria-label="목차">
+      {showTitle && <div class="toc-title">목차</div>}
+      <ul class="toc-list">
+        {filteredHeadings.map((heading) => (
+          <li class:list={['toc-item', heading.depth === 3 ? 'toc-h3' : 'toc-h2']}>
+            <a href={`#${heading.slug}`} class="toc-link" data-slug={heading.slug}>
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .toc {
+    font-size: 0.9rem;
+  }
+
+  .toc-title {
+    margin-bottom: var(--space-sm);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+  }
+
+  .toc-list {
+    list-style: none;
+  }
+
+  .toc-item + .toc-item {
+    margin-top: 2px;
+  }
+
+  .toc-link {
+    display: block;
+    padding: 6px 0 6px 12px;
+    border-left: 2px solid var(--color-border);
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+    text-decoration: none;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .toc-link:hover {
+    color: var(--color-text);
+    border-left-color: var(--color-text-tertiary);
+    text-decoration: none;
+  }
+
+  .toc-link.active {
+    color: var(--color-primary);
+    border-left-color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .toc-h3 .toc-link {
+    padding-left: 24px;
+    font-size: 0.88em;
+  }
+</style>

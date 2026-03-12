@@ -43,6 +43,13 @@
   margin-bottom: 0.3em;
 }
 
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  scroll-margin-top: calc(var(--header-height) + var(--space-md));
+}
+
 /* Paragraph */
 .prose p {
   margin-top: 0.75em;
@@ -110,6 +117,22 @@
   padding: 0;
   font-size: inherit;
   color: inherit;
+}
+
+.prose .mermaid-diagram {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: var(--space-md);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+.prose .mermaid-diagram svg {
+  display: block;
+  min-width: 100%;
+  height: auto;
 }
 
 /* Blockquote */
