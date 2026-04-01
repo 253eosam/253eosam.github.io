@@ -1,46 +1,50 @@
 /* ── Prose: 마크다운 콘텐츠 스타일링 ── */
 .prose {
-  font-size: 1rem;
-  line-height: 1.8;
+  font-size: 0.97rem;
+  line-height: 1.9;
   color: var(--color-text);
 }
 
 .prose > * + * {
-  margin-top: 1.25em;
+  margin-top: 1.35em;
 }
 
 /* Headings */
 .prose h1 {
-  font-size: 1.75rem;
+  font-size: 1.68rem;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.35;
+  letter-spacing: var(--tracking-tight);
   margin-top: 2em;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.55em;
 }
 
 .prose h2 {
-  font-size: 1.4rem;
+  font-size: 1.32rem;
   font-weight: 700;
-  line-height: 1.35;
-  margin-top: 1.75em;
-  margin-bottom: 0.5em;
-  padding-bottom: 0.3em;
+  line-height: 1.42;
+  letter-spacing: var(--tracking-heading);
+  margin-top: 1.9em;
+  margin-bottom: 0.55em;
+  padding-bottom: 0.35em;
   border-bottom: 1px solid var(--color-border);
 }
 
 .prose h3 {
-  font-size: 1.15rem;
-  font-weight: 600;
-  line-height: 1.4;
-  margin-top: 1.5em;
-  margin-bottom: 0.4em;
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: var(--tracking-heading);
+  margin-top: 1.6em;
+  margin-bottom: 0.45em;
 }
 
 .prose h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-top: 1.25em;
-  margin-bottom: 0.3em;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-top: 1.3em;
+  margin-bottom: 0.35em;
 }
 
 .prose h1,
@@ -52,8 +56,8 @@
 
 /* Paragraph */
 .prose p {
-  margin-top: 0.75em;
-  margin-bottom: 0.75em;
+  margin-top: 0.85em;
+  margin-bottom: 0.85em;
 }
 
 /* Links */
@@ -65,20 +69,21 @@
 
 /* Strong / Em */
 .prose strong {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* Lists */
 .prose ul,
 .prose ol {
-  padding-left: 1.5em;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  padding-left: 1.4em;
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
 }
 
 .prose li {
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  line-height: 1.85;
 }
 
 .prose li > ul,
@@ -143,6 +148,7 @@
   background: var(--color-surface);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   color: var(--color-text-secondary);
+  line-height: 1.85;
 }
 
 .prose blockquote p {
@@ -163,7 +169,7 @@
 .prose table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 
 .prose th,
