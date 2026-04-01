@@ -130,6 +130,14 @@ const splitLinkedText = (text: string, label: string) => {
                   </dl>
                 )}
 
+                {proj.techStack && proj.techStack.length > 0 && (
+                  <div class="project__tech">
+                    {proj.techStack.map((tech) => (
+                      <SkillTag label={tech} />
+                    ))}
+                  </div>
+                )}
+
                 {proj.highlighted ? (
                   proj.issues && proj.issues.length > 0 && (
                   <div class="project__narratives">
@@ -221,14 +229,6 @@ const splitLinkedText = (text: string, label: string) => {
                       ))}
                     </ul>
                   )
-                )}
-
-                {proj.techStack && proj.techStack.length > 0 && (
-                  <div class="project__tech">
-                    {proj.techStack.map((tech) => (
-                      <SkillTag label={tech} />
-                    ))}
-                  </div>
                 )}
               </article>
             ))}
@@ -653,9 +653,14 @@ const splitLinkedText = (text: string, label: string) => {
   }
 
   .project__tech {
+    margin-top: var(--space-sm);
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-xs);
+  }
+
+  .project__tech + .project__details {
+    margin-top: var(--space-sm);
   }
 
   /* ── 활동 ── */
