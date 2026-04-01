@@ -34,7 +34,6 @@ const resume = {
         {
           "name": "시대인재 북스 마이그레이션 참여",
           "url": "https://sdijbooks.com/",
-          "description": "도서 판매 서비스",
           "highlighted": true,
           "summary": "ASP 기반 도서 판매 서비스를 Next.js 기반으로 마이그레이션하며 전시-주문-결제 흐름과 배포 파이프라인을 재구성한 프로젝트입니다.",
           "contribution": "FE 3명, 퍼블리싱 1명 환경에서 프로젝트 관리와 프론트 구조 설계에 참여했습니다. 디자인 시스템, API 연동 표준화, CI/CD 구축, 성능 최적화를 주도했습니다.",
@@ -67,33 +66,11 @@ const resume = {
             {
               "execution": "번들 구조를 조정하고 불필요한 JavaScript를 제거해 초기 전송량을 줄였습니다."
             }
-          ],
-          "details": [
-            { "text": "디자인 산출물 기준으로 UI Framework + tailwind setting으로 디자인 시스템 개발 + storybook 셋팅" },
-            { "text": "반응형 디자인 퍼블리싱(PC/Tablet/Mobile)" },
-            { "text": "ASP + 서비스 분석 후 페이지 마이그레이션 작업" },
-            { "text": "전시 → 주문 → 결제 프로세스 처리 작업" },
-            { "text": "API Code Generator orval을 이용하여 swagger API 추출하여 리소스 감소" },
-            {
-              "text": "CI/CD 구축",
-              "subItems": [
-                "ECS를 사용한 배포환경이 마련되어 있어, docker file을 작성하고 build 환경을 셋팅",
-                "pm2를 사용하여 vCPU 최대 성능 이용"
-              ]
-            },
-            {
-              "text": "프론트엔드 성능 및 번들 구조 최적화 (Lighthouse 비교 기준)",
-              "subItems": [
-                "사용자 체감 성능: 평균 LCP 2.67s→1.68s (0.99초 개선), Speed Index 2.60s→1.16s (1.44초 개선), TBT 35.1ms→13.9ms (21.2ms 개선)",
-                "소스 코드/번들: 초기 스크립트 전송량 약 65% 절감, 미사용 JavaScript 약 76% 절감"
-              ]
-            }
           ]
         },
         {
           "name": "시대인재C 서비스 오픈 참여 및 유지보수",
           "url": "https://www.sdijc.com/main/survival-pro",
-          "description": "시대인재 데이터를 활용한 모의고사 컨텐츠를 제공",
           "highlighted": true,
           "summary": "자사 브랜드 도서, 모의고사 접수, 성적 조회 및 분석 기능을 제공하는 반응형 웹 서비스",
           "contribution": "공통 UI 컴포넌트와 레이아웃 설계, 모집 이벤트 페이지, 전시 페이지, 성적 조회 페이지 개발을 담당했습니다.",
@@ -148,7 +125,6 @@ const resume = {
         {
           "name": "askyour.trade 서비스 오픈 및 유지보수",
           "url": "https://askyour.trade",
-          "description": "무역사무 솔루션 제공, B2B/B2C",
           "highlighted": true,
           "summary": "무역 사무 업무를 웹 서비스로 옮기기 위해 메일, 화물 모니터링, 전자도장 기능을 설계하고 운영한 B2B/B2C 프로젝트입니다.",
           "contribution": "FE 1명으로 제품 기능 설계부터 구현, 운영까지 담당했습니다. 메일 기능 구조 설계, 실시간 알림, 에디터 확장, 캔버스/PDF 기반 기능 개발을 단독 수행했습니다.",
@@ -247,9 +223,7 @@ const resume = {
     },
     {
       "institution": "운암고등학교",
-      "major": "",
-      "period": "2010.03 - 2013.02",
-      "degree": ""
+      "period": "2010.03 - 2013.02"
     }
   ],
   "activities": [
