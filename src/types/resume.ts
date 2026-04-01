@@ -51,8 +51,9 @@ export interface ResumeExperience {
   logo?: string;
   role: string;
   department?: string;
-  period: string;
-  duration: string;
+  startDate: string;
+  endDate?: string;
+  isCurrent?: boolean;
   employmentType?: string;
   description?: string;
   projects: ResumeProject[];

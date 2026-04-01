@@ -26,8 +26,8 @@ const resume = {
       "logo": "/images/company/hiconsy.webp",
       "role": "팀원",
       "department": "FE개발팀",
-      "period": "2025.04 - 재직 중",
-      "duration": "1년",
+      "startDate": "2025-04",
+      "isCurrent": true,
       "employmentType": "정규직",
       "description": "시대인재 브랜드를 운영하는 대치동 기반 교육 기업입니다.",
       "projects": [
@@ -117,8 +117,8 @@ const resume = {
       "logo": "/images/company/team-reboot.png",
       "role": "팀원",
       "department": "제품개발팀",
-      "period": "2023.09 - 2024.12",
-      "duration": "1년 4개월",
+      "startDate": "2023-09",
+      "endDate": "2024-12",
       "employmentType": "정규직",
       "description": "무역 사무업무 솔루션 제공",
       "projects": [
@@ -176,8 +176,8 @@ const resume = {
       "logo": "/images/company/wemakeprice.jpg",
       "role": "팀원",
       "department": "프론트개발그룹 | FE백오피스팀",
-      "period": "2020.07 - 2023.05",
-      "duration": "2년 11개월",
+      "startDate": "2020-07",
+      "endDate": "2023-05",
       "employmentType": "정규직",
       "description": "이커머스",
       "projects": [
