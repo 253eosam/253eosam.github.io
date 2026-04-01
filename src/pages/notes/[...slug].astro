@@ -60,7 +60,7 @@ function formatDate(dateStr: string): string {
             </a>
           </div>
         ) : (
-          <div class="prose">
+          <div class="prose prose--note">
             <Content />
           </div>
         )}
@@ -333,6 +333,10 @@ function formatDate(dateStr: string): string {
     font-weight: 700;
     line-height: 1.3;
     letter-spacing: -0.02em;
+  }
+
+  .prose--note :global(h1) {
+    display: none;
   }
 
   .note-tags {
