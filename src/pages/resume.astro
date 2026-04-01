@@ -4,9 +4,11 @@ import Header from '../components/Header.astro';
 import ResumeSection from '../components/resume/ResumeSection.astro';
 import SkillTag from '../components/resume/SkillTag.astro';
 import resume from '../data/resume.json';
+import type { ResumeData, ResumeProject } from '../types/resume';
 
-const { profile, skills, experience, certifications, education, activities } = resume;
-const splitLinkedText = (text, label) => {
+const { profile, skills, experience, certifications, education, activities } = resume as ResumeData;
+
+const splitLinkedText = (text: string, label: string) => {
   const index = text.indexOf(label);
 
   if (index === -1) {
@@ -19,7 +21,7 @@ const splitLinkedText = (text, label) => {
   };
 };
 
-const buildNarrativeBlocks = (project) => {
+const buildNarrativeBlocks = (project: ResumeProject) => {
   const problem = Array.isArray(project.problem) ? project.problem : [];
   const strategy = Array.isArray(project.strategy) ? project.strategy : [];
   const execution = Array.isArray(project.execution) ? project.execution : [];
