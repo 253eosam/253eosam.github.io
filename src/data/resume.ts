@@ -1,4 +1,6 @@
-{
+import type { ResumeData } from '../types/resume';
+
+const resume = {
   "profile": {
     "name": "이성준",
     "profileImage": "/images/profile.png",
@@ -268,4 +270,6 @@
       ]
     }
   ]
-}
+} satisfies ResumeData;
+
+export default resume;

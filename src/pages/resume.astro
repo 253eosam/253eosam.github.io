@@ -3,10 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ResumeSection from '../components/resume/ResumeSection.astro';
 import SkillTag from '../components/resume/SkillTag.astro';
-import resume from '../data/resume.json';
-import type { ResumeData, ResumeProject } from '../types/resume';
+import resume from '../data/resume';
+import type { ResumeProject } from '../types/resume';
 
-const { profile, skills, experience, certifications, education, activities } = resume as ResumeData;
+const { profile, skills, experience, certifications, education, activities } = resume;
 
 const splitLinkedText = (text: string, label: string) => {
   const index = text.indexOf(label);
