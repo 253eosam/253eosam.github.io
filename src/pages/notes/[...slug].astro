@@ -339,6 +339,12 @@ function formatDate(dateStr: string): string {
     display: none;
   }
 
+  .prose--note :global(h2[id='목차']),
+  .prose--note :global(h2[id='목차'] + ul),
+  .prose--note :global(h2[id='목차'] + ol) {
+    display: none;
+  }
+
   .note-tags {
     display: flex;
     flex-wrap: wrap;
