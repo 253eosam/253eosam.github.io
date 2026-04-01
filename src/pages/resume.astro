@@ -149,19 +149,20 @@ const { profile, skills, experience, certifications, education, activities } = r
                             <li>
                               {typeof item === 'string'
                                 ? item
-                                : item.parts?.map((part) =>
-                                    part.url ? (
-                                      <a
-                                        href={part.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        class="project__inline-link"
-                                      >
-                                        {part.text}
-                                      </a>
-                                    ) : (
-                                      part.text
-                                    )
+                                : (
+                                    <>
+                                      <span class="project__execution-text">{item.text}</span>
+                                      {item.link && (
+                                        <a
+                                          href={item.link.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          class="activity__link project__execution-link"
+                                        >
+                                          {item.link.label}
+                                        </a>
+                                      )}
+                                    </>
                                   )}
                             </li>
                           ))}
@@ -493,14 +494,8 @@ const { profile, skills, experience, certifications, education, activities } = r
     text-decoration: underline;
   }
 
-  .project__inline-link {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .project__inline-link:hover {
-    color: var(--color-accent);
-    text-decoration: underline;
+  .project__execution-text {
+    display: block;
   }
 
   .project__facts {
