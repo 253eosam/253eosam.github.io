@@ -42,15 +42,16 @@ const { categories } = Astro.props;
   .filter {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-sm);
+    gap: 10px;
     padding: var(--space-lg) 0;
   }
 
   .filter-btn {
     font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    padding: 6px 14px;
+    letter-spacing: var(--tracking-body);
+    padding: 7px 14px;
     border: 1px solid var(--color-border);
     border-radius: 9999px;
     background: var(--color-bg);

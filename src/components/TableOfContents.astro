@@ -33,14 +33,14 @@ const filteredHeadings = headings.filter((heading) => heading.depth === 2 || hea
 
 <style>
   .toc {
-    font-size: 0.9rem;
+    font-size: 0.86rem;
   }
 
   .toc-title {
     margin-bottom: var(--space-sm);
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     color: var(--color-text-tertiary);
     text-transform: uppercase;
   }
@@ -58,7 +58,8 @@ const filteredHeadings = headings.filter((heading) => heading.depth === 2 || hea
     padding: 6px 0 6px 12px;
     border-left: 2px solid var(--color-border);
     color: var(--color-text-secondary);
-    line-height: 1.45;
+    line-height: 1.55;
+    letter-spacing: var(--tracking-body);
     text-decoration: none;
     transition:
       color 0.15s ease,
@@ -75,7 +76,7 @@ const filteredHeadings = headings.filter((heading) => heading.depth === 2 || hea
   .toc-link.active {
     color: var(--color-primary);
     border-left-color: var(--color-primary);
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .toc-h3 .toc-link {

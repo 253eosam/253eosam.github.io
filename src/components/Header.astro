@@ -38,11 +38,11 @@ const { current = 'home' } = Astro.props;
   }
 
   .logo {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--color-text);
     text-decoration: none;
-    letter-spacing: -0.02em;
+    letter-spacing: var(--tracking-heading);
   }
 
   .logo:hover {
@@ -52,13 +52,14 @@ const { current = 'home' } = Astro.props;
 
   .nav {
     display: flex;
-    gap: var(--space-lg);
+    gap: 20px;
   }
 
   .nav__link {
-    font-size: 0.9375rem;
+    font-size: 0.9rem;
     color: var(--color-text-tertiary);
     text-decoration: none;
+    letter-spacing: var(--tracking-body);
     transition: color 0.15s;
   }
 
@@ -75,7 +76,7 @@ const { current = 'home' } = Astro.props;
 
   .nav__link.active {
     color: var(--color-text);
-    font-weight: 600;
+    font-weight: 500;
   }
 
   @media print {

@@ -227,15 +227,16 @@ const { profile, skills, experience, certifications, education, activities } = r
   }
 
   .profile__name {
-    font-size: 2.125rem;
+    font-size: 1.95rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.28;
   }
 
   .profile__role {
-    font-size: 1.125rem;
+    font-size: 1.05rem;
     color: var(--color-text-secondary);
+    line-height: 1.6;
     margin-top: var(--space-xs);
   }
 
@@ -260,15 +261,16 @@ const { profile, skills, experience, certifications, education, activities } = r
   .profile__intro {
     margin-top: var(--space-lg);
     color: var(--color-text-secondary);
-    line-height: 1.8;
+    font-size: 0.95rem;
+    line-height: 1.85;
   }
 
   .profile__highlights {
     margin-top: var(--space-sm);
     padding-left: var(--space-lg);
     color: var(--color-text-secondary);
-    line-height: 1.8;
-    font-size: 0.9375rem;
+    line-height: 1.85;
+    font-size: 0.91rem;
   }
 
   .profile__highlights li {
@@ -313,13 +315,14 @@ const { profile, skills, experience, certifications, education, activities } = r
   }
 
   .exp__company {
-    font-size: 1.25rem;
+    font-size: 1.16rem;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    line-height: 1.35;
+    letter-spacing: var(--tracking-heading);
   }
 
   .exp__role {
-    font-size: 0.9375rem;
+    font-size: 0.9rem;
     color: var(--color-text-secondary);
   }
 
@@ -342,7 +345,8 @@ const { profile, skills, experience, certifications, education, activities } = r
   .exp__desc {
     margin-top: var(--space-sm);
     color: var(--color-text-secondary);
-    font-size: 0.9375rem;
+    font-size: 0.91rem;
+    line-height: 1.75;
   }
 
   @media (min-width: 640px) {
@@ -372,8 +376,10 @@ const { profile, skills, experience, certifications, education, activities } = r
   }
 
   .project__name {
-    font-size: 1.0625rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: var(--tracking-heading);
   }
 
   .project__name a {
@@ -388,9 +394,9 @@ const { profile, skills, experience, certifications, education, activities } = r
 
   .project__desc {
     margin-top: var(--space-xs);
-    font-size: 0.9375rem;
+    font-size: 0.91rem;
     color: var(--color-text-secondary);
-    line-height: 1.7;
+    line-height: 1.75;
   }
 
   .project__team {
@@ -402,9 +408,9 @@ const { profile, skills, experience, certifications, education, activities } = r
   .project__details {
     margin-top: var(--space-sm);
     padding-left: var(--space-lg);
-    font-size: 0.9375rem;
+    font-size: 0.91rem;
     color: var(--color-text-secondary);
-    line-height: 1.8;
+    line-height: 1.85;
   }
 
   .project__details > li {
@@ -414,7 +420,7 @@ const { profile, skills, experience, certifications, education, activities } = r
   .project__sub-details {
     margin-top: 2px;
     padding-left: var(--space-lg);
-    font-size: 0.875rem;
+    font-size: 0.84rem;
     line-height: 1.8;
   }
 
