@@ -558,23 +558,32 @@ const buildNarrativeBlocks = (project) => {
   }
 
   .project__narratives {
+    margin-top: var(--space-xs);
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-sm);
   }
 
   .project__narrative {
-    padding-top: var(--space-sm);
-    border-top: 1px solid var(--color-border);
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background:
+      linear-gradient(180deg, rgba(0, 204, 170, 0.05) 0, rgba(0, 204, 170, 0.02) 44px, var(--color-surface) 100%);
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
   }
 
   .project__narrative-index {
+    align-self: flex-start;
+    padding: 2px 8px;
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--color-text-tertiary);
+    color: var(--color-accent);
+    background: rgba(0, 204, 170, 0.1);
+    border-radius: 999px;
     letter-spacing: 0.02em;
     line-height: 1.7;
   }
@@ -589,6 +598,11 @@ const buildNarrativeBlocks = (project) => {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2px;
+  }
+
+  .project__narrative-row + .project__narrative-row {
+    padding-top: var(--space-xs);
+    border-top: 1px dashed var(--color-border);
   }
 
   .project__narrative-label {
