@@ -100,7 +100,7 @@ const resume = {
                   "url": "https://253eosam.github.io/commit-from-branch/"
                 }
               },
-              "impact": "작업 중인 Jira를 커밋에 자동 기입해 작업 히스토리와 코드 추적 용이성을 높였습니다.",
+              "impact": "JavaScript 기반 코드에 TypeScript를 확장해 타입 안정성과 협업 생산성을 높였고, mapper layer 도입으로 API 응답과 페이지 모델 간 책임을 분리해 유지보수성을 개선했습니다. 또한 작업 중인 Jira를 커밋에 자동 기입해 작업 히스토리와 코드 추적 용이성을 높였습니다.",
               "retrospective": "인수인계가 충분하지 않은 상황일수록 코드 품질 규칙과 커밋 기준 같은 최소한의 협업 규칙을 먼저 맞추는 것이 운영 안정성과 의사결정 속도에 직접 연결된다는 점을 체감했습니다."
             }
           ]
