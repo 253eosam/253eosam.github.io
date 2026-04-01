@@ -151,7 +151,14 @@ const { profile, skills, experience, certifications, education, activities } = r
                                 ? item
                                 : item.parts?.map((part) =>
                                     part.url ? (
-                                      <a href={part.url} target="_blank" rel="noopener noreferrer">{part.text}</a>
+                                      <a
+                                        href={part.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="project__inline-link"
+                                      >
+                                        {part.text}
+                                      </a>
                                     ) : (
                                       part.text
                                     )
@@ -482,6 +489,16 @@ const { profile, skills, experience, certifications, education, activities } = r
   }
 
   .project__name a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .project__inline-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .project__inline-link:hover {
     color: var(--color-accent);
     text-decoration: underline;
   }
