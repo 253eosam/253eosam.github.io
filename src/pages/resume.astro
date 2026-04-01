@@ -558,32 +558,24 @@ const buildNarrativeBlocks = (project) => {
   }
 
   .project__narratives {
-    margin-top: var(--space-xs);
+    margin-top: var(--space-sm);
     display: flex;
     flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-lg);
   }
 
   .project__narrative {
-    padding: var(--space-md);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background:
-      linear-gradient(180deg, rgba(0, 204, 170, 0.05) 0, rgba(0, 204, 170, 0.02) 44px, var(--color-surface) 100%);
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
   }
 
   .project__narrative-index {
-    align-self: flex-start;
-    padding: 2px 8px;
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     font-weight: 700;
     color: var(--color-accent);
-    background: rgba(0, 204, 170, 0.1);
-    border-radius: 999px;
     letter-spacing: 0.02em;
     line-height: 1.7;
   }
