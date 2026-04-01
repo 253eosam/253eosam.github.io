@@ -6,6 +6,18 @@ import SkillTag from '../components/resume/SkillTag.astro';
 import resume from '../data/resume.json';
 
 const { profile, skills, experience, certifications, education, activities } = resume;
+const splitLinkedText = (text, label) => {
+  const index = text.indexOf(label);
+
+  if (index === -1) {
+    return null;
+  }
+
+  return {
+    before: text.slice(0, index),
+    after: text.slice(index + label.length),
+  };
+};
 ---
 
 <BaseLayout title="이력서" description={`${profile.name} - ${profile.role}`}>
@@ -150,19 +162,26 @@ const { profile, skills, experience, certifications, education, activities } = r
                               {typeof item === 'string'
                                 ? item
                                 : (
-                                    <>
-                                      <span class="project__execution-text">{item.text}</span>
-                                      {item.link && (
-                                        <a
-                                          href={item.link.url}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          class="activity__link project__execution-link"
-                                        >
-                                          {item.link.label}
-                                        </a>
-                                      )}
-                                    </>
+                                    (() => {
+                                      const split = item.link ? splitLinkedText(item.text, item.link.label) : null;
+
+                                      return split && item.link ? (
+                                        <>
+                                          {split.before}
+                                          <a
+                                            href={item.link.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="project__inline-link"
+                                          >
+                                            {item.link.label}
+                                          </a>
+                                          {split.after}
+                                        </>
+                                      ) : (
+                                        item.text
+                                      );
+                                    })()
                                   )}
                             </li>
                           ))}
@@ -494,8 +513,14 @@ const { profile, skills, experience, certifications, education, activities } = r
     text-decoration: underline;
   }
 
-  .project__execution-text {
-    display: block;
+  .project__inline-link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .project__inline-link:hover {
+    color: var(--color-accent);
   }
 
   .project__facts {
