@@ -94,12 +94,13 @@ const resume = {
               "problem": "진행 중이던 프로젝트는 있었지만 기존 팀이 사라진 상태에서, 서비스를 안정적으로 오픈하고 운영해야 하는 문제가 발생했습니다.",
               "strategy": "빠른 운영 대응과 협업 일관성을 위해 코드 품질 규칙과 커밋 규칙을 표준화하고, 작업 히스토리를 추적할 수 있는 기준을 함께 정리했습니다.",
               "execution": {
-                "text": "Nuxt.js 기반 JavaScript 프로젝트에 TypeScript 설정을 확장하고 API interface를 생성했으며, 페이지 interface와 매핑하는 mapper layer를 도입했습니다. 또한 일관된 코드 품질 유지를 위해 ESLint를 적용하고, 작업 중인 Jira를 자동 기입해 코드 히스토리 추적을 돕는 git commit formatter를 개발·도입했습니다.",
+                "text": "Nuxt.js 기반 JavaScript 프로젝트에 TypeScript 설정을 확장하고 API interface를 생성했으며, 페이지 interface와 매핑하는 mapper layer를 도입했습니다. 또한 일관된 코드 품질 유지를 위해 ESLint를 적용하고 git commit formatter를 개발·도입했습니다.",
                 "link": {
                   "label": "git commit formatter",
                   "url": "https://253eosam.github.io/commit-from-branch/"
                 }
               },
+              "impact": "작업 중인 Jira를 커밋에 자동 기입해 작업 히스토리와 코드 추적 용이성을 높였습니다.",
               "retrospective": "인수인계가 충분하지 않은 상황일수록 코드 품질 규칙과 커밋 기준 같은 최소한의 협업 규칙을 먼저 맞추는 것이 운영 안정성과 의사결정 속도에 직접 연결된다는 점을 체감했습니다."
             }
           ]
