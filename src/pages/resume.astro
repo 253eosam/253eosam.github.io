@@ -103,7 +103,7 @@ const splitLinkedText = (text: string, label: string) => {
                   </h4>
                 </div>
 
-                {(proj.summary || proj.description || proj.team || proj.contribution) && (
+                {(proj.summary || proj.description || proj.team || proj.contribution || (proj.techStack && proj.techStack.length > 0)) && (
                   <dl class="project__facts">
                     {(proj.summary || proj.description) && (
                       <div class="project__fact">
@@ -127,15 +127,18 @@ const splitLinkedText = (text: string, label: string) => {
                         <dd class="project__fact-text">{proj.contribution}</dd>
                       </div>
                     )}
-                  </dl>
-                )}
 
-                {proj.techStack && proj.techStack.length > 0 && (
-                  <div class="project__tech">
-                    {proj.techStack.map((tech) => (
-                      <SkillTag label={tech} />
-                    ))}
-                  </div>
+                    {proj.techStack && proj.techStack.length > 0 && (
+                      <div class="project__fact">
+                        <dt class="project__fact-label">기술</dt>
+                        <dd class="project__fact-text project__fact-tech">
+                          {proj.techStack.map((tech) => (
+                            <SkillTag label={tech} />
+                          ))}
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
                 )}
 
                 {proj.highlighted ? (
@@ -652,15 +655,10 @@ const splitLinkedText = (text: string, label: string) => {
     }
   }
 
-  .project__tech {
-    margin-top: var(--space-sm);
+  .project__fact-tech {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-xs);
-  }
-
-  .project__tech + .project__details {
-    margin-top: var(--space-sm);
   }
 
   /* ── 활동 ── */
