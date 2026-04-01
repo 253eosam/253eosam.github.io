@@ -95,7 +95,7 @@ const { profile, skills, experience, certifications, education, activities } = r
                     {(proj.summary || proj.description) && (
                       <div class="project__fact">
                         <dt class="project__fact-label">프로젝트 설명</dt>
-                        <dd class:list={['project__fact-text', proj.highlighted && 'project__fact-text--summary']}>
+                        <dd class="project__fact-text">
                           {proj.summary || proj.description}
                         </dd>
                       </div>
@@ -507,11 +507,6 @@ const { profile, skills, experience, certifications, education, activities } = r
     font-size: 0.875rem;
     color: var(--color-text-secondary);
     line-height: 1.7;
-  }
-
-  .project__fact-text--summary {
-    color: var(--color-text-secondary);
-    font-size: 0.9375rem;
   }
 
   .project__sections {
