@@ -23,16 +23,14 @@ const buildNarrativeBlocks = (project) => {
   const problem = Array.isArray(project.problem) ? project.problem : [];
   const strategy = Array.isArray(project.strategy) ? project.strategy : [];
   const execution = Array.isArray(project.execution) ? project.execution : [];
-  const impact = Array.isArray(project.impact) ? project.impact : [];
-  const maxLength = Math.max(0, problem.length, strategy.length, execution.length, impact.length);
+  const maxLength = Math.max(0, problem.length, strategy.length, execution.length);
 
   return Array.from({ length: maxLength }, (_, index) => ({
     index: index + 1,
     problem: problem[index],
     strategy: strategy[index],
     execution: execution[index],
-    impact: impact[index],
-  })).filter((block) => block.problem || block.strategy || block.execution || block.impact);
+  })).filter((block) => block.problem || block.strategy || block.execution);
 };
 ---
 
@@ -198,27 +196,39 @@ const buildNarrativeBlocks = (project) => {
                               </p>
                             </div>
                           )}
-
-                          {block.impact && (
-                            <div class="project__narrative-row">
-                              <div class="project__narrative-label">성과</div>
-                              <p class="project__narrative-content">{block.impact}</p>
-                            </div>
-                          )}
                         </div>
                       </section>
                     ))}
 
-                    {proj.retrospective && proj.retrospective.length > 0 && (
-                      <section class="project__section">
-                        <h5 class="project__section-title">회고</h5>
-                        <ul class="project__section-list">
-                          {proj.retrospective.map((item) => (
-                            <li>{item}</li>
-                          ))}
-                        </ul>
+                    {((proj.impact && proj.impact.length > 0) || (proj.retrospective && proj.retrospective.length > 0)) && (
+                      <section class="project__section project__section--closing">
+                        <h5 class="project__section-title">성과 및 회고</h5>
+                        <div class="project__closing-groups">
+                          {proj.impact && proj.impact.length > 0 && (
+                            <div class="project__closing-group">
+                              <h6 class="project__closing-subtitle">성과</h6>
+                              <ul class="project__section-list project__section-list--closing">
+                                {proj.impact.map((item) => (
+                                  <li>{item}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+
+                          {proj.retrospective && proj.retrospective.length > 0 && (
+                            <div class="project__closing-group">
+                              <h6 class="project__closing-subtitle">회고</h6>
+                              <ul class="project__section-list project__section-list--closing project__section-list--retrospective">
+                                {proj.retrospective.map((item) => (
+                                  <li>{item}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
                       </section>
                     )}
+
                   </div>
                 ) : (
                   proj.details && proj.details.length > 0 && (
@@ -624,6 +634,25 @@ const buildNarrativeBlocks = (project) => {
     letter-spacing: 0.02em;
   }
 
+  .project__section--closing {
+    margin-top: var(--space-xs);
+  }
+
+  .project__closing-groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-top: 6px;
+  }
+
+  .project__closing-subtitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.02em;
+    line-height: 1.7;
+  }
+
   .project__section-list {
     margin-top: 6px;
     padding-left: var(--space-lg);
@@ -635,6 +664,15 @@ const buildNarrativeBlocks = (project) => {
   .project__section-list li,
   .project__details > li {
     list-style: disc;
+  }
+
+  .project__section-list--closing {
+    margin-top: 4px;
+  }
+
+  .project__section-list--retrospective {
+    font-size: 0.91rem;
+    color: var(--color-text-tertiary);
   }
 
   .project__details {
