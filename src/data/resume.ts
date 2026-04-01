@@ -40,7 +40,7 @@ const resume = {
             }
           },
           "highlighted": true,
-          "summary": "ASP 기반 도서 판매 서비스를 Next.js 기반으로 마이그레이션하고 배포 파이프라인을 재구성한 프로젝트입니다.",
+          "summary": "ASP 기반 모바일/PC 도서 판매 서비스를 Next.js 기반의 반응형 웹으로 통합 마이그레이션하고, 배포 파이프라인을 재구성한 프로젝트입니다.",
           "contribution": "프론트엔드 프로젝트 리딩, 프로젝트 환경 설정, CI/CD 배포 프로세스 구축, 디자인 시스템 개발, 도서·구매 서브도메인 관련 페이지 퍼블리싱 및 프론트엔드 개발을 담당했습니다.",
           "techStack": ["Next", "tailwindcss", "pnpm", "monorepo", "zustand", "daisyUI", "orval", "react-query"],
           "team": "FE 4명, 퍼블리셔 1명, BE 2명, 기획자 2명, 디자이너 2명",
