@@ -41,9 +41,9 @@ const resume = {
           },
           "highlighted": true,
           "summary": "ASP 기반 도서 판매 서비스를 Next.js 기반으로 마이그레이션하며 전시-주문-결제 흐름과 배포 파이프라인을 재구성한 프로젝트입니다.",
-          "contribution": "FE 3명, 퍼블리싱 1명 환경에서 프로젝트 관리와 프론트 구조 설계에 참여했습니다. 디자인 시스템, API 연동 표준화, CI/CD 구축, 성능 최적화를 주도했습니다.",
+          "contribution": "FE 4명, 퍼블리셔 1명, BE 2명, 기획 2명, 디자이너 2명 협업 환경에서 프로젝트 관리와 프론트 구조 설계에 참여했습니다. 디자인 시스템, API 연동 표준화, CI/CD 구축, 성능 최적화를 주도했습니다.",
           "techStack": ["Next", "tailwindcss", "pnpm", "monorepo", "zustand", "daisyUI", "orval", "react-query"],
-          "team": "FE 3명, 퍼블리싱 1명 / 프로젝트 관리",
+          "team": "FE 4명, 퍼블리셔 1명, BE 2명, 기획 2명, 디자이너 2명",
           "issues": [
             {
               "problem": "기존 ASP 서비스를 분석 없이 화면만 옮기면 전시-주문-결제 전 구간에서 누락과 회귀가 발생할 수 있었고, 구현 방식이 사람마다 달라질 위험이 컸습니다.",
