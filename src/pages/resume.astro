@@ -4,7 +4,6 @@ import Header from '../components/Header.astro';
 import ResumeSection from '../components/resume/ResumeSection.astro';
 import SkillTag from '../components/resume/SkillTag.astro';
 import resume from '../data/resume';
-import type { ResumeProject } from '../types/resume';
 
 const { profile, skills, experience, certifications, education, activities } = resume;
 
@@ -19,24 +18,6 @@ const splitLinkedText = (text: string, label: string) => {
     before: text.slice(0, index),
     after: text.slice(index + label.length),
   };
-};
-
-const buildNarrativeBlocks = (project: ResumeProject) => {
-  const problem = Array.isArray(project.problem) ? project.problem : [];
-  const strategy = Array.isArray(project.strategy) ? project.strategy : [];
-  const execution = Array.isArray(project.execution) ? project.execution : [];
-  const impact = Array.isArray(project.impact) ? project.impact : [];
-  const retrospective = Array.isArray(project.retrospective) ? project.retrospective : [];
-  const maxLength = Math.max(0, problem.length, strategy.length, execution.length, impact.length, retrospective.length);
-
-  return Array.from({ length: maxLength }, (_, index) => ({
-    index: index + 1,
-    problem: problem[index],
-    strategy: strategy[index],
-    execution: execution[index],
-    impact: impact[index],
-    retrospective: retrospective[index],
-  })).filter((block) => block.problem || block.strategy || block.execution || block.impact || block.retrospective);
 };
 ---
 
@@ -150,10 +131,11 @@ const buildNarrativeBlocks = (project: ResumeProject) => {
                 )}
 
                 {proj.highlighted ? (
+                  proj.issues && proj.issues.length > 0 && (
                   <div class="project__narratives">
-                    {buildNarrativeBlocks(proj).map((block) => (
+                    {proj.issues.map((block, index) => (
                       <section class="project__narrative">
-                        <h5 class="project__narrative-index">이슈 {block.index}</h5>
+                        <h5 class="project__narrative-index">이슈 {index + 1}</h5>
                         <div class="project__narrative-rows">
                           {block.problem && (
                             <div class="project__narrative-row">
@@ -221,6 +203,7 @@ const buildNarrativeBlocks = (project: ResumeProject) => {
                     ))}
 
                   </div>
+                  )
                 ) : (
                   proj.details && proj.details.length > 0 && (
                     <ul class="project__details">

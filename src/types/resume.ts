@@ -20,6 +20,14 @@ export interface ResumeExecutionWithLink {
 
 export type ResumeExecutionItem = string | ResumeExecutionWithLink;
 
+export interface ResumeProjectIssue {
+  problem?: string;
+  strategy?: string;
+  execution?: ResumeExecutionItem;
+  impact?: string;
+  retrospective?: string;
+}
+
 export interface ResumeProjectDetail {
   text: string;
   subItems?: string[];
@@ -34,11 +42,7 @@ export interface ResumeProject {
   contribution?: string;
   techStack?: string[];
   team?: string;
-  problem?: string[];
-  strategy?: string[];
-  execution?: ResumeExecutionItem[];
-  impact?: string[];
-  retrospective?: string[];
+  issues?: ResumeProjectIssue[];
   details?: ResumeProjectDetail[];
 }
 
