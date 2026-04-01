@@ -32,7 +32,7 @@ const resume = {
       "description": "시대인재 브랜드를 운영하는 대치동 기반 교육 기업입니다.",
       "projects": [
         {
-          "name": "시대인재 북스 마이그레이션",
+          "name": "시대인재 북스 마이그레이션 & 디자인 개편",
           "url": "https://sdijbooks.com/",
           "highlighted": true,
           "summary": "ASP 기반 도서 판매 서비스를 Next.js 기반으로 마이그레이션하며 전시-주문-결제 흐름과 배포 파이프라인을 재구성한 프로젝트입니다.",
