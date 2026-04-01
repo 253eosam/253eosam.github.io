@@ -513,16 +513,6 @@ const splitLinkedText = (text, label) => {
     text-decoration: underline;
   }
 
-  .project__inline-link {
-    color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .project__inline-link:hover {
-    color: var(--color-accent);
-  }
-
   .project__facts {
     display: grid;
     gap: var(--space-sm);
@@ -667,20 +657,26 @@ const splitLinkedText = (text, label) => {
     list-style: disc;
   }
 
-  .activity__link {
+  .activity__link,
+  .project__inline-link {
     display: inline-block;
-    margin-top: var(--space-xs);
-    font-size: 0.875rem;
     color: var(--color-accent);
     text-decoration: none;
   }
 
-  .activity__link:hover {
+  .activity__link {
+    margin-top: var(--space-xs);
+    font-size: 0.875rem;
+  }
+
+  .activity__link:hover,
+  .project__inline-link:hover {
     text-decoration: underline;
   }
 
   .project__name a::after,
-  .activity__link::after {
+  .activity__link::after,
+  .project__inline-link::after {
     content: '↗';
     display: inline-block;
     margin-left: 2px;
