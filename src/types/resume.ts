@@ -3,6 +3,11 @@ export interface ResumeLink {
   url: string;
 }
 
+export interface ResumeTextWithLink {
+  text: string;
+  link: ResumeLink;
+}
+
 export interface ResumeProfile {
   name: string;
   profileImage?: string;
@@ -13,12 +18,7 @@ export interface ResumeProfile {
   highlights?: string[];
 }
 
-export interface ResumeExecutionWithLink {
-  text: string;
-  link: ResumeLink;
-}
-
-export type ResumeExecutionItem = string | ResumeExecutionWithLink;
+export type ResumeExecutionItem = string | ResumeTextWithLink;
 
 export interface ResumeProjectIssue {
   problem?: string;
@@ -34,7 +34,7 @@ export interface ResumeProjectDetail {
 }
 
 export interface ResumeProject {
-  name: string;
+  name: string | ResumeTextWithLink;
   url?: string;
   description?: string;
   highlighted?: boolean;

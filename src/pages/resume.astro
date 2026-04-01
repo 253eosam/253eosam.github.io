@@ -95,7 +95,21 @@ const splitLinkedText = (text: string, label: string) => {
               <article class:list={['project', proj.highlighted && 'project--highlighted']}>
                 <div class="project__header">
                   <h4 class="project__name">
-                    {proj.url ? (
+                    {typeof proj.name !== 'string' ? (
+                      (() => {
+                        const split = splitLinkedText(proj.name.text, proj.name.link.label);
+
+                        return split ? (
+                          <>
+                            {split.before}
+                            <a href={proj.name.link.url} target="_blank" rel="noopener noreferrer">{proj.name.link.label}</a>
+                            {split.after}
+                          </>
+                        ) : (
+                          proj.name.text
+                        );
+                      })()
+                    ) : proj.url ? (
                       <a href={proj.url} target="_blank" rel="noopener noreferrer">{proj.name}</a>
                     ) : (
                       proj.name
