@@ -69,7 +69,7 @@ const resume = {
           ]
         },
         {
-          "name": "시대인재C 서비스 오픈 참여 및 유지보수",
+          "name": "시대인재C 서비스 오픈 & 유지보수",
           "url": "https://www.sdijc.com/main/survival-pro",
           "highlighted": true,
           "summary": "자사 브랜드 도서, 모의고사 접수, 성적 조회 및 분석 기능을 제공하는 반응형 웹 서비스",
