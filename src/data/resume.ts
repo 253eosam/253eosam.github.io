@@ -55,8 +55,13 @@ const resume = {
             {
               "problem": "기존 ASP 환경은 ASP 친화적인 개발자에게 업무가 편중되기 쉬웠고, 화면 로직과 정책이 여러 레이어에 분산돼 FE·BE 역할 경계가 모호했습니다. 또한 SP 기반 구조와 query가 함께 얽혀 있어 유지보수와 연동 방식 정리에 비효율이 있었습니다.",
               "strategy": "Next.js 마이그레이션을 계기로 FE·BE 책임 경계를 명확히 나누고, 화면 정책·연동 구조·공통 자산을 각 영역의 전문성에 맞게 관리할 수 있는 구조로 재편하고자 했습니다.",
-              "execution": "ASP 화면을 Next.js로 전환하면서 기존 SP 기반 구조와 query가 함께 얽혀 있던 연동 방식을 API 중심으로 재정리하고, Swagger 명세를 추적해 Orval로 API interface와 호출 함수를 자동화했습니다. 또한 공통 유틸리티와 UI를 모노레포 구조로 분리하고 패키지 버전까지 한곳에서 관리해 재사용성과 운영 효율을 높였습니다.",
-              "impact": "FE·BE 역할 경계가 명확해져 협업 효율과 유지보수성이 개선됐고, API 연동 코드와 패키지 관리가 표준화되면서 생산성을 높였습니다. 성능 측면에서도 AWS 대비 dev 기준 Performance 평균은 5.3p, Best Practices는 36.3p 개선됐고, FCP 약 16%, LCP 약 37%, TBT 약 60%, Speed Index 약 55%, TTI 약 66% 단축했습니다. 또한 대표 페이지 기준 books-main +30p, column-main +34p, main +15p의 성능 개선을 확인했습니다.",
+              "execution": "ASP 화면을 Next.js로 전환하면서 기존 SP 기반 구조와 query가 함께 얽혀 있던 연동 방식을 API 중심으로 재정리하고, Swagger 명세를 추적해 Orval로 API interface와 호출 함수를 자동화했습니다. 또한 공통 유틸리티와 UI를 모노레포 구조로 분리하고 패키지 버전까지 한곳에서 관리하도록 구성했습니다.",
+              "impact": [
+                "FE·BE 역할 경계가 명확해져 협업 효율과 유지보수성이 개선됐고, API 연동 코드와 패키지 관리가 표준화되면서 생산성을 높였습니다.",
+                "dev 환경 Lighthouse 기준 Performance 84.5점, Best Practices 92.1점을 기록했습니다.",
+                "주요 성능 지표: FCP 640.8ms, LCP 1.68s, TBT 13.9ms, Speed Index 1.16s, TTI 1.68s",
+                "대표 페이지 기준 books-main 96점, column-main 84점, main 87점을 확인했습니다."
+              ],
               "retrospective": "초기 분석 내용을 더 일찍 문서화했다면 팀 간 페이지 구현 속도 차이를 더 줄일 수 있었겠다고 판단했습니다."
             },
             {

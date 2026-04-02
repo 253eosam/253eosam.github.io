@@ -287,7 +287,15 @@ const getExperienceDuration = (startDate: string, endDate?: string, isCurrent?: 
                           {block.impact && (
                             <div class="project__narrative-row">
                               <div class="project__narrative-label">성과</div>
-                              <p class="project__narrative-content">{block.impact}</p>
+                              {Array.isArray(block.impact) ? (
+                                <ul class="project__narrative-list">
+                                  {block.impact.map((item) => (
+                                    <li>{item}</li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <p class="project__narrative-content">{block.impact}</p>
+                              )}
                             </div>
                           )}
 
@@ -686,6 +694,18 @@ const getExperienceDuration = (startDate: string, endDate?: string, isCurrent?: 
     font-size: 0.9375rem;
     color: var(--color-text-secondary);
     line-height: 1.8;
+  }
+
+  .project__narrative-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+  }
+
+  .project__narrative-list li + li {
+    margin-top: 0.25rem;
   }
 
   .project__narrative-content--retrospective {

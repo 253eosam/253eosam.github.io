@@ -24,7 +24,7 @@ export interface ResumeProjectIssue {
   problem?: string;
   strategy?: string;
   execution?: ResumeExecutionItem;
-  impact?: string;
+  impact?: string | string[];
   retrospective?: string;
 }
 
