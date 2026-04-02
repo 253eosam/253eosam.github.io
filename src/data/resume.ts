@@ -67,8 +67,11 @@ const resume = {
               "retrospective": "AI 도구가 레거시 프로젝트의 정책과 구현 의도를 추적하는 데 큰 도움을 줬고, 반복적인 생산 작업에서 높은 생산성을 보여준다는 점을 확인했습니다."
             },
             {
-              "strategy": "배포 환경은 ECS 기준으로 Docker/PM2 설정을 정리하고, 오픈 전 Lighthouse 비교를 통해 병목 구간을 계측 중심으로 최적화했습니다.",
-              "execution": "dockerfile 작성, ECS 배포 환경 설정, PM2 기반 프로세스 운영 최적화를 수행했습니다."
+              "problem": "마이그레이션 작업 중 API 스펙이 자주 변경돼 변경사항을 매번 공유받는 피로도가 컸고, 어떤 값이 어떻게 바뀌었는지 프론트엔드에서 빠르게 파악하기도 쉽지 않았습니다.",
+              "strategy": "Swagger 결과물을 기준으로 직전 배포 대비 변경점만 비교해, 프론트엔드가 먼저 확인해야 할 API와 변경 범위를 빠르게 식별할 수 있는 자동화 구조를 만들고자 했습니다.",
+              "execution": "AI를 활용해 Docker 기반 n8n workflow를 설계·구현하고, 각 서비스의 Swagger JSON에서 METHOD + path 기준 endpoint snapshot을 생성해 직전 snapshot과 비교하는 구조를 만들었습니다. parameters, requestBody, responses만 추려 변경점을 added, changed, removed로 분류했고, $ref는 가능한 범위에서 실제 schema 기준으로 해석해 diff를 계산한 뒤 변경된 API 링크와 함께 Slack 봇으로 알림하도록 구성했습니다. 또한 닷컴·북스·컨텐츠 3개의 서비스에 대해 workflow를 운영해, 프론트에서 관리하는 서비스 전반의 API 변경을 탐지할 수 있게 했습니다.",
+              "impact": "API 변경사항을 수동으로 공유하는 부담을 줄였고, 프론트엔드가 확인해야 할 endpoint와 변경 범위를 빠르게 파악할 수 있게 해 마이그레이션 대응 속도와 협업 효율을 높였습니다.",
+              "retrospective": "Swagger 전체를 그대로 비교하기보다 프론트엔드에 실제 영향을 주는 request·response 변화 중심으로 기준을 좁히는 것이 중요하다는 점을 배웠습니다. severity 기준은 계속 다듬을 여지가 있지만, 먼저 확인해야 할 endpoint를 빠르게 드러내는 도구로는 충분한 효용이 있었습니다."
             }
           ]
         },
