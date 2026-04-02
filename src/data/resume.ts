@@ -64,16 +64,8 @@ const resume = {
               "retrospective": "AI 도구가 레거시 프로젝트의 정책과 구현 의도를 추적하는 데 큰 도움을 줬고, 반복적인 생산 작업에서 높은 생산성을 보여준다는 점을 확인했습니다."
             },
             {
-              "strategy": "Swagger 기반 API를 Orval로 생성해 프론트와 백엔드 인터페이스를 명확히 하고 수작업 API 레이어를 줄였습니다.",
-              "execution": "전시 → 주문 → 결제 프로세스를 구현하고, Orval을 활용한 Swagger API code generation을 적용했습니다.",
-              "impact": "디자인 시스템과 API 생성 체계를 먼저 정리해 팀 단위 구현 일관성과 유지보수성을 확보했습니다."
-            },
-            {
               "strategy": "배포 환경은 ECS 기준으로 Docker/PM2 설정을 정리하고, 오픈 전 Lighthouse 비교를 통해 병목 구간을 계측 중심으로 최적화했습니다.",
               "execution": "dockerfile 작성, ECS 배포 환경 설정, PM2 기반 프로세스 운영 최적화를 수행했습니다."
-            },
-            {
-              "execution": "번들 구조를 조정하고 불필요한 JavaScript를 제거해 초기 전송량을 줄였습니다."
             }
           ]
         },
