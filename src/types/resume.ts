@@ -10,6 +10,7 @@ export interface ResumeTextWithLink {
 
 export interface ResumeTextWithItems {
   text: string;
+  label?: string;
   items: string[];
 }
 

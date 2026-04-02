@@ -296,6 +296,9 @@ const getExperienceDuration = (startDate: string, endDate?: string, isCurrent?: 
                               ) : typeof block.impact === 'object' ? (
                                 <div class="project__narrative-mixed">
                                   <p class="project__narrative-content">{block.impact.text}</p>
+                                  {block.impact.label && (
+                                    <p class="project__narrative-list-label">{block.impact.label}</p>
+                                  )}
                                   <ul class="project__narrative-list">
                                     {block.impact.items.map((item) => (
                                       <li>{item}</li>
@@ -709,6 +712,14 @@ const getExperienceDuration = (startDate: string, endDate?: string, isCurrent?: 
     display: flex;
     flex-direction: column;
     gap: 0.375rem;
+  }
+
+  .project__narrative-list-label {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
   }
 
   .project__narrative-list {

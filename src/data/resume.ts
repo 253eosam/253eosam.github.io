@@ -58,9 +58,10 @@ const resume = {
               "execution": "ASP 화면을 Next.js로 전환하면서 기존 SP 기반 구조와 query가 함께 얽혀 있던 연동 방식을 API 중심으로 재정리하고, Swagger 명세를 추적해 Orval로 API interface와 호출 함수를 자동화했습니다. 또한 공통 유틸리티와 UI를 모노레포 구조로 분리하고 패키지 버전까지 한곳에서 관리하도록 구성했습니다.",
               "impact": {
                 "text": "FE·BE 역할 경계가 명확해져 협업 효율과 유지보수성이 개선됐고, API 연동 코드와 패키지 관리가 표준화되면서 생산성을 높였습니다.",
+                "label": "Lighthouse 기준 (dev 환경):",
                 "items": [
-                  "dev 환경 Lighthouse 기준 Performance 5.3p, Best Practices 36.3p 개선을 확인했습니다.",
-                  "주요 성능 지표는 FCP 약 16%, LCP 약 37%, TBT 약 60%, Speed Index 약 55%, TTI 약 66% 단축했습니다."
+                  "Performance 5.3p, Best Practices 36.3p 개선",
+                  "FCP 약 16%, LCP 약 37%, TBT 약 60%, Speed Index 약 55%, TTI 약 66% 단축"
                 ]
               },
               "retrospective": "AI 도구가 레거시 프로젝트의 정책과 구현 의도를 추적하는 데 큰 도움을 줬고, 반복적인 생산 작업에서 높은 생산성을 보여준다는 점을 확인했습니다."
