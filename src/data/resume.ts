@@ -61,7 +61,7 @@ const resume = {
                 "dev 환경 Lighthouse 기준 Performance 84.5점, Best Practices 92.1점을 기록했습니다.",
                 "주요 성능 지표: FCP 640.8ms, LCP 1.68s, TBT 13.9ms, Speed Index 1.16s, TTI 1.68s"
               ],
-              "retrospective": "AI 도구가 레거시 프로젝트의 정책과 구현 의도를 추적하는 데 큰 도움을 준다는 점을 확인했고, 초기 마이그레이션 단계부터 더 적극적으로 활용했다면 분석 속도와 정책 정리 효율을 더 높일 수 있었겠다고 판단했습니다."
+              "retrospective": "AI 도구가 레거시 프로젝트의 정책과 구현 의도를 추적하는 데 큰 도움을 줬고, 반복적인 생산 작업에서 높은 생산성을 보여준다는 점을 확인했습니다."
             },
             {
               "strategy": "Swagger 기반 API를 Orval로 생성해 프론트와 백엔드 인터페이스를 명확히 하고 수작업 API 레이어를 줄였습니다.",
