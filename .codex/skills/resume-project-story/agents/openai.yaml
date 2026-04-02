@@ -1,7 +1,7 @@
 interface:
   display_name: "Resume Project Story"
-  short_description: "Edit this repo's resume copy and layout."
-  default_prompt: "Use $resume-project-story to update resume copy, issue narratives, and layout conventions in this repository."
+  short_description: "Edit this repo's issue-based resume copy and layout."
+  default_prompt: "Use $resume-project-story to update issue-based resume copy, metrics, and layout conventions in this repository."
 
 policy:
   allow_implicit_invocation: true
