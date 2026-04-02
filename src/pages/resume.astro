@@ -4,21 +4,9 @@ import Header from '../components/Header.astro';
 import ResumeSection from '../components/resume/ResumeSection.astro';
 import SkillTag from '../components/resume/SkillTag.astro';
 import resume from '../data/resume';
+import { mapResumeData } from '../lib/resume-mapper';
 
-const { profile, skills, experience, certifications, education, activities } = resume;
-
-const splitLinkedText = (text: string, label: string) => {
-  const index = text.indexOf(label);
-
-  if (index === -1) {
-    return null;
-  }
-
-  return {
-    before: text.slice(0, index),
-    after: text.slice(index + label.length),
-  };
-};
+const { profile, skills, experience, certifications, education, activities } = mapResumeData(resume);
 
 const parseYearMonth = (value: string) => {
   const match = value.match(/^(\d{4})-(\d{2})$/);
@@ -166,157 +154,82 @@ const getExperienceDuration = (startDate: string, endDate?: string, isCurrent?: 
             )}
 
             {exp.projects.map((proj) => (
-              <article class:list={['project', proj.highlighted && 'project--highlighted']}>
+              <article class:list={['project', proj.presentation === 'story' && 'project--highlighted']}>
                 <div class="project__header">
                   <h4 class="project__name">
-                    {typeof proj.name !== 'string' ? (
-                      (() => {
-                        const split = splitLinkedText(proj.name.text, proj.name.link.label);
-
-                        return split ? (
-                          <>
-                            {split.before}
-                            <a href={proj.name.link.url} target="_blank" rel="noopener noreferrer">{proj.name.link.label}</a>
-                            {split.after}
-                          </>
-                        ) : (
-                          proj.name.text
-                        );
-                      })()
-                    ) : proj.url ? (
-                      <a href={proj.url} target="_blank" rel="noopener noreferrer">{proj.name}</a>
+                    {proj.title.inlineLink ? (
+                      <>
+                        {proj.title.inlineLink.before}
+                        <a href={proj.title.inlineLink.url} target="_blank" rel="noopener noreferrer">{proj.title.inlineLink.label}</a>
+                        {proj.title.inlineLink.after}
+                      </>
+                    ) : proj.title.url ? (
+                      <a href={proj.title.url} target="_blank" rel="noopener noreferrer">{proj.title.text}</a>
                     ) : (
-                      proj.name
+                      proj.title.text
                     )}
                   </h4>
                 </div>
 
-                {(proj.summary || proj.description || proj.team || proj.contribution || (proj.techStack && proj.techStack.length > 0)) && (
+                {proj.facts.length > 0 && (
                   <dl class="project__facts">
-                    {(proj.summary || proj.description) && (
+                    {proj.facts.map((fact) => (
                       <div class="project__fact">
-                        <dt class="project__fact-label">프로젝트 설명</dt>
-                        <dd class="project__fact-text">
-                          {proj.summary || proj.description}
-                        </dd>
-                      </div>
-                    )}
-
-                    {proj.team && (
-                      <div class="project__fact">
-                        <dt class="project__fact-label">팀 구성</dt>
-                        <dd class="project__fact-text">{proj.team}</dd>
-                      </div>
-                    )}
-
-                    {proj.contribution && (
-                      <div class="project__fact">
-                        <dt class="project__fact-label">기여도</dt>
-                        <dd class="project__fact-text">{proj.contribution}</dd>
-                      </div>
-                    )}
-
-                    {proj.techStack && proj.techStack.length > 0 && (
-                      <div class="project__fact">
-                        <dt class="project__fact-label">기술</dt>
-                        <dd class="project__fact-text project__fact-tech">
-                          {proj.techStack.map((tech) => (
+                        <dt class="project__fact-label">{fact.label}</dt>
+                        <dd class:list={['project__fact-text', fact.techStack && 'project__fact-tech']}>
+                          {fact.techStack ? fact.techStack.map((tech) => (
                             <SkillTag label={tech} />
-                          ))}
+                          )) : fact.text}
                         </dd>
                       </div>
-                    )}
+                    ))}
                   </dl>
                 )}
 
-                {proj.highlighted ? (
-                  proj.issues && proj.issues.length > 0 && (
+                {proj.presentation === 'story' ? (
+                  proj.narratives.length > 0 && (
                   <div class="project__narratives">
-                    {proj.issues.map((block, index) => (
+                    {proj.narratives.map((block) => (
                       <section class="project__narrative">
-                        <h5 class="project__narrative-index">이슈 {index + 1}</h5>
+                        <h5 class="project__narrative-index">이슈 {block.index}</h5>
                         <div class="project__narrative-rows">
-                          {block.problem && (
+                          {block.rows.map((row) => (
                             <div class="project__narrative-row">
-                              <div class="project__narrative-label">문제정의</div>
-                              <p class="project__narrative-content">{block.problem}</p>
-                            </div>
-                          )}
-
-                          {block.strategy && (
-                            <div class="project__narrative-row">
-                              <div class="project__narrative-label">해결전략</div>
-                              <p class="project__narrative-content">{block.strategy}</p>
-                            </div>
-                          )}
-
-                          {block.execution && (
-                            <div class="project__narrative-row">
-                              <div class="project__narrative-label">주요 실행</div>
-                              <p class="project__narrative-content">
-                                {typeof block.execution === 'string'
-                                  ? block.execution
-                                  : (
-                                      (() => {
-                                        const split = block.execution.link
-                                          ? splitLinkedText(block.execution.text, block.execution.link.label)
-                                          : null;
-
-                                        return split && block.execution.link ? (
-                                          <>
-                                            {split.before}
-                                            <a
-                                              href={block.execution.link.url}
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-                                              class="project__inline-link"
-                                            >
-                                              {block.execution.link.label}
-                                            </a>
-                                            {split.after}
-                                          </>
-                                        ) : (
-                                          block.execution.text
-                                        );
-                                      })()
+                              <div class="project__narrative-label">{row.label}</div>
+                              <div class="project__narrative-mixed">
+                                {row.content.text && (
+                                  <p class:list={['project__narrative-content', row.tone === 'retrospective' && 'project__narrative-content--retrospective']}>
+                                    {row.content.inlineLink ? (
+                                      <>
+                                        {row.content.inlineLink.before}
+                                        <a
+                                          href={row.content.inlineLink.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          class="project__inline-link"
+                                        >
+                                          {row.content.inlineLink.label}
+                                        </a>
+                                        {row.content.inlineLink.after}
+                                      </>
+                                    ) : (
+                                      row.content.text
                                     )}
-                              </p>
-                            </div>
-                          )}
-
-                          {block.impact && (
-                            <div class="project__narrative-row">
-                              <div class="project__narrative-label">성과</div>
-                              {Array.isArray(block.impact) ? (
+                                  </p>
+                                )}
+                                {row.content.label && (
+                                  <p class="project__narrative-list-label">{row.content.label}</p>
+                                )}
+                                {row.content.items.length > 0 && (
                                 <ul class="project__narrative-list">
-                                  {block.impact.map((item) => (
+                                  {row.content.items.map((item) => (
                                     <li>{item}</li>
                                   ))}
                                 </ul>
-                              ) : typeof block.impact === 'object' ? (
-                                <div class="project__narrative-mixed">
-                                  <p class="project__narrative-content">{block.impact.text}</p>
-                                  {block.impact.label && (
-                                    <p class="project__narrative-list-label">{block.impact.label}</p>
-                                  )}
-                                  <ul class="project__narrative-list">
-                                    {block.impact.items.map((item) => (
-                                      <li>{item}</li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              ) : (
-                                <p class="project__narrative-content">{block.impact}</p>
-                              )}
+                                )}
+                              </div>
                             </div>
-                          )}
-
-                          {block.retrospective && (
-                            <div class="project__narrative-row">
-                              <div class="project__narrative-label">회고</div>
-                              <p class="project__narrative-content project__narrative-content--retrospective">{block.retrospective}</p>
-                            </div>
-                          )}
+                          ))}
                         </div>
                       </section>
                     ))}
@@ -324,15 +237,28 @@ const getExperienceDuration = (startDate: string, endDate?: string, isCurrent?: 
                   </div>
                   )
                 ) : (
-                  proj.details && proj.details.length > 0 && (
+                  proj.details.length > 0 && (
                     <ul class="project__details">
                       {proj.details.map((detail) => (
                         <li>
-                          {detail.text}
-                          {detail.subItems && detail.subItems.length > 0 && (
+                          {detail.text && (
+                            detail.inlineLink ? (
+                              <>
+                                {detail.inlineLink.before}
+                                <a href={detail.inlineLink.url} target="_blank" rel="noopener noreferrer" class="project__inline-link">{detail.inlineLink.label}</a>
+                                {detail.inlineLink.after}
+                              </>
+                            ) : (
+                              detail.text
+                            )
+                          )}
+                          {detail.label && (
+                            <p class="project__detail-label">{detail.label}</p>
+                          )}
+                          {detail.items.length > 0 && (
                             <ul class="project__sub-details">
-                              {detail.subItems.map((sub) => (
-                                <li>{sub}</li>
+                              {detail.items.map((item) => (
+                                <li>{item}</li>
                               ))}
                             </ul>
                           )}
@@ -769,6 +695,13 @@ const getExperienceDuration = (startDate: string, endDate?: string, isCurrent?: 
     font-size: 0.91rem;
     color: var(--color-text-secondary);
     line-height: 1.85;
+  }
+
+  .project__detail-label {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+    line-height: 1.7;
   }
 
   .project__sub-details {

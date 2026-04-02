@@ -3,15 +3,11 @@ export interface ResumeLink {
   url: string;
 }
 
-export interface ResumeTextWithLink {
-  text: string;
-  link: ResumeLink;
-}
-
-export interface ResumeTextWithItems {
-  text: string;
+export interface ResumeContentBlock {
+  text?: string;
   label?: string;
-  items: string[];
+  items?: string[];
+  link?: ResumeLink;
 }
 
 export interface ResumeProfile {
@@ -24,32 +20,27 @@ export interface ResumeProfile {
   highlights?: string[];
 }
 
-export type ResumeExecutionItem = string | ResumeTextWithLink;
-
 export interface ResumeProjectIssue {
-  problem?: string;
-  strategy?: string;
-  execution?: ResumeExecutionItem;
-  impact?: string | string[] | ResumeTextWithItems;
-  retrospective?: string;
+  problem?: ResumeContentBlock;
+  strategy?: ResumeContentBlock;
+  execution?: ResumeContentBlock;
+  impact?: ResumeContentBlock;
+  retrospective?: ResumeContentBlock;
 }
 
-export interface ResumeProjectDetail {
-  text: string;
-  subItems?: string[];
-}
+export type ResumeProjectPresentation = 'story' | 'compact';
 
 export interface ResumeProject {
-  name: string | ResumeTextWithLink;
+  name: string;
   url?: string;
-  description?: string;
-  highlighted?: boolean;
+  partialLinkLabel?: string;
+  presentation: ResumeProjectPresentation;
   summary?: string;
   contribution?: string;
   techStack?: string[];
   team?: string;
   issues?: ResumeProjectIssue[];
-  details?: ResumeProjectDetail[];
+  details?: ResumeContentBlock[];
 }
 
 export interface ResumeExperience {
