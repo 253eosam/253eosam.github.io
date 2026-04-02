@@ -8,6 +8,11 @@ export interface ResumeTextWithLink {
   link: ResumeLink;
 }
 
+export interface ResumeTextWithItems {
+  text: string;
+  items: string[];
+}
+
 export interface ResumeProfile {
   name: string;
   profileImage?: string;
@@ -24,7 +29,7 @@ export interface ResumeProjectIssue {
   problem?: string;
   strategy?: string;
   execution?: ResumeExecutionItem;
-  impact?: string | string[];
+  impact?: string | string[] | ResumeTextWithItems;
   retrospective?: string;
 }
 
