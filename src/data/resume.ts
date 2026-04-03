@@ -210,7 +210,7 @@ const resume = {
     {
       "name": "사내 알고리즘 스터디",
       "organization": "위메프",
-      "period": "2022",
+      "period": "2022.08 - 2022.11",
       "description": "JavaScript 알고리즘 스터디 진행",
       "details": [
         "기본적인 자료구조 개념 설명 및 구현 방법 학습",
@@ -221,7 +221,7 @@ const resume = {
     {
       "name": "SSAFY 2기(구미)",
       "organization": "삼성전자",
-      "period": "2019.07.01 - 2020.06.30",
+      "period": "2019.07 - 2020.06",
       "description": "SSAFY(Samsung Software Academy For Youth)는 삼성에서 운영하는 소프트웨어 개발자 양성 과정으로, 약 1년간 집중적인 교육과 실무 프로젝트를 수행하는 프로그램이다.",
       "details": [
         "알고리즘 문제 해결 능력 향상, 풀스택 웹 개발, 팀 프로젝트 경험, 협업 툴 활용 등을 중점적으로 학습"
