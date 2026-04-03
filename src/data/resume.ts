@@ -16,7 +16,7 @@ const resume = {
       "스타트업 초기 멤버로 참여하여 실무자의 요구사항을 분석하고 구현한 경험",
       "동시 접속 16,000명 수준의 트래픽 안정적 처리 경험",
       "개발 표준화·자동화를 통한 협업 생산성 향상 경험",
-      "이커머스 어드민 장기 유지보수 및 개선 경험"
+      "반응형 웹·플랫폼 어드민 개발 경험"
     ]
   },
   "skills": ["TypeScript", "Nuxt.js", "Next.js", "TailwindCSS", "styled-components", "Git", "Vue.js", "React"],
