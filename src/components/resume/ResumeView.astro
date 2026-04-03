@@ -28,6 +28,28 @@ const parseYearMonth = (value: string) => {
   return { year, month };
 };
 
+const parseDottedPeriod = (value: string) => {
+  const match = value.match(/^(\d{4})\.(\d{2})\s*-\s*(\d{4})\.(\d{2})$/);
+
+  if (!match) {
+    return null;
+  }
+
+  const start = { year: Number(match[1]), month: Number(match[2]) };
+  const end = { year: Number(match[3]), month: Number(match[4]) };
+
+  if (
+    Number.isNaN(start.year) ||
+    Number.isNaN(start.month) ||
+    Number.isNaN(end.year) ||
+    Number.isNaN(end.month)
+  ) {
+    return null;
+  }
+
+  return { start, end };
+};
+
 const formatDurationFromMonths = (months: number) => {
   const years = Math.floor(months / 12);
   const remainingMonths = months % 12;
@@ -83,6 +105,25 @@ const getExperienceDuration = (startDate: string, endDate?: string, isCurrent?: 
   }
 
   return formatDurationFromMonths(totalMonths);
+};
+
+const getActivityPeriod = (period: string) => {
+  const parsed = parseDottedPeriod(period);
+
+  if (!parsed) {
+    return period;
+  }
+
+  const totalMonths =
+    (parsed.end.year - parsed.start.year) * 12 +
+    (parsed.end.month - parsed.start.month) +
+    1;
+
+  if (totalMonths <= 0) {
+    return period;
+  }
+
+  return `${period} · ${formatDurationFromMonths(totalMonths)}`;
 };
 ---
 
@@ -308,7 +349,7 @@ const getExperienceDuration = (startDate: string, endDate?: string, isCurrent?: 
               <h3 class="activity__name">{act.name}</h3>
               <p class="activity__org">{act.organization}</p>
             </div>
-            <span class="activity__period">{act.period}</span>
+            <span class="activity__period">{getActivityPeriod(act.period)}</span>
           </div>
 
           {act.description && (
