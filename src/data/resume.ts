@@ -124,7 +124,7 @@ const resume = {
           "url": "https://askyour.trade",
           "presentation": "compact",
           "summary": "무역 사무 업무를 웹 서비스로 옮기기 위해 메일, 화물 모니터링, 전자도장 기능을 설계하고 운영한 B2B/B2C 프로젝트입니다.",
-          "contribution": "FE 1명으로 제품 기능 설계부터 구현, 운영까지 담당했습니다. 메일 기능 구조 설계, 실시간 알림, 에디터 확장, 캔버스/PDF 기반 기능 개발을 단독 수행했습니다.",
+          "contribution": "제품 기능 설계부터 구현, 운영까지 담당했으며, 메일 기능 구조 설계, 실시간 알림, 에디터 확장, 캔버스/PDF 기반 기능 개발을 주도했습니다.",
           "techStack": ["React", "Styled-component", "react-query", "zustand"],
           "team": "FE 1명",
           "details": [
@@ -139,7 +139,7 @@ const resume = {
           "name": "askyour.trade 어드민",
           "presentation": "compact",
           "summary": "askyour.trade 서비스 관리 어드민",
-          "contribution": "FE 2명 중 운영 기능 개발과 관리 화면 개선을 담당했습니다.",
+          "contribution": "운영 기능 개발과 관리 화면 개선을 담당했습니다.",
           "techStack": ["React", "Material-UI", "Styled-component", "react-query", "zustand"],
           "team": "FE 2명",
           "details": [
@@ -163,7 +163,7 @@ const resume = {
           "name": "위메프 어드민 유지보수",
           "presentation": "compact",
           "summary": "위메프에 등록된 각 상품의 고유 아이디를 부여하여 동일한 상품을 비교하고 데이터 통일 목적",
-          "contribution": "5명 조직에서 운영성 기능 개발, Vue 3 마이그레이션, 반복 작업 자동화 도구 개발에 참여했습니다.",
+          "contribution": "운영성 기능 개발, Vue 3 마이그레이션, 반복 작업 자동화 도구 개발을 담당했습니다.",
           "techStack": ["Vue.js", "Vuex", "Element-UI", "Hygen", "React"],
           "team": "5명",
           "details": [
@@ -176,7 +176,7 @@ const resume = {
           "name": "위메프 여행·레저 서비스 유지보수",
           "presentation": "compact",
           "summary": "위메프 여행, 숙박, 액티비티, 공연티켓을 판매하는 서비스",
-          "contribution": "6명 조직에서 여행·레저 운영 기능 개발과 공연 티켓 프로젝트의 JSP → Vue 전환에 참여했습니다.",
+          "contribution": "여행·레저 운영 기능 개발과 공연 티켓 프로젝트의 JSP → Vue 전환을 담당했습니다.",
           "techStack": ["Vue.js", "Vuex", "vue-property-decorator", "vue-class-component", "JSP", "jQuery"],
           "team": "6명",
           "details": [
