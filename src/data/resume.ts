@@ -34,7 +34,7 @@ const resume = {
         {
           "name": "시대인재 북스 마이그레이션 & 디자인 시스템",
           "url": "https://sdijbooks.com/",
-          "partialLinkLabel": "시대인재 북스 마이그레이션",
+          "partialLinkLabel": "시대인재 북스",
           "presentation": "story",
           "summary": "ASP 기반 모바일/PC 도서 판매 서비스를 Next.js 기반의 반응형 웹으로 통합 마이그레이션하고, 배포 파이프라인을 재구성한 프로젝트입니다.",
           "contribution": "프론트엔드 프로젝트 리딩, 프로젝트 환경 설정, CI/CD 배포 프로세스 구축, 디자인 시스템 개발, 도서·구매 서브도메인 관련 페이지 퍼블리싱 및 프론트엔드 개발을 담당했습니다.",
@@ -72,6 +72,7 @@ const resume = {
         {
           "name": "시대인재C 서비스 오픈 & 유지보수",
           "url": "https://www.sdijc.com/main/survival-pro",
+          "partialLinkLabel": "시대인재C",
           "presentation": "story",
           "summary": "자사 브랜드 도서, 모의고사 접수, 성적 조회 및 분석 기능을 제공하는 반응형 웹 서비스",
           "contribution": "공통 UI 컴포넌트와 레이아웃 설계, 모집 이벤트 페이지, 전시 페이지, 성적 조회 페이지 개발을 담당했습니다.",
@@ -121,6 +122,7 @@ const resume = {
         {
           "name": "askyour.trade 서비스 오픈 및 유지보수",
           "url": "https://askyour.trade",
+          "partialLinkLabel": "askyour.trade",
           "presentation": "compact",
           "summary": "무역 사무 업무를 웹 서비스로 옮기기 위해 메일, 화물 모니터링, 전자도장 기능을 설계하고 운영한 B2B/B2C 프로젝트입니다.",
           "contribution": "제품 기능 설계부터 구현, 운영까지 담당했으며, 메일 기능 구조 설계, 실시간 알림, 에디터 확장, 캔버스/PDF 기반 기능 개발을 주도했습니다.",
