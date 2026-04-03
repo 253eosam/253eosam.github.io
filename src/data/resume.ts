@@ -125,7 +125,7 @@ const resume = {
           "presentation": "compact",
           "summary": "무역 사무 업무를 웹 서비스로 옮기기 위해 메일, 화물 모니터링, 전자도장 기능을 설계하고 운영한 B2B/B2C 프로젝트입니다.",
           "contribution": "제품 기능 설계부터 구현, 운영까지 담당했으며, 메일 기능 구조 설계, 실시간 알림, 에디터 확장, 캔버스/PDF 기반 기능 개발을 주도했습니다.",
-          "techStack": ["React", "Styled-component", "react-query", "zustand"],
+          "techStack": ["React", "TypeScript", "Radix UI", "react-hook-form", "zod", "Styled-component", "react-query", "zustand"],
           "team": "FE 2명, BE 2명, 기획자 1명",
           "details": [
             { "text": "메일 기능은 레이아웃 기반 라우팅으로 구조를 고정해 URL만으로 원하는 화면에 바로 진입할 수 있게 설계했고, 이 구조를 바탕으로 알림 기능에서도 타겟 이메일 화면으로 바로 이동할 수 있는 흐름을 구현했습니다." },
