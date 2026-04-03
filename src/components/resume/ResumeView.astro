@@ -1,0 +1,783 @@
+---
+import ResumeSection from './ResumeSection.astro';
+import SkillTag from './SkillTag.astro';
+
+const {
+  profile,
+  skills = [],
+  experience = [],
+  certifications = [],
+  education = [],
+  activities = [],
+} = Astro.props;
+
+const parseYearMonth = (value: string) => {
+  const match = value.match(/^(\d{4})-(\d{2})$/);
+
+  if (!match) {
+    return null;
+  }
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+
+  if (Number.isNaN(year) || Number.isNaN(month)) {
+    return null;
+  }
+
+  return { year, month };
+};
+
+const formatDurationFromMonths = (months: number) => {
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+
+  if (years === 0) {
+    return `${remainingMonths}개월`;
+  }
+
+  if (remainingMonths === 0) {
+    return `${years}년`;
+  }
+
+  return `${years}년 ${remainingMonths}개월`;
+};
+
+const formatYearMonth = (value: string) => value.replace('-', '.');
+
+const getExperiencePeriod = (startDate: string, endDate?: string, isCurrent?: boolean) => {
+  const start = formatYearMonth(startDate);
+
+  if (isCurrent) {
+    return `${start} - 재직 중`;
+  }
+
+  if (!endDate) {
+    return start;
+  }
+
+  return `${start} - ${formatYearMonth(endDate)}`;
+};
+
+const getExperienceDuration = (startDate: string, endDate?: string, isCurrent?: boolean) => {
+  const start = parseYearMonth(startDate);
+
+  if (!start) {
+    return '';
+  }
+
+  const end = isCurrent
+    ? { year: new Date().getFullYear(), month: new Date().getMonth() + 1 }
+    : endDate
+      ? parseYearMonth(endDate)
+      : null;
+
+  if (!end) {
+    return '';
+  }
+
+  const totalMonths = (end.year - start.year) * 12 + (end.month - start.month) + 1;
+
+  if (totalMonths <= 0) {
+    return '';
+  }
+
+  return formatDurationFromMonths(totalMonths);
+};
+---
+
+<main class="container resume">
+  <section class="profile">
+    <div class="profile__top">
+      <div class="profile__text">
+        <h1 class="profile__name">{profile.name}</h1>
+        <p class="profile__role">{profile.role}</p>
+
+        <div class="profile__contact">
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          {profile.links.map((link) => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a>
+          ))}
+        </div>
+      </div>
+
+      {profile.profileImage && (
+        <img src={profile.profileImage} alt={`${profile.name} 프로필 사진`} class="profile__image" width="100" height="100" />
+      )}
+    </div>
+
+    <p class="profile__intro">{profile.introduction}</p>
+
+    {profile.highlights && profile.highlights.length > 0 && (
+      <ul class="profile__highlights">
+        {profile.highlights.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    )}
+  </section>
+
+  {skills.length > 0 && (
+    <ResumeSection title="기술">
+      <div class="skills">
+        {skills.map((skill) => (
+          <SkillTag label={skill} />
+        ))}
+      </div>
+    </ResumeSection>
+  )}
+
+  {experience.length > 0 && (
+    <ResumeSection title="경력">
+      {experience.map((exp) => (
+        <div class="exp">
+          <div class="exp__header">
+            <div class="exp__info">
+              {exp.logo && (
+                <img src={exp.logo} alt={`${exp.company} 로고`} class="exp__logo" width="36" height="36" />
+              )}
+              <div>
+                <h3 class="exp__company">{exp.company}</h3>
+                <p class="exp__role">{exp.role}{exp.department && ` · ${exp.department}`}</p>
+              </div>
+            </div>
+            <div class="exp__meta">
+              <span class="exp__period">{getExperiencePeriod(exp.startDate, exp.endDate, exp.isCurrent)}</span>
+              <span class="exp__sub">{getExperienceDuration(exp.startDate, exp.endDate, exp.isCurrent)}{exp.employmentType && ` · ${exp.employmentType}`}</span>
+            </div>
+          </div>
+
+          {exp.description && (
+            <p class="exp__desc">{exp.description}</p>
+          )}
+
+          {exp.projects.map((proj) => (
+            <article class:list={['project', proj.presentation === 'story' && 'project--highlighted']}>
+              <div class="project__header">
+                <h4 class="project__name">
+                  {proj.title.inlineLink ? (
+                    <>
+                      {proj.title.inlineLink.before}
+                      <a href={proj.title.inlineLink.url} target="_blank" rel="noopener noreferrer">{proj.title.inlineLink.label}</a>
+                      {proj.title.inlineLink.after}
+                    </>
+                  ) : proj.title.url ? (
+                    <a href={proj.title.url} target="_blank" rel="noopener noreferrer">{proj.title.text}</a>
+                  ) : (
+                    proj.title.text
+                  )}
+                </h4>
+              </div>
+
+              {proj.facts.length > 0 && (
+                <dl class="project__facts">
+                  {proj.facts.map((fact) => (
+                    <div class="project__fact">
+                      <dt class="project__fact-label">{fact.label}</dt>
+                      <dd class:list={['project__fact-text', fact.techStack && 'project__fact-tech']}>
+                        {fact.techStack ? fact.techStack.map((tech) => (
+                          <SkillTag label={tech} />
+                        )) : fact.text}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+
+              {proj.presentation === 'story' ? (
+                proj.narratives.length > 0 && (
+                  <div class="project__narratives">
+                    {proj.narratives.map((block) => (
+                      <section class="project__narrative">
+                        <h5 class="project__narrative-index">이슈 {block.index}</h5>
+                        <div class="project__narrative-rows">
+                          {block.rows.map((row) => (
+                            <div class="project__narrative-row">
+                              <div class="project__narrative-label">{row.label}</div>
+                              <div class="project__narrative-mixed">
+                                {row.content.text && (
+                                  <p class:list={['project__narrative-content', row.tone === 'retrospective' && 'project__narrative-content--retrospective']}>
+                                    {row.content.inlineLink ? (
+                                      <>
+                                        {row.content.inlineLink.before}
+                                        <a
+                                          href={row.content.inlineLink.url}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          class="project__inline-link"
+                                        >
+                                          {row.content.inlineLink.label}
+                                        </a>
+                                        {row.content.inlineLink.after}
+                                      </>
+                                    ) : (
+                                      row.content.text
+                                    )}
+                                  </p>
+                                )}
+                                {row.content.label && (
+                                  <p class="project__narrative-list-label">{row.content.label}</p>
+                                )}
+                                {row.content.items.length > 0 && (
+                                  <ul class="project__narrative-list">
+                                    {row.content.items.map((item) => (
+                                      <li>{item}</li>
+                                    ))}
+                                  </ul>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </section>
+                    ))}
+                  </div>
+                )
+              ) : (
+                proj.details.length > 0 && (
+                  <ul class="project__details">
+                    {proj.details.map((detail) => (
+                      <li>
+                        {detail.text && (
+                          detail.inlineLink ? (
+                            <>
+                              {detail.inlineLink.before}
+                              <a href={detail.inlineLink.url} target="_blank" rel="noopener noreferrer" class="project__inline-link">{detail.inlineLink.label}</a>
+                              {detail.inlineLink.after}
+                            </>
+                          ) : (
+                            detail.text
+                          )
+                        )}
+                        {detail.label && (
+                          <p class="project__detail-label">{detail.label}</p>
+                        )}
+                        {detail.items.length > 0 && (
+                          <ul class="project__sub-details">
+                            {detail.items.map((item) => (
+                              <li>{item}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )
+              )}
+            </article>
+          ))}
+        </div>
+      ))}
+    </ResumeSection>
+  )}
+
+  {certifications.length > 0 && (
+    <ResumeSection title="자격증">
+      {certifications.map((cert) => (
+        <div class="row-item">
+          <div class="row-item__left">
+            <span class="row-item__name">{cert.name}</span>
+            <span class="row-item__sub">{cert.organization}</span>
+          </div>
+          <span class="row-item__date">{cert.date}</span>
+        </div>
+      ))}
+    </ResumeSection>
+  )}
+
+  {education.length > 0 && (
+    <ResumeSection title="학력">
+      {education.map((edu) => (
+        <div class="row-item">
+          <div class="row-item__left">
+            <span class="row-item__name">{edu.institution}</span>
+            {edu.major && <span class="row-item__sub">{edu.major}{edu.degree && ` (${edu.degree})`}</span>}
+          </div>
+          <span class="row-item__date">{edu.period}</span>
+        </div>
+      ))}
+    </ResumeSection>
+  )}
+
+  {activities.length > 0 && (
+    <ResumeSection title="활동">
+      {activities.map((act) => (
+        <div class="activity">
+          <div class="activity__header">
+            <div>
+              <h3 class="activity__name">{act.name}</h3>
+              <p class="activity__org">{act.organization}</p>
+            </div>
+            <span class="activity__period">{act.period}</span>
+          </div>
+
+          {act.description && (
+            <p class="activity__desc">{act.description}</p>
+          )}
+
+          {act.details && act.details.length > 0 && (
+            <ul class="activity__details">
+              {act.details.map((detail) => (
+                <li>{detail}</li>
+              ))}
+            </ul>
+          )}
+
+          {act.link && (
+            <a href={act.link.url} target="_blank" rel="noopener noreferrer" class="activity__link">
+              {act.link.label}
+            </a>
+          )}
+        </div>
+      ))}
+    </ResumeSection>
+  )}
+</main>
+
+<style>
+  .resume {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-3xl);
+  }
+
+  .profile {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .profile__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-lg);
+  }
+
+  .profile__text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .profile__image {
+    width: 100px;
+    height: 100px;
+    border-radius: 16px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .profile__name {
+    font-size: 1.95rem;
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.28;
+  }
+
+  .profile__role {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-top: var(--space-xs);
+  }
+
+  .profile__contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+    font-size: 0.875rem;
+  }
+
+  .profile__contact a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .profile__contact a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .profile__intro {
+    margin-top: var(--space-lg);
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.85;
+  }
+
+  .profile__highlights {
+    margin-top: var(--space-sm);
+    padding-left: var(--space-lg);
+    color: var(--color-text-secondary);
+    line-height: 1.85;
+    font-size: 0.91rem;
+  }
+
+  .profile__highlights li {
+    list-style: disc;
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .exp {
+    margin-bottom: var(--space-xl);
+  }
+
+  .exp:last-child {
+    margin-bottom: 0;
+  }
+
+  .exp__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .exp__info {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .exp__logo {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .exp__company {
+    font-size: 1.16rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: var(--tracking-heading);
+  }
+
+  .exp__role {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+
+  .exp__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .exp__period,
+  .exp__sub,
+  .activity__period,
+  .row-item__date {
+    font-size: 0.8125rem;
+    color: var(--color-text-tertiary);
+  }
+
+  .exp__desc {
+    margin-top: var(--space-sm);
+    color: var(--color-text-secondary);
+    font-size: 0.91rem;
+    line-height: 1.75;
+  }
+
+  @media (min-width: 640px) {
+    .exp__header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .exp__meta {
+      text-align: right;
+      flex-shrink: 0;
+    }
+  }
+
+  .project {
+    margin-top: var(--space-md);
+    padding-left: var(--space-md);
+    border-left: 3px solid var(--color-accent);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .project__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .project__name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: var(--tracking-heading);
+    color: var(--color-text);
+  }
+
+  .project__name a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .project__name a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .project__facts {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .project__fact {
+    display: grid;
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: var(--space-sm);
+    align-items: start;
+    margin: 0;
+  }
+
+  .project__fact + .project__fact {
+    padding-top: var(--space-sm);
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .project__fact-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.02em;
+    line-height: 1.7;
+    margin-top: 1px;
+  }
+
+  .project__fact-text {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .project__fact-tech {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--space-xs);
+    row-gap: 6px;
+    align-items: center;
+  }
+
+  .project__narratives {
+    margin-top: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .project__narrative {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .project__narrative-index {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 0.02em;
+    line-height: 1.7;
+  }
+
+  .project__narrative-rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .project__narrative-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .project__narrative-row + .project__narrative-row {
+    padding-top: var(--space-xs);
+  }
+
+  .project__narrative-label {
+    margin-top: 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.02em;
+    line-height: 2;
+  }
+
+  .project__narrative-content,
+  .project__narrative-list-label {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+  }
+
+  .project__narrative-mixed {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .project__narrative-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+  }
+
+  .project__narrative-list li + li {
+    margin-top: 0.25rem;
+  }
+
+  .project__narrative-content--retrospective {
+    font-size: 0.91rem;
+    color: var(--color-text-tertiary);
+  }
+
+  .project__details {
+    padding-left: var(--space-lg);
+    font-size: 0.91rem;
+    color: var(--color-text-secondary);
+    line-height: 1.85;
+  }
+
+  .project__details > li,
+  .activity__details li {
+    list-style: disc;
+  }
+
+  .project__detail-label {
+    margin: 4px 0 0;
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+    line-height: 1.7;
+  }
+
+  .project__sub-details {
+    margin-top: 2px;
+    padding-left: var(--space-lg);
+    font-size: 0.84rem;
+    line-height: 1.8;
+  }
+
+  .project__sub-details li {
+    list-style: circle;
+  }
+
+  @media (min-width: 640px) {
+    .project__narrative-row {
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+      gap: var(--space-sm);
+      align-items: start;
+    }
+  }
+
+  .activity {
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .activity:last-child,
+  .row-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .activity__header,
+  .row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .activity__name,
+  .row-item__name {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .activity__org,
+  .row-item__sub {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+  }
+
+  .activity__period,
+  .row-item__date {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .activity__desc {
+    margin-top: var(--space-xs);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+  }
+
+  .activity__details {
+    margin-top: var(--space-xs);
+    padding-left: var(--space-lg);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+  }
+
+  .activity__link,
+  .project__inline-link {
+    display: inline-block;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .activity__link {
+    margin-top: var(--space-xs);
+    font-size: 0.875rem;
+  }
+
+  .activity__link:hover,
+  .project__inline-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .project__name a::after,
+  .activity__link::after,
+  .project__inline-link::after {
+    content: '↗';
+    display: inline-block;
+    margin-left: 2px;
+  }
+
+  .row-item {
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .row-item__left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+</style>

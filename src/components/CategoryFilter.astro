@@ -12,26 +12,40 @@ const { categories } = Astro.props;
 </nav>
 
 <script>
-  function initFilter() {
-    const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  function applyFilter(filter, category) {
+    const buttons = filter.querySelectorAll<HTMLButtonElement>('.filter-btn');
     const cards = document.querySelectorAll<HTMLElement>('.note-card');
 
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const cat = btn.dataset.category;
-
-        buttons.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        cards.forEach((card) => {
-          if (cat === 'all' || card.dataset.category === cat) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
+    buttons.forEach((button) => {
+      button.classList.toggle('active', button.dataset.category === category);
     });
+
+    cards.forEach((card) => {
+      card.hidden = !(category === 'all' || card.dataset.category === category);
+    });
+  }
+
+  function initFilter() {
+    const filter = document.querySelector<HTMLElement>('.filter');
+
+    if (!filter || filter.dataset.filterBound === 'true') {
+      return;
+    }
+
+    filter.dataset.filterBound = 'true';
+
+    filter.addEventListener('click', (event) => {
+      const button = (event.target as HTMLElement | null)?.closest<HTMLButtonElement>('.filter-btn');
+
+      if (!button) {
+        return;
+      }
+
+      applyFilter(filter, button.dataset.category ?? 'all');
+    });
+
+    const activeButton = filter.querySelector<HTMLButtonElement>('.filter-btn.active');
+    applyFilter(filter, activeButton?.dataset.category ?? 'all');
   }
 
   initFilter();
