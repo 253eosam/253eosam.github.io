@@ -202,6 +202,7 @@ const resume = {
       "degree": "학사"
     },
     {
+      "major": "입문계",
       "institution": "운암고등학교",
       "period": "2010.03 - 2013.02"
     }
