@@ -126,7 +126,7 @@ const resume = {
           "summary": "무역 사무 업무를 웹 서비스로 옮기기 위해 메일, 화물 모니터링, 전자도장 기능을 설계하고 운영한 B2B/B2C 프로젝트입니다.",
           "contribution": "제품 기능 설계부터 구현, 운영까지 담당했으며, 메일 기능 구조 설계, 실시간 알림, 에디터 확장, 캔버스/PDF 기반 기능 개발을 주도했습니다.",
           "techStack": ["React", "Styled-component", "react-query", "zustand"],
-          "team": "FE 1명",
+          "team": "FE 2명, BE 2명, 기획자 1명",
           "details": [
             { "text": "무역 실무자의 메일 확인, 화물 추적, 문서 날인 흐름을 서비스 내부에서 처리할 수 있도록 기능을 설계하고 구현했습니다." },
             { "text": "메일 기능은 레이아웃 기반 라우팅으로 구조를 고정하고, Froala editor를 커스터마이징해 서명·템플릿 기능을 추가했습니다." },
@@ -141,7 +141,7 @@ const resume = {
           "summary": "askyour.trade 서비스 관리 어드민",
           "contribution": "운영 기능 개발과 관리 화면 개선을 담당했습니다.",
           "techStack": ["React", "Material-UI", "Styled-component", "react-query", "zustand"],
-          "team": "FE 2명",
+          "team": "FE 2명, BE 2명",
           "details": [
             { "text": "운영 기능 개발 및 유지보수를 담당했습니다." },
             { "text": "Material-UI 기반 관리 화면을 구현해 기능 추가와 유지보수 속도를 높였습니다." }
@@ -209,7 +209,7 @@ const resume = {
   "activities": [
     {
       "name": "사내 알고리즘 스터디",
-      "organization": "(주)위메프",
+      "organization": "위메프",
       "period": "2022",
       "description": "JavaScript 알고리즘 스터디 진행",
       "details": [
