@@ -176,7 +176,7 @@ const resume = {
           "name": "위메프 여행·레저 서비스 유지보수",
           "presentation": "compact",
           "summary": "위메프 여행, 숙박, 액티비티, 공연티켓을 판매하는 서비스",
-          "contribution": "여행·레저 운영 기능 개발과 공연 티켓 프로젝트의 JSP → Vue 전환을 담당했습니다.",
+          "contribution": "여행·레저 운영 기능 개발과 공연 티켓 프로젝트의 JSP → Vue 전환에 참여했습니다.",
           "techStack": ["Vue.js", "Vuex", "vue-property-decorator", "vue-class-component", "JSP", "jQuery"],
           "team": "6명",
           "details": [
