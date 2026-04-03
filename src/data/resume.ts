@@ -38,7 +38,7 @@ const resume = {
           "presentation": "story",
           "summary": "ASP 기반 모바일/PC 도서 판매 서비스를 Next.js 기반의 반응형 웹으로 통합 마이그레이션하고, 배포 파이프라인을 재구성한 프로젝트입니다.",
           "contribution": "프론트엔드 프로젝트 리딩, 프로젝트 환경 설정, CI/CD 배포 프로세스 구축, 디자인 시스템 개발, 도서·구매 서브도메인 관련 페이지 퍼블리싱 및 프론트엔드 개발을 담당했습니다.",
-          "techStack": ["Next", "tailwindcss", "pnpm", "monorepo", "zustand", "daisyUI", "orval", "react-query"],
+          "techStack": ["Next", "TypeScript", "tailwindcss", "pnpm", "monorepo", "zustand", "daisyUI", "orval", "react-query"],
           "team": "FE 4명, 퍼블리셔 1명, BE 2명, 기획자 2명, 디자이너 2명",
           "issues": [
             {
@@ -60,13 +60,12 @@ const resume = {
                   "FCP 약 16%, LCP 약 37%, TBT 약 60%, Speed Index 약 55%, TTI 약 66% 단축"
                 ]
               },
-              "retrospective": { "text": "AI 도구가 레거시 프로젝트의 정책과 구현 의도를 추적하는 데 큰 도움을 줬고, 반복적인 생산 작업에서 높은 생산성을 보여준다는 점을 확인했습니다." }
             },
             {
               "problem": { "text": "마이그레이션 작업 중 API 스펙이 자주 변경돼 변경사항을 매번 공유받는 피로도가 컸고, 어떤 값이 어떻게 바뀌었는지 프론트엔드에서 빠르게 파악하기도 쉽지 않았습니다." },
               "strategy": { "text": "Swagger 결과물을 기준으로 직전 배포 대비 변경점만 비교해, 프론트엔드가 먼저 확인해야 할 API와 변경 범위를 빠르게 식별할 수 있는 자동화 구조를 만들고자 했습니다." },
               "execution": { "text": "AI를 활용해 Docker 기반 n8n workflow를 설계·구현하고, 각 서비스의 Swagger JSON에서 METHOD + path 기준 endpoint snapshot을 생성해 직전 snapshot과 비교하는 구조를 만들었습니다. parameters, requestBody, responses만 추려 변경점을 added, changed, removed로 분류했고, $ref는 가능한 범위에서 실제 schema 기준으로 해석해 diff를 계산한 뒤 변경된 API 링크와 함께 Slack 봇으로 알림하도록 구성했습니다. 또한 닷컴·북스·컨텐츠 3개의 서비스에 대해 workflow를 운영해, 프론트에서 관리하는 서비스 전반의 API 변경을 탐지할 수 있게 했습니다." },
-              "impact": { "text": "API 변경사항을 수동으로 공유하는 부담을 줄였고, 프론트엔드가 확인해야 할 endpoint와 변경 범위를 빠르게 파악할 수 있게 해 마이그레이션 대응 속도와 협업 효율을 높였습니다." }
+              "impact": { "text": "API 변경사항을 수동으로 공유하는 부담을 줄였고, 프론트엔드가 확인해야 할 endpoint와 변경 범위를 빠르게 파악할 수 있게 해 마이그레이션 대응 속도와 협업 효율을 높였습니다." },
             }
           ]
         },
@@ -76,7 +75,7 @@ const resume = {
           "presentation": "story",
           "summary": "자사 브랜드 도서, 모의고사 접수, 성적 조회 및 분석 기능을 제공하는 반응형 웹 서비스",
           "contribution": "공통 UI 컴포넌트와 레이아웃 설계, 모집 이벤트 페이지, 전시 페이지, 성적 조회 페이지 개발을 담당했습니다.",
-          "techStack": ["Nuxt", "SCSS"],
+          "techStack": ["Nuxt", "TypeScript", "SCSS"],
           "team": "FE 2명, BE 2명, 디자이너 2명, 기획자 2명",
           "issues": [
             {
@@ -140,11 +139,10 @@ const resume = {
           "presentation": "compact",
           "summary": "askyour.trade 서비스 관리 어드민",
           "contribution": "운영 기능 개발과 관리 화면 개선을 담당했습니다.",
-          "techStack": ["React", "Material-UI", "Styled-component", "react-query", "zustand"],
+          "techStack": ["React", "TypeScript", "Material-UI", "Styled-component", "react-query", "zustand"],
           "team": "FE 2명, BE 2명",
           "details": [
-            { "text": "운영 기능 개발 및 유지보수를 담당했습니다." },
-            { "text": "Material-UI 기반 관리 화면을 구현해 기능 추가와 유지보수 속도를 높였습니다." }
+            { "text": "Material-UI 기반 관리 화면을 구축해 신규 프로젝트 생성 비용을 최소화하고 빠르게 작업할 수 있도록 했습니다." }
           ]
         }
       ]
@@ -164,7 +162,7 @@ const resume = {
           "presentation": "compact",
           "summary": "위메프에 등록된 각 상품의 고유 아이디를 부여하여 동일한 상품을 비교하고 데이터 통일 목적",
           "contribution": "운영성 기능 개발, Vue 3 마이그레이션, 반복 작업 자동화 도구 개발을 담당했습니다.",
-          "techStack": ["Vue.js", "Vuex", "Element-UI", "Hygen", "React"],
+          "techStack": ["Vue.js", "TypeScript", "Vuex", "Element-UI", "Hygen", "React"],
           "team": "5명",
           "details": [
             { "text": "장기 운영 중인 어드민 기능 개발과 유지보수를 담당했습니다." },
@@ -177,7 +175,7 @@ const resume = {
           "presentation": "compact",
           "summary": "위메프 여행, 숙박, 액티비티, 공연티켓을 판매하는 서비스",
           "contribution": "여행·레저 운영 기능 개발과 공연 티켓 프로젝트의 JSP → Vue 전환에 참여했습니다.",
-          "techStack": ["Vue.js", "Vuex", "vue-property-decorator", "vue-class-component", "JSP", "jQuery"],
+          "techStack": ["Vue.js", "TypeScript", "Vuex", "vue-property-decorator", "vue-class-component", "JSP", "jQuery"],
           "team": "6명",
           "details": [
             { "text": "여행·레저 서비스 기능 개발과 운영 이슈 대응을 담당했습니다." },
@@ -202,8 +200,8 @@ const resume = {
       "degree": "학사"
     },
     {
-      "major": "입문계",
       "institution": "운암고등학교",
+      "major": "입문계",
       "period": "2010.03 - 2013.02"
     }
   ],
