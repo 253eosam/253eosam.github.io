@@ -5,7 +5,7 @@ import rehypeWrapTable from './src/plugins/rehype-wrap-table.mjs';
 export default defineConfig({
   site: 'https://253eosam.github.io',
   server: {
-    allowedHosts: ['all'],
+    allowedHosts: true,
   },
   markdown: {
     shikiConfig: {
