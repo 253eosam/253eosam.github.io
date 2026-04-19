@@ -184,16 +184,23 @@ fetch(url, {
 | 옵션 | 의미 |
 |------|------|
 | `cache: 'force-cache'` | Data Cache에 저장하고 이후 요청은 캐시에서 읽는다. Next.js 14의 기본값 |
-| `cache: 'no-store'` | 캐시하지 않는다. 매 요청마다 원본 호출 |
-| `next.revalidate: N` | N초 경과 후 다음 요청 때 백그라운드에서 재검증(ISR 유사 동작) |
-| `next.revalidate: 0` | `cache: 'no-store'`와 동일하게 해석된다 |
+| `cache: 'no-store'` | 캐시하지 않는다. 매 요청마다 원본 호출. 해당 `fetch`가 포함된 라우트의 Full Route Cache도 함께 비활성화 |
+| `next.revalidate: N` | N초가 지난 뒤 다음 요청에서 백그라운드 재검증(stale-while-revalidate 유사 동작) |
 | `next.tags: [...]` | 태그를 붙여두고 `revalidateTag('태그명')`로 선택적 무효화 |
 
-Next.js 14 기준 기본 캐시 정책은 `force-cache`에 가깝다. 다만 `cookies()`, `headers()` 같은 동적 함수를 사용하거나 `dynamic = 'force-dynamic'`을 지정한 세그먼트에서는 강제로 매 요청 실행된다.
+세그먼트 수준에서 캐시를 끄려면 `export const dynamic = 'force-dynamic'` 또는 `export const revalidate = 0`를 사용한다. 두 옵션 모두 Data Cache와 Full Route Cache를 동시에 비활성화한다.
+
+Next.js 14 공식 문서 기준으로 `fetch`의 기본 `cache` 값은 `force-cache`이며, 옵션을 생략해도 동일하게 적용된다. 다만 `cookies()`, `headers()` 같은 동적 함수를 사용하거나 `dynamic = 'force-dynamic'`을 지정한 세그먼트에서는 Data Cache와 Full Route Cache가 비활성화되어 매 요청 렌더링이 일어난다.
 
 ### Request Memoization
 
-같은 렌더 사이클 안에서 동일한 URL과 옵션으로 `fetch`를 여러 번 호출하면, Next.js는 내부적으로 첫 호출의 Promise를 재사용한다. 이 메커니즘을 **Request Memoization**이라고 부른다.
+같은 렌더 사이클 안에서 동일한 URL과 옵션으로 `fetch`를 여러 번 호출하면, 첫 호출의 결과가 자동으로 재사용된다. 이 메커니즘을 **Request Memoization**이라고 부른다. 공식 문서에 따르면 이는 **Next.js가 아니라 React가 확장한 `fetch` API의 기능**이며, 렌더가 끝나면 메모이제이션 엔트리가 정리된다.
+
+Request Memoization은 다음 제약을 가진다.
+
+- `GET` 메서드 `fetch` 호출에만 적용된다.
+- React 컴포넌트 트리 내부에서만 유효하며, Route Handler 같은 트리 바깥 호출에는 적용되지 않는다.
+- `fetch`를 쓸 수 없는 DB/CMS 클라이언트에서 같은 효과가 필요하면 `React.cache()`로 함수를 감싸서 사용한다.
 
 ```tsx
 // app/posts/[id]/page.tsx
@@ -289,8 +296,8 @@ App Router는 네 개의 서로 다른 캐시 계층을 갖는다. 이름이 비
 |------|------|------|--------|
 | Request Memoization | 한 번의 요청/렌더 사이클 | 렌더 종료 시 폐기 | 자동(렌더 종료) |
 | Data Cache | 서버 전역 | 영속적(재배포 후에도 유지될 수 있음) | `revalidate`, `revalidateTag()`, `revalidatePath()` |
-| Full Route Cache | 서버 전역 | 빌드 시점 또는 `revalidate` 주기 | `revalidatePath()`, 재배포 |
-| Router Cache | 개별 브라우저 세션 | 세션 동안 짧게 유지 | 내비게이션, `router.refresh()` |
+| Full Route Cache | 서버 전역 | 빌드 시점 또는 `revalidate` 주기 | `revalidatePath()`, `revalidateTag()`, 재배포 |
+| Router Cache | 개별 브라우저 세션 | 정적 라우트 5분 / 동적 라우트 30초 자동 무효화, 새로 고침 시 전체 비움 | `router.refresh()`, Server Action 내 `revalidatePath()`/`revalidateTag()` |
 
 ### Request Memoization
 
@@ -320,13 +327,15 @@ revalidateTag('posts');
 
 ### Router Cache
 
-클라이언트 브라우저의 메모리에 저장되는 캐시다. 클라이언트 내비게이션으로 이미 방문한 라우트의 RSC Payload를 잠시 보관해두고, 사용자가 뒤로 갔다가 돌아올 때 즉시 복원한다.
+클라이언트 브라우저의 메모리에 저장되는 캐시다. 클라이언트 내비게이션으로 이미 방문한 라우트의 RSC Payload를 세그먼트 단위로 보관해두고, 사용자가 뒤로 갔다가 돌아올 때 즉시 복원한다.
 
-수명은 짧고 자동으로 관리된다. 강제로 비우려면 Client Component에서 `router.refresh()`를 호출하거나, Server Action에서 `revalidatePath()`를 호출한다.
+공식 문서에 따르면 Router Cache는 브라우저 세션 동안 유지되며, 개별 세그먼트는 정적 렌더링 기준 약 5분, 동적 렌더링 기준 약 30초의 자동 무효화 기간을 가진다. 페이지 새로 고침 시에는 전체가 비워진다. 강제로 무효화하려면 Client Component에서 `router.refresh()`를 호출하거나, Server Action 안에서 `revalidatePath()`/`revalidateTag()`를 호출한다.
 
 > **Q: 캐시를 전부 끄고 싶을 때 어디까지 설정해야 하는가?**
 >
-> 세 곳을 함께 고려해야 한다. ① `fetch`에 `cache: 'no-store'` 또는 `next.revalidate: 0`, ② 세그먼트 파일(`page.tsx` 또는 `layout.tsx`)에 `export const dynamic = 'force-dynamic'`, ③ 필요에 따라 `export const revalidate = 0`. `fetch` 옵션만 바꾼다고 Full Route Cache까지 꺼지는 것은 아니므로, 페이지 전체를 동적으로 유지하려면 세그먼트 옵션도 함께 지정해야 한다.
+> 공식 문서에 따르면 `fetch`를 `cache: 'no-store'`로 호출하면 해당 `fetch`가 포함된 라우트는 자동으로 Full Route Cache에서도 제외된다. 따라서 단일 요청만 끄고 싶다면 `cache: 'no-store'`만으로 충분하다.
+>
+> 세그먼트 전체를 항상 동적으로 유지하고 싶거나 `fetch`를 사용하지 않는 데이터 접근(DB 클라이언트 등)이 있다면 `export const dynamic = 'force-dynamic'` 또는 `export const revalidate = 0`를 세그먼트 파일(`page.tsx`/`layout.tsx`)에 지정한다. 다만 Router Cache는 이 옵션들로 끌 수 없으며, 클라이언트 측 캐시는 `router.refresh()`나 `revalidatePath()`/`revalidateTag()`로만 무효화된다.
 
 ## Streaming과 Suspense
 
