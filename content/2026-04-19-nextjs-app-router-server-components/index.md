@@ -15,7 +15,10 @@ description: 'Next.js 14의 App Router와 Server Components가 어떤 문제를 
 - [개요](#개요)
 - [App Router 파일 규약](#app-router-파일-규약)
 - [Server Components와 Client Components](#server-components와-client-components)
+  - [서버에서 클라이언트로 전달되는 props의 직렬화](#서버에서-클라이언트로-전달되는-props의-직렬화)
+  - [언제 Server Component로, 언제 Client Component로 쓸 것인가](#언제-server-component로-언제-client-component로-쓸-것인가)
 - [Next.js가 확장한 `fetch`](#nextjs가-확장한-fetch)
+  - [Request Memoization](#request-memoization)
 - [왜 axios를 App Router 서버에서 쓰면 안 되는가](#왜-axios를-app-router-서버에서-쓰면-안-되는가)
 - [캐싱의 네 계층](#캐싱의-네-계층)
 - [Streaming과 Suspense](#streaming과-suspense)
@@ -114,7 +117,7 @@ export function Counter() {
 }
 ```
 
-**서버에서 클라이언트로 전달되는 props의 직렬화**
+### 서버에서 클라이언트로 전달되는 props의 직렬화
 
 Server Component가 Client Component를 렌더링할 때, props는 서버에서 직렬화되어 클라이언트에 전달된다. 이 때문에 **모든 props가 전달 가능한 것은 아니다**.
 
@@ -128,7 +131,7 @@ Server Component가 Client Component를 렌더링할 때, props는 서버에서 
 
 함수 prop은 원칙적으로 전달할 수 없지만, `'use server'` 지시어가 붙은 **Server Action**은 예외적으로 참조 ID 형태로 직렬화되어 클라이언트에서 호출 가능해진다.
 
-**언제 Server Component로, 언제 Client Component로 쓸 것인가**
+### 언제 Server Component로, 언제 Client Component로 쓸 것인가
 
 | 기준 | Server Component | Client Component |
 |------|------------------|------------------|
@@ -176,7 +179,7 @@ fetch(url, {
 
 Next.js 14 공식 문서 기준으로 `fetch`의 기본 `cache` 값은 `force-cache`이며, 옵션을 생략해도 동일하게 적용된다. 다만 `cookies()`, `headers()` 같은 동적 함수를 사용하거나 `dynamic = 'force-dynamic'`을 지정한 세그먼트에서는 Data Cache와 Full Route Cache가 비활성화되어 매 요청 렌더링이 일어난다.
 
-**Request Memoization**
+### Request Memoization
 
 같은 렌더 사이클 안에서 동일한 URL과 옵션으로 `fetch`를 여러 번 호출하면, 첫 호출의 결과가 자동으로 재사용된다. 이 메커니즘을 **Request Memoization**이라고 부른다. 공식 문서에 따르면 이는 **Next.js가 아니라 React가 확장한 `fetch` API의 기능**이며, 렌더가 끝나면 메모이제이션 엔트리가 정리된다.
 
