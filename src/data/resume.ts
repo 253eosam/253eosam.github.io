@@ -10,7 +10,7 @@ const resume = {
       { "label": "GitHub", "url": "https://github.com/253eosam" },
       { "label": "Blog", "url": "https://253eosam.github.io/" }
     ],
-    "introduction": "비즈니스 도메인과 프로젝트 히스토리 이해를 바탕으로 안정적인 서비스 운영을 추구하는 6년차 FE 개발자입니다.",
+    "introduction": "비즈니스 도메인과 프로젝트 히스토리 이해를 바탕으로 안정적인 서비스 운영을 추구하는 7년차 FE 개발자입니다.",
     "highlights": [
       "서비스 전 과정(기획-개발-배포-운영) 경험 보유",
       "스타트업 초기 멤버로 참여하여 실무자의 요구사항을 분석하고 구현한 경험",
