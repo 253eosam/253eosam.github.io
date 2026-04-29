@@ -241,6 +241,10 @@ export async function serverFetch<T>(
     throw new Error('API 요청에 실패했습니다.');
   }
 
+  if (res.status === 204 || res.headers.get('content-length') === '0') {
+    return undefined as T;
+  }
+
   return res.json();
 }
 ```
@@ -300,6 +304,7 @@ export type Transaction = {
   category: string;
   occurredAt: string;
   memo?: string;
+  isFavorite?: boolean;
 };
 ```
 
@@ -480,7 +485,7 @@ export function TransactionRow({ transaction }: TransactionRowProps) {
   const amountPrefix = transaction.type === 'income' ? '+' : '-';
 
   return (
-    <li className="flex items-center justify-between rounded-xl border p-4">
+    <div className="flex items-center justify-between rounded-xl border p-4">
       <div>
         <p className="font-medium">{transaction.title}</p>
         <p className="text-sm text-gray-500">
@@ -492,7 +497,7 @@ export function TransactionRow({ transaction }: TransactionRowProps) {
         {amountPrefix}
         {transaction.amount.toLocaleString()}원
       </strong>
-    </li>
+    </div>
   );
 }
 ```
