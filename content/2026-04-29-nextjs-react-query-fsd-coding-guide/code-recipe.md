@@ -97,6 +97,30 @@ features/
   delete-transaction/
 ```
 
+행동이 명확한 feature UI는 보통 자기 feature의 mutation hook을 내부에서 호출한다.
+
+```txt
+features/delete-transaction/model/use-delete-transaction.ts
+→ useMutation으로 mutate 생성
+
+features/delete-transaction/ui/delete-transaction-button.tsx
+→ useDeleteTransaction() 호출
+→ mutate를 버튼 이벤트에 연결
+
+widgets/transaction-list/ui/transaction-list-section.tsx
+→ DeleteTransactionButton을 화면에 배치
+```
+
+widget이 `mutate`를 만들어 feature UI에 props로 넘기는 구조가 기본은 아니다. widget은 feature UI를 조합하고, 행동의 구현은 feature 내부에 둔다.
+
+```txt
+행동이 명확한 feature UI
+→ feature 내부에서 mutation hook 호출
+
+범용 UI / presentational component
+→ props로 상태와 핸들러를 받음
+```
+
 ```ts
 // features/create-transaction/model/use-create-transaction.ts
 export function useCreateTransaction() {
