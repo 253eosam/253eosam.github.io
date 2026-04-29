@@ -1,61 +1,22 @@
----
-title: 'next.js + react-query + FSD coding guide'
-date: '2026-04-29'
-category: 'frontend'
-tags: ['Next.js', 'React Query', 'FSD', 'App Router', 'architecture']
-description: 'Next.js App Router, Feature-Sliced Design, React Query를 함께 사용할 때의 코드 구조와 작성 기준을 정리한다.'
----
+# Next.js + FSD + React Query Code Recipe
 
-# Next.js + FSD + React Query 개발 지침서
+## Core Rule
 
-> 한줄 정의: 조회는 entities, 변경은 features, 독립적인 화면 조합은 widgets, 라우팅과 route 전용 섹션은 app, 공통 재료는 shared에 둔다.
+```txt
+조회는 entities
+변경은 features
+독립적인 화면 조합은 widgets
+라우팅/배치/route 전용 섹션은 app
+공통 재료는 shared
+```
 
-## 목차
+수입/지출처럼 구조가 유사한 도메인은 `income`, `expense`를 각각 복사하지 말고 `transaction`처럼 추상화한다.
 
-- [개요](#개요)
-- [기본 원칙](#기본-원칙)
-- [추천 폴더 구조](#추천-폴더-구조)
-- [shared 규칙](#shared-규칙)
-- [entities 규칙](#entities-규칙)
-- [transaction entity 설계 예시](#transaction-entity-설계-예시)
-- [Query Key 설계 규칙](#query-key-설계-규칙)
-- [Queries 설계 규칙](#queries-설계-규칙)
-- [entities/ui 규칙](#entitiesui-규칙)
-- [features 규칙](#features-규칙)
-- [생성 mutation 예시](#생성-mutation-예시)
-- [삭제 mutation과 optimistic update 예시](#삭제-mutation과-optimistic-update-예시)
-- [수정 mutation과 optimistic update 예시](#수정-mutation과-optimistic-update-예시)
-- [search feature 예시](#search-feature-예시)
-- [widgets 규칙](#widgets-규칙)
-- [transaction-list widget 예시](#transaction-list-widget-예시)
-- [app 규칙](#app-규칙)
-- [지출 페이지 예시](#지출-페이지-예시)
-- [수입 페이지 예시](#수입-페이지-예시)
-- [사용 방법: 새 목록 페이지를 추가할 때](#사용-방법-새-목록-페이지를-추가할-때)
-- [사용 방법: 새 feature를 추가할 때](#사용-방법-새-feature를-추가할-때)
-- [사용 방법: 새 entity UI를 추가할 때](#사용-방법-새-entity-ui를-추가할-때)
-- [사용 방법: page section을 분리할 때](#사용-방법-page-section을-분리할-때)
-- [사용 방법: React Query prefetch를 적용할 때](#사용-방법-react-query-prefetch를-적용할-때)
-- [레이어 판단 체크리스트](#레이어-판단-체크리스트)
-- [금지 패턴](#금지-패턴)
-- [최종 원칙](#최종-원칙)
-- [참고 자료](#참고-자료)
+```ts
+export type TransactionType = 'income' | 'expense';
+```
 
-## 개요
-
-이 문서는 프로젝트에서 Next.js App Router, Feature-Sliced Design(FSD), React Query를 함께 사용할 때의 코드 구조와 작성 기준을 정의한다.
-
-목표는 다음과 같다.
-
-- 변경 이유가 같은 코드끼리 묶는다.
-- page는 조립만 담당한다.
-- 조회와 변경의 책임을 분리한다.
-- query key를 일관되게 관리한다.
-- 수입/지출처럼 비슷한 도메인은 적절히 추상화한다.
-
-## 기본 원칙
-
-프로젝트는 다음 레이어를 기준으로 나눈다.
+## Layer Responsibility
 
 ```txt
 app       = 라우팅, 페이지 조립, server prefetch, route 전용 UI
@@ -64,8 +25,6 @@ features  = 사용자 행동
 entities  = 비즈니스 도메인
 shared    = 공통 인프라, primitive UI
 ```
-
-`app/[route]/_ui`와 `widgets`는 구분한다. `page.tsx`를 읽기 쉽게 나누기 위한 route 전용 섹션은 `app/[route]/_ui`에 둔다. 서버 상태, 클라이언트 상태, 사용자 행동, entity UI를 묶어 하나의 독립적인 화면 블록이 되면 `widgets`에 둔다.
 
 의존성 방향은 항상 아래로만 흐른다.
 
@@ -90,7 +49,54 @@ features → widgets ❌
 widgets → app ❌
 ```
 
-## 추천 폴더 구조
+## app/_ui vs widgets
+
+`app/[route]/_ui`와 `widgets`는 구분한다. `page.tsx`를 읽기 쉽게 나누기 위한 route 전용 섹션은 `app/[route]/_ui`에 둔다.
+
+```txt
+app/[route]/_ui
+= 특정 route에서만 쓰는 가벼운 섹션
+= 정적 소개, 단순 배치, page 전용 JSX 분리
+
+widgets
+= 여러 하위 레이어를 조합한 화면 블록
+= 데이터 조회, 화면 상태, feature action, entity UI를 연결하는 단위
+```
+
+예를 들어 `HeroSection`, `IntroSection`, `PricingSection`처럼 해당 page의 문맥에서만 의미가 있는 정적 섹션은 `app/home/_ui`에 둔다.
+
+```txt
+src/
+  app/
+    home/
+      page.tsx
+      _ui/
+        hero-section.tsx
+        intro-section.tsx
+```
+
+반면 `TransactionListSection`처럼 조회 hook, 검색 상태, entity row, 삭제 feature를 함께 묶는 섹션은 `widgets`에 둔다.
+
+```txt
+src/
+  widgets/
+    transaction-list/
+      ui/
+        transaction-list-section.tsx
+```
+
+판단 기준:
+
+```txt
+단순 배치/정적 소개 → app/[route]/_ui
+특정 페이지에서만 쓰이는 가벼운 배치 컴포넌트 → app/[route]/_ui
+기능/데이터/인터랙션 있음 → widgets
+entity와 feature를 조합하는 화면 단위 → widgets
+여러 페이지에서 재사용되는 의미 있는 화면 블록 → widgets
+공통 layout primitive → shared/ui
+```
+
+## Recommended Structure
 
 ```txt
 src/
@@ -167,17 +173,15 @@ src/
 
   widgets/
     transaction-list/
-      model/
-        use-transaction-list.ts
       ui/
         transaction-list-section.tsx
 ```
 
-## shared 규칙
+## shared
 
 `shared`에는 도메인 지식이 없는 코드를 둔다.
 
-### 들어갈 수 있는 것
+들어갈 수 있는 것:
 
 ```txt
 shared/ui/button.tsx
@@ -189,7 +193,7 @@ shared/lib/cn.ts
 shared/constants/routes.ts
 ```
 
-### 넣으면 안 되는 것
+넣으면 안 되는 것:
 
 ```txt
 shared/ui/transaction-badge.tsx ❌
@@ -198,8 +202,6 @@ shared/lib/calculate-settlement.ts ❌
 ```
 
 도메인 이름이 들어가거나 비즈니스 규칙이 포함되면 `shared`가 아니다.
-
-### 예시: shared primitive Badge
 
 ```tsx
 // shared/ui/badge.tsx
@@ -220,8 +222,6 @@ export function Badge({ children, variant = 'default' }: BadgeProps) {
   );
 }
 ```
-
-### 예시: shared server fetch
 
 ```ts
 // shared/api/server-fetch.ts
@@ -245,7 +245,7 @@ export async function serverFetch<T>(
 }
 ```
 
-## entities 규칙
+## entities
 
 `entities`는 비즈니스 객체를 표현한다.
 
@@ -259,7 +259,7 @@ category
 trip
 ```
 
-### entities에 들어가는 것
+entities에 들어가는 것:
 
 ```txt
 조회 API
@@ -270,7 +270,7 @@ queryOptions
 순수 도메인 함수
 ```
 
-### entities에 넣지 않는 것
+entities에 넣지 않는 것:
 
 ```txt
 생성
@@ -283,10 +283,6 @@ queryOptions
 ```
 
 이런 행동은 `features`에 둔다.
-
-## transaction entity 설계 예시
-
-수입과 지출은 별도 entity로 쪼개기보다 `transaction`으로 추상화한다.
 
 ```ts
 // entities/transaction/model/types.ts
@@ -302,8 +298,6 @@ export type Transaction = {
   memo?: string;
 };
 ```
-
-### 목록 조회 API
 
 ```ts
 // entities/transaction/api/get-transactions.ts
@@ -323,8 +317,6 @@ export function getTransactions({ type }: GetTransactionsParams) {
 }
 ```
 
-### 상세 조회 API
-
 ```ts
 // entities/transaction/api/get-transaction.ts
 import { serverFetch } from '@/shared/api/server-fetch';
@@ -343,11 +335,9 @@ export function getTransaction({ id }: GetTransactionParams) {
 }
 ```
 
-## Query Key 설계 규칙
+## Query Keys
 
-query key와 query option은 분리한다.
-
-### query-keys.ts
+query key와 query option은 분리한다. query key 문자열을 여러 파일에 흩뿌리지 않는다.
 
 ```ts
 // entities/transaction/model/query-keys.ts
@@ -367,47 +357,27 @@ export const transactionQueryKeys = {
 };
 ```
 
-### query key 사용 이유
-
-```ts
-transactionQueryKeys.all;
-// ['transactions']
-
-transactionQueryKeys.lists();
-// ['transactions', 'list']
-
-transactionQueryKeys.list('expense');
-// ['transactions', 'list', 'expense']
-
-transactionQueryKeys.detail('123');
-// ['transactions', 'detail', '123']
-```
-
 이렇게 분리하면 캐시 무효화가 명확해진다.
 
 ```ts
-// transaction 관련 전체 무효화
 queryClient.invalidateQueries({
   queryKey: transactionQueryKeys.all,
 });
 
-// 수입/지출 목록 전체 무효화
 queryClient.invalidateQueries({
   queryKey: transactionQueryKeys.lists(),
 });
 
-// 지출 목록만 무효화
 queryClient.invalidateQueries({
   queryKey: transactionQueryKeys.list('expense'),
 });
 
-// 특정 상세만 무효화
 queryClient.invalidateQueries({
   queryKey: transactionQueryKeys.detail(transactionId),
 });
 ```
 
-## Queries 설계 규칙
+## Query Options
 
 ```ts
 // entities/transaction/model/queries.ts
@@ -435,8 +405,6 @@ export const transactionQueries = {
 };
 ```
 
-### Client hook
-
 ```ts
 // entities/transaction/model/use-transactions.ts
 'use client';
@@ -462,11 +430,9 @@ export function useTransaction(id: string) {
 }
 ```
 
-## entities/ui 규칙
+## entities/ui
 
 `entities/ui`는 도메인 데이터를 보여주는 최소 표현 UI다.
-
-### 좋은 예시
 
 ```tsx
 // entities/transaction/ui/transaction-row.tsx
@@ -497,7 +463,7 @@ export function TransactionRow({ transaction }: TransactionRowProps) {
 }
 ```
 
-### primitive를 이용한 domain UI 예시
+primitive를 이용한 domain UI는 entity에 둔다.
 
 ```tsx
 // entities/transaction/ui/transaction-badge.tsx
@@ -517,7 +483,7 @@ export function TransactionBadge({ type }: TransactionBadgeProps) {
 }
 ```
 
-### entities/ui에 넣으면 안 되는 것
+사용자 행동 UI는 entity에 두지 않는다.
 
 ```tsx
 // ❌ entities/transaction/ui/delete-transaction-button.tsx
@@ -528,7 +494,7 @@ export function DeleteTransactionButton() {
 
 삭제는 사용자 행동이므로 `features/delete-transaction`으로 이동한다.
 
-## features 규칙
+## features
 
 `features`는 사용자 행동 단위로 만든다.
 
@@ -543,7 +509,7 @@ settle-payment
 invite-member
 ```
 
-### features에 들어가는 것
+features에 들어가는 것:
 
 ```txt
 mutation API
@@ -555,9 +521,7 @@ form
 dialog
 ```
 
-## 생성 mutation 예시
-
-### API
+### create mutation
 
 ```ts
 // features/create-transaction/api/create-transaction.ts
@@ -580,8 +544,6 @@ export function createTransaction(payload: CreateTransactionPayload) {
   });
 }
 ```
-
-### Mutation hook
 
 ```ts
 // features/create-transaction/model/use-create-transaction.ts
@@ -607,65 +569,7 @@ export function useCreateTransaction() {
 }
 ```
 
-### UI
-
-```tsx
-// features/create-transaction/ui/create-transaction-form.tsx
-'use client';
-
-import { FormEvent } from 'react';
-import type { TransactionType } from '@/entities/transaction/model/types';
-import { useCreateTransaction } from '../model/use-create-transaction';
-
-type CreateTransactionFormProps = {
-  type: TransactionType;
-};
-
-export function CreateTransactionForm({ type }: CreateTransactionFormProps) {
-  const { mutate, isPending } = useCreateTransaction();
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-
-    mutate({
-      type,
-      title: String(formData.get('title')),
-      amount: Number(formData.get('amount')),
-      category: String(formData.get('category')),
-      occurredAt: String(formData.get('occurredAt')),
-      memo: String(formData.get('memo') ?? ''),
-    });
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-3">
-      <input name="title" placeholder="제목" />
-      <input name="amount" type="number" placeholder="금액" />
-      <input name="category" placeholder="카테고리" />
-      <input name="occurredAt" type="date" />
-      <input name="memo" placeholder="메모" />
-      <button type="submit" disabled={isPending}>
-        {isPending ? '저장 중...' : '저장'}
-      </button>
-    </form>
-  );
-}
-```
-
-## 삭제 mutation과 optimistic update 예시
-
-삭제는 optimistic update와 궁합이 좋다.
-
-```txt
-1. 삭제 버튼 클릭
-2. UI에서 먼저 제거
-3. API 실패 시 이전 목록 복구
-4. 성공/실패와 관계없이 최종 refetch
-```
-
-### API
+### delete mutation with optimistic update
 
 ```ts
 // features/delete-transaction/api/delete-transaction.ts
@@ -677,8 +581,6 @@ export function deleteTransaction({ id }: { id: string }) {
   });
 }
 ```
-
-### Mutation hook
 
 ```ts
 // features/delete-transaction/model/use-delete-transaction.ts
@@ -740,8 +642,6 @@ export function useDeleteTransaction() {
 }
 ```
 
-### UI
-
 ```tsx
 // features/delete-transaction/ui/delete-transaction-button.tsx
 'use client';
@@ -772,7 +672,7 @@ export function DeleteTransactionButton({
 }
 ```
 
-## 수정 mutation과 optimistic update 예시
+### update mutation with optimistic update
 
 수정은 목록과 상세 캐시를 모두 갱신해야 한다.
 
@@ -861,7 +761,7 @@ export function useUpdateTransaction() {
 }
 ```
 
-## search feature 예시
+## search feature
 
 검색은 서버 데이터를 변경하지 않지만, 사용자 행동에 의한 UI 상태 변화이므로 feature로 둔다.
 
@@ -923,36 +823,11 @@ export function filterTransactions(
 }
 ```
 
-## widgets 규칙
+## widgets
 
 `widgets`는 페이지를 구성하는 의미 있는 화면 블록이다. 단순히 `page.tsx`를 작게 나누기 위한 섹션을 모두 `widgets`로 올리지는 않는다.
 
-기준은 "페이지 섹션인가?"보다 "독립적인 기능/데이터/조합 단위인가?"에 가깝다.
-
-### app/[route]/_ui와 widgets의 차이
-
-```txt
-app/[route]/_ui
-= 특정 route에서만 쓰는 가벼운 섹션
-= 정적 소개, 단순 배치, page 전용 JSX 분리
-
-widgets
-= 여러 하위 레이어를 조합한 화면 블록
-= 데이터 조회, 화면 상태, feature action, entity UI를 연결하는 단위
-```
-
-예를 들어 `HeroSection`, `IntroSection`, `PricingSection`처럼 해당 page의 문맥에서만 의미가 있는 정적 섹션은 `app/home/_ui`에 둔다. 반면 `TransactionListSection`처럼 조회 hook, 검색 상태, entity row, 삭제 feature를 함께 묶는 섹션은 `widgets`에 둔다.
-
-예:
-
-```txt
-transaction-list
-settlement-summary
-trip-header
-member-panel
-```
-
-### widgets 역할
+widgets 역할:
 
 ```txt
 독립적인 화면 블록 구성
@@ -963,7 +838,7 @@ features UI 조합
 route와 무관하게 재사용 가능한 화면 블록 제공
 ```
 
-### widgets에 넣으면 안 되는 것
+widgets에 넣으면 안 되는 것:
 
 ```txt
 직접 API 호출 ❌
@@ -971,8 +846,6 @@ mutation 직접 구현 ❌
 query key 직접 작성 ❌
 비즈니스 핵심 로직 직접 작성 ❌
 ```
-
-## transaction-list widget 예시
 
 ```tsx
 // widgets/transaction-list/ui/transaction-list-section.tsx
@@ -1049,11 +922,11 @@ export function TransactionListSection({
 }
 ```
 
-## app 규칙
+## app
 
-`app`은 라우팅과 페이지 조립만 담당한다.
+`app`은 라우팅과 페이지 조립을 담당한다. route 전용의 가벼운 섹션은 `app/[route]/_ui`에 둘 수 있다.
 
-### app에서 하는 일
+app에서 하는 일:
 
 ```txt
 QueryClient 생성
@@ -1061,10 +934,11 @@ prefetchQuery 실행
 dehydrate
 HydrationBoundary 적용
 widget 배치
+route 전용 section 배치
 metadata 정의
 ```
 
-### app에서 하지 않는 일
+app에서 하지 않는 일:
 
 ```txt
 복잡한 데이터 가공 ❌
@@ -1072,8 +946,6 @@ mutation 구현 ❌
 fetch 함수를 직접 작성 ❌
 query key 문자열 직접 작성 ❌
 ```
-
-## 지출 페이지 예시
 
 ```tsx
 // app/expenses/page.tsx
@@ -1107,8 +979,6 @@ export default async function ExpensesPage() {
 }
 ```
 
-## 수입 페이지 예시
-
 ```tsx
 // app/incomes/page.tsx
 import {
@@ -1141,15 +1011,11 @@ export default async function IncomesPage() {
 }
 ```
 
-## 사용 방법: 새 목록 페이지를 추가할 때
+## Adding a New List Page
 
 예: `카테고리별 거래내역 페이지`를 추가한다고 가정한다.
 
-### 1단계: entity API가 필요한지 확인한다
-
-이미 `transactionQueries.list(type)`으로 충분하면 새 entity API를 만들지 않는다.
-
-카테고리 조건이 필요하면 query를 확장한다.
+이미 `transactionQueries.list(type)`으로 충분하면 새 entity API를 만들지 않는다. 카테고리 조건이 필요하면 query를 확장한다.
 
 ```ts
 // entities/transaction/api/get-transactions.ts
@@ -1175,15 +1041,11 @@ export function getTransactions({ type, categoryId }: GetTransactionsParams) {
 }
 ```
 
-### 2단계: query key를 확장한다
-
 ```ts
 // entities/transaction/model/query-keys.ts
 listByCategory: (categoryId: string) =>
   [...transactionQueryKeys.lists(), 'category', categoryId] as const,
 ```
-
-### 3단계: query option을 추가한다
 
 ```ts
 // entities/transaction/model/queries.ts
@@ -1194,8 +1056,6 @@ listByCategory: (categoryId: string) =>
     staleTime: 1000 * 60,
   }),
 ```
-
-### 4단계: page에서 prefetch한다
 
 ```tsx
 // app/categories/[categoryId]/page.tsx
@@ -1249,17 +1109,15 @@ type TransactionListSectionProps = {
 />
 ```
 
-## 사용 방법: 새 feature를 추가할 때
+## Adding a New Feature
 
 예: `거래내역 즐겨찾기` 기능을 추가한다고 가정한다.
 
-### 1단계: feature 이름을 동사로 정한다
+feature 이름은 동사로 정한다.
 
 ```txt
 features/toggle-transaction-favorite
 ```
-
-### 2단계: API를 만든다
 
 ```ts
 // features/toggle-transaction-favorite/api/toggle-transaction-favorite.ts
@@ -1281,8 +1139,6 @@ export function toggleTransactionFavorite({
   });
 }
 ```
-
-### 3단계: mutation hook을 만든다
 
 ```ts
 // features/toggle-transaction-favorite/model/use-toggle-transaction-favorite.ts
@@ -1344,8 +1200,6 @@ export function useToggleTransactionFavorite() {
 }
 ```
 
-### 4단계: feature UI를 만든다
-
 ```tsx
 // features/toggle-transaction-favorite/ui/favorite-transaction-button.tsx
 'use client';
@@ -1384,7 +1238,7 @@ export function FavoriteTransactionButton({
 }
 ```
 
-### 5단계: widget에 조합한다
+widget에 조합한다.
 
 ```tsx
 <FavoriteTransactionButton
@@ -1394,11 +1248,9 @@ export function FavoriteTransactionButton({
 />
 ```
 
-## 사용 방법: 새 entity UI를 추가할 때
+## Adding Entity UI
 
-예: `과목 뱃지` 또는 `카테고리 뱃지`를 추가한다고 가정한다.
-
-### primitive는 shared에 둔다
+primitive는 `shared`에 둔다.
 
 ```tsx
 // shared/ui/badge.tsx
@@ -1407,7 +1259,7 @@ export function Badge({ children }: { children: React.ReactNode }) {
 }
 ```
 
-### 도메인 의미가 붙으면 entity에 둔다
+도메인 의미가 붙으면 entity에 둔다.
 
 ```tsx
 // entities/category/ui/category-badge.tsx
@@ -1432,58 +1284,7 @@ SubjectBadge = entities/subject
 TransactionBadge = entities/transaction
 ```
 
-## 사용 방법: page section을 분리할 때
-
-페이지 section을 무조건 widget으로 만들 필요는 없다.
-
-단순히 특정 page의 JSX를 정리하기 위해 나눈 섹션이라면 `app/[route]/_ui`에 둔다. 해당 섹션이 서버 상태, 클라이언트 상태, 사용자 행동, entity/feature 조합을 하나의 화면 단위로 묶을 때 `widgets`로 올린다.
-
-### 단순 정적 섹션
-
-```txt
-app/
-  home/
-    page.tsx
-    _ui/
-      hero-section.tsx
-      intro-section.tsx
-      pricing-section.tsx
-```
-
-```tsx
-// app/home/_ui/hero-section.tsx
-export function HeroSection() {
-  return (
-    <section>
-      <h1>여행 정산을 쉽게 관리하세요</h1>
-      <p>로그인 없이도 지출을 기록하고 공유할 수 있습니다.</p>
-    </section>
-  );
-}
-```
-
-이런 섹션은 해당 페이지의 일부일 뿐이며, 독립적인 도메인 조합 단위가 아니다. 따라서 `widgets`가 아니어도 된다.
-
-### 기능/데이터/인터랙션이 있는 섹션
-
-```txt
-widgets/transaction-list/ui/transaction-list-section.tsx
-```
-
-예를 들어 거래 목록 섹션이 `useTransactions()`, 검색 상태, `filterTransactions()`, `TransactionRow`, `DeleteTransactionButton`을 함께 묶는다면 `widgets`에 둔다.
-
-판단 기준:
-
-```txt
-단순 배치/정적 소개 → app/[route]/_ui
-특정 페이지에서만 쓰이는 가벼운 배치 컴포넌트 → app/[route]/_ui
-기능/데이터/인터랙션 있음 → widgets
-entity와 feature를 조합하는 화면 단위 → widgets
-여러 페이지에서 재사용되는 의미 있는 화면 블록 → widgets
-공통 layout primitive → shared/ui
-```
-
-## 사용 방법: React Query prefetch를 적용할 때
+## React Query Prefetch
 
 인터랙션이 많은 화면은 다음 패턴을 사용한다.
 
@@ -1499,8 +1300,6 @@ client section/widget
   2. hydration된 캐시 사용
   3. 이후 인터랙션 처리
 ```
-
-예시:
 
 ```tsx
 // app/expenses/page.tsx
@@ -1523,9 +1322,7 @@ export default async function ExpensesPage() {
 }
 ```
 
-## 레이어 판단 체크리스트
-
-헷갈리면 아래 순서로 판단한다.
+## Layer Checklist
 
 ### shared인가?
 
@@ -1582,7 +1379,7 @@ page.tsx를 정리하기 위한 route 전용 _ui인가?
 
 YES → `app`
 
-## 금지 패턴
+## Forbidden Patterns
 
 ```txt
 shared에서 도메인 API 호출 ❌
@@ -1595,49 +1392,9 @@ queryKey를 문자열로 직접 작성 ❌
 수입/지출을 거의 같은 코드로 각각 복사 ❌
 ```
 
-## 최종 원칙
-
-```txt
-조회는 entities
-변경은 features
-독립적인 화면 조합은 widgets
-라우팅/배치/route 전용 섹션은 app
-공통 재료는 shared
-```
-
-수입/지출처럼 구조가 유사한 도메인은 `transaction`처럼 추상화한다.
-
-```ts
-export type TransactionType = 'income' | 'expense';
-```
-
-페이지 차이는 props로 표현한다.
-
-```tsx
-<TransactionListSection
-  type="expense"
-  title="지출 내역"
-  description="사용한 금액을 검색하고 확인할 수 있습니다."
-  searchPlaceholder="지출 내역 검색"
-  emptyMessage="검색된 지출 내역이 없습니다."
-/>
-```
-
-```tsx
-<TransactionListSection
-  type="income"
-  title="수입 내역"
-  description="들어온 금액을 검색하고 확인할 수 있습니다."
-  searchPlaceholder="수입 내역 검색"
-  emptyMessage="검색된 수입 내역이 없습니다."
-/>
-```
-
-이 기준을 프로젝트 전반에 일관되게 적용한다.
-
-## 참고 자료
+## References
 
 - [Next.js Docs - App Router](https://nextjs.org/docs/app)
-- [Next.js Docs - `page.js` file convention](https://nextjs.org/docs/app/api-reference/file-conventions/page)
+- [Next.js Docs - page.js file convention](https://nextjs.org/docs/app/api-reference/file-conventions/page)
 - [TanStack Query Docs - Query Options](https://tanstack.com/query/latest/docs/framework/react/guides/query-options)
-- [TanStack Query Docs - `queryOptions`](https://tanstack.com/query/latest/docs/framework/react/reference/queryOptions)
+- [TanStack Query Docs - queryOptions](https://tanstack.com/query/latest/docs/framework/react/reference/queryOptions)
