@@ -27,7 +27,7 @@ const resume = {
       "role": "팀원",
       "department": "FE개발팀",
       "startDate": "2025-04",
-      "isCurrent": true,
+      "endDate": "2026-06",
       "employmentType": "정규직",
       "description": "시대인재 브랜드를 운영하는 교육 기업입니다.",
       "projects": [
